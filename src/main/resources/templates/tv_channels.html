@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--https://leafletjs.com/examples/choropleth/ -->
+<!--marker color: https://tombatossals.github.io/angular-leaflet-directive/examples/0503-markers-icons-example.html -->
+<!--https://gis.stackexchange.com/questions/330713/zoom-marker-text-when-zooming-map -->
+
+<!--https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html#listing-seed-starter-data-->
+
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>tvChannels</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"  />
+    <script type="text/javascript" th:src="@{/js/funkcje.js}"></script>
+
+
+<!--    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"-->
+<!--          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="-->
+<!--          crossorigin=""/>-->
+<!--    &lt;!&ndash; Make sure you put this AFTER Leaflet's CSS &ndash;&gt;-->
+<!--    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"-->
+<!--            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="-->
+<!--            crossorigin=""></script>-->
+
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+
+
+<!--    <link rel="stylesheet" media="screen" th:href="@{/css/style.css}"/>-->
+
+<!--    <?php $strona->WyswietlStyle() ;-->
+<!--    $strona->StronaDane();-->
+<!--    $strona->WyswietlTytul();-->
+<!--    ?>-->
+<script>
+$(document).ready(function(){
+  $("#filterTvTags").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tvChannels div").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+</head>
+<body>
+1
+<script th:inline="javascript">
+
+<!--var x="[[${x}]]";-->
+<!--var y="[[${y}]]";-->
+
+console.log("html:START");
+
+
+var tvChannels =[[${tvChannels}]];
+var tvChannelName = tvChannels[0].name;
+console.log("html:tvChannels[0].name:"+tvChannels[0].name + "/" +tvChannelName );
+
+
+
+</script>
+
+<div id = "glowny">
+
+    <div id="tresc" class="tresc">
+
+
+
+        <div id="naglowek" class="naglowek" onclick="window.location='tv_piloty'">
+
+
+
+            <p style="text-align:center;font-size:15px;">
+                <?php $strona->WyswietlNaglowek(); ?></p>
+
+        </div>
+
+<!--        <div id="myBtnContainer" >-->
+<!--            <button class="btn active" onclick="filterSelection('all')">wszystko</button>-->
+<!--            <button class="btn" onclick="filterSelection('film')">film</button>-->
+<!--            <button class="btn" onclick="filterSelection('wiadomosci')">wiadomosci</button>-->
+<!--            <button class="btn" onclick="filterSelection('sport')">sport</button>-->
+<!--            <button class="btn" onclick="filterSelection('bajki')">bajki</button>-->
+<!--            <button class="btn" onclick="filterSelection('muza')">MUZA</button>-->
+<!--            &lt;!&ndash; <button class="btn" onclick="open_close_link('test')">TEST</button> &ndash;&gt;-->
+
+<!--        </div>-->
+
+<!--        <h2>Filterable List</h2>-->
+<!--        <p>Type something in the input field to search the list for specific items:</p>-->
+        <input id="filterTvTags" type="text" placeholder="Search..">
+        <br>
+<!--        <button type="button" th:onclick="WyswietlTvKanaly();">WyswietlTvKanaly</button>-->
+
+        <div id="tvChannels"  style="float: left;width: 400px;" ></div>
+<!--        <div id="tvChannelsDetails" style="float: left;" ></div>-->
+
+    </div>
+
+    <div class="panel_prawy" >
+        <div class="menu_kontener">
+            <!--<div class="menu" onclick="location.href=/logout.php?dis=yes">Wyloguj się</div> -->
+            <!--<div class="menu" onclick='open.href=logout.php'>Wyloguj się</div>-->
+
+
+
+<!--            <div id="menu">-->
+
+<!--                <?php $strona->WyswietlMenu(); ?>-->
+<!--                &lt;!&ndash; https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_close &ndash;&gt;-->
+<!--            </div>-->
+            <!--defer -->
+<!--            <script   src="funkcje.js" ></script>-->
+
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+</div>
+
+<!-- <script crs="jquery.min.js"></script> -->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+
+
+
+<!--<script th:inline="javascript">WyswietlTvKanaly2(); </script>-->
+
+<script th:inline="javascript">WyswietlTvKanaly(); </script>
+<!--<script th:inline="javascript">WyswietlTvKanaly2(); </script>-->
+<script th:inline="javascript">WyswietlMenu(); </script>
+<script type="text/javascript">
+
+        $(document).ready(function () {
+        console.log("dokument ready");
+            $(".kanal").click(function () {
+                var p =  $(this).attr('id');
+               // var p=p.replace('"','');
+                console.log(p);
+                $.get("http://192.168.1.5/genericArgs", { p: p });
+
+
+            });
+        });
+
+    </script>
+</body>
+</html>

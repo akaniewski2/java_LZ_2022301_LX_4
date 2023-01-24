@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--https://leafletjs.com/examples/choropleth/ -->
+<!--marker color: https://tombatossals.github.io/angular-leaflet-directive/examples/0503-markers-icons-example.html -->
+<!--https://gis.stackexchange.com/questions/330713/zoom-marker-text-when-zooming-map -->
+
+<!--https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html#listing-seed-starter-data-->
+
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>tvChannels</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"  />
+    <script type="text/javascript" th:src="@{/js/test.js}"></script>
+<!--    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"-->
+<!--          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="-->
+<!--          crossorigin=""/>-->
+<!--    &lt;!&ndash; Make sure you put this AFTER Leaflet's CSS &ndash;&gt;-->
+<!--    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"-->
+<!--            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="-->
+<!--            crossorigin=""></script>-->
+
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+
+
+<!--    <link rel="stylesheet" media="screen" th:href="@{/css/style.css}"/>-->
+
+</head>
+<body>
+1
+<script th:inline="javascript">
+
+<!--var x="[[${x}]]";-->
+<!--var y="[[${y}]]";-->
+
+console.log("html:START");
+
+
+var tvChannels =[[${tvChannels}]];
+var tvChannelName = tvChannels[0].name;
+console.log("html:tvChannels[0].name:"+tvChannels[0].name + "/" +tvChannelName );
+
+
+
+</script>
+
+
+<script th:inline="javascript">showAlert(); </script>
+2
+<button type="button" th:onclick="showAlert()">Show Alert</button>
+2b
+<button class="btn" onclick="showAlert()_">showAlert()_</button>
+3a
+<script type="text/javascript">
+        function showAlert3a() {
+        alert("The button was clicked!");
+}
+</script>
+3b
+
+<button type="button" th:onclick="showAlert3a()">showAlert3a</button>
+3c
+<button class="btn" onclick="showAlert3a()">showAlert3a</button>
+<button class="btn" onclick="showAlert()">showAlert3a</button>
+
+
+<script type="text/javascript">
+        function showAlert3a() {
+        alert("The button was clicked!");
+}
+</script>
+
+
+<button class="btn" onclick="showAlert()">showAlert3a</button>
+
+
+<button class="btn" onclick="f_tvChannels()">f_tvChannels</button>
+<button class="btn" onclick="f_tvChannels2()">f_tvChannels2</button>
+
+<div style="clear:both;">
+1.....
+<div style="clear:both;"><div id="tv_channels"></div>
+2.....
+<div style="clear:both;"><div id="tv_channels2"></div>
+3.....
+<div style="clear:both;"><div id="tv_channels3"></div>
+</body>
+</html>
