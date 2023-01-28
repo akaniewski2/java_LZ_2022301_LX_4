@@ -36,7 +36,8 @@ tvChannels.forEach(val=>{
 
   });
 
-}
+};
+
 function WyswietlTvKanaly() {
 
 //$("#tvChannels").append('<div id=123121 class="menu"> JQeury    xxxhh h hoihiohi ho </div>');
@@ -54,7 +55,71 @@ tvChannels.forEach(val=>{
  // $("#tvChannelsDetails").append('<div id='+val.code+' class="menu kanal filterDiv" style="text-align: left;"> '+val.tag.concat(' ').replace(',',' ')+'</div>');
 }
   });
-}
+};
+
+
+function WyswietlTvPiloty(pilot='TV_VOLTA', div_id,block) {
+
+i=0;
+div_content="";
+c_in_line=0;
+m=0;
+
+$('#pilot_nazwa').text(pilot);
+
+tvRemotes.forEach(val=>{
+
+	if (val.name == pilot && val.block==block && val.button!='FIND') {
+
+		button=val.button;
+		dec_=val.dec_;
+		button_class = val.button_class;
+		c_in_line=val.c_in_line;
+		m=i+1;
+
+//		div_content='<div id= '+dec_+' data-long-press-delay="500" class="przycisk '+button_class +'"> '+ button +' '+button_class+' '+ val.block + ' '+block +'</div>\n';
+		div_content='<div id= '+dec_+' data-long-press-delay="500" class="przycisk '+button_class +'"> '+ button +'</div>\n';
+		if((i+1) % c_in_line == 0 ) div_content += '<div style=clear:both;></div>' ;
+
+		//'<div id=test > '+val.name+ ' </div>'
+  $(div_id).append(div_content);
+
+// return div_content;
+
+
+		i++;
+	};
+
+  });
+};
+
+
+function f_tvRemotesListUniq() {
+	
+	const tvRemotesList =[];
+	const tvRemotesListUniq =[];
+
+	i=0;
+	tvRemotes.forEach(val=>{
+		
+		tvRemotesList[i] =val.name;
+		i++;
+		 
+
+		 });
+	    console.log("tvRemotesList1:"+tvRemotesList);
+
+		//  return tvRemotesList.sort().filter(function(value, index, array) {
+        //     return (index === 0) || (value !== array[index-1]);
+        // });
+		
+     return tvRemotesList.reduce((acc, d) => acc.includes(d) ? acc : acc.concat(d), []);
+
+	 console.log("tvRemotesListUniq"+tvRemotesListUniq);
+};
+
+
+
 
 //
 //function filterDiv() {
@@ -70,6 +135,8 @@ tvChannels.forEach(val=>{
 //    });
 //
 //  }};
+
+
 
 function WyswietlTvKanaly2() {
 var trescDiv=document.getElementById('tresc');

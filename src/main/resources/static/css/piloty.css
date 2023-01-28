@@ -1,0 +1,162 @@
+body
+{
+	background-color: #000000;
+	
+	color: lightgray;
+	font-size: 28px;
+	font-family: 'Inconsolata';
+	font-weight: 10;
+	/* padding: 10px; */
+	width:auto;
+}
+
+#pojemnik
+{
+	width:auto;
+	/* margin-left:auto; */
+	/* margin-right:auto; */
+
+}
+
+.pilot{
+	 
+	border: 1px solid blue;
+	border-radius: 10px;
+	padding: 3px;
+	/* padding: 10px; */
+	
+}
+
+/* #plansza
+{
+	width: 900px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	text-align: center;
+	font-size: 48px;
+	min-height: 60px;
+} */
+
+/* #szubienica
+{
+	float: left; 
+	width: 450px;
+	text-align: center;
+	min-height: 280px;
+} */
+
+#przyciski
+{
+	/* float: left;  */
+	/* width: 600px; */
+	width:auto;
+	text-align: center;
+	/* min-height: 280px; */
+	background-color: #ca1e1e;
+	font-size:8px;
+
+	
+
+}
+
+.przycisk
+{
+    /* width: 80px;
+	height: 40px;   */
+
+	width: 80px;
+	height: 40px;  
+	
+	/* padding: 5px; */
+	padding-top: 0px;
+	margin: 5px;
+	border: 2px solid gray;
+	float: left;
+	cursor: pointer;
+	border-radius: 15px;
+	font-size: 10px;
+	font-weight: bold;
+	/* font-size: 10px; */
+	/* text-align:center;  */
+
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+	background-color: #222222;
+}
+
+.przycisk:hover
+{
+	/* background-color: #222222; */
+	/* color: white; */
+	border: 2px solid white;
+
+}
+
+.reset
+{
+	color:green;
+	cursor: pointer;
+	font-size: 48px;
+}
+
+.reset:hover
+{
+	color:white;
+}
+
+
+/* .blok {
+	background-color: gray;
+} */
+.blok_1 {
+	border: 2px solid gray;
+ /* margin-top:5px; */
+ 
+/* display: inline-block; */
+border-radius: 10px;
+ padding: 10px 10px 10px 10px;
+ margin: 10px;
+
+}
+
+/* .kanaly {
+	padding: 10px;  
+	  display: inline-block;
+} */
+
+.kolor_2 {
+	background-color: #131111;
+}
+
+.red {
+	/* background-color: rgb(207, 50, 50); */
+	color:rgb(207, 50, 50);
+}
+
+.green {
+	/* background-color: rgb(10, 153, 53); */
+	color:rgb(10, 153, 53);
+}
+
+.yellow {
+	/* background-color: rgb(204, 202, 65); */
+	color:rgb(204, 202, 65);
+}
+
+.blue {
+	/* background-color: rgb(74, 133, 189); */
+	color:rgb(74, 133, 189);
+}
+
+.white {
+	color:rgb(255, 255, 255);
+	/* background-color: rgb(255, 255, 255);
+	color: #131111; */
+}
+
+.small {
+
+	/* width: 86px; */
+	height: 40px; 
+}

@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.arkani.LZ_2022301_LX.repo.TvChannelRepo;
+import pl.arkani.LZ_2022301_LX.repo.TvRemoteRepo;
 
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
@@ -20,9 +19,11 @@ import java.net.UnknownHostException;
 public class TvChannelController {
 
     private TvChannelRepo tvChannelRepo;
+    private TvRemoteRepo tvRemoteRepo;
     @Autowired
-    public TvChannelController(TvChannelRepo tvChannelRepo) {
+    public TvChannelController(TvChannelRepo tvChannelRepo, TvRemoteRepo tvRemoteRepo) {
         this.tvChannelRepo = tvChannelRepo;
+        this.tvRemoteRepo = tvRemoteRepo;
     }
 
         @GetMapping(path = "/a")
@@ -42,6 +43,7 @@ public class TvChannelController {
 
 
         model.addAttribute("tvChannels",tvChannelRepo.findAll());
+        model.addAttribute("tvRemotes",tvRemoteRepo.findAll());
 
 
 

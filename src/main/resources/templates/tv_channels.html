@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <title>tvChannels</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"  />
+    <link rel="stylesheet" th:href="@{/css/piloty.css}"  />
     <script type="text/javascript" th:src="@{/js/funkcje.js}"></script>
 
 
@@ -42,7 +43,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-1
+
 <script th:inline="javascript">
 
 <!--var x="[[${x}]]";-->
@@ -55,7 +56,7 @@ var tvChannels =[[${tvChannels}]];
 var tvChannelName = tvChannels[0].name;
 console.log("html:tvChannels[0].name:"+tvChannels[0].name + "/" +tvChannelName );
 
-
+var tvRemotes =[[${tvRemotes}]];
 
 </script>
 
@@ -92,6 +93,78 @@ console.log("html:tvChannels[0].name:"+tvChannels[0].name + "/" +tvChannelName )
 <!--        <button type="button" th:onclick="WyswietlTvKanaly();">WyswietlTvKanaly</button>-->
 
         <div id="tvChannels"  style="float: left;width: 400px;" ></div>
+<!--        <div id="tvRemotes" class="menu" style="float: left;width: 400px;text-align: left;" >-->
+        <div id="tvRemotes"   style="float: left;width: 700px;text-align: left;margin-left: 10%;" >
+
+
+
+                <!-- PILOTY START -->
+                <div id="pojemnik" style="display: inline-block;">
+
+                    <form action="" method="post">
+                        <!-- <label for ="listaPilotow"> Piloty </lael> -->
+                        <select id ="listaPilotow" name="listaPilotow" value="TV_VOLTA"   onchange="this.form.submit()"   class="select" style="display:inline-block;Swidth:30%;margin-left:2%;margin-top:0;font-size:18px;">
+                            <option value=" "><i>wybierz pilot...</i></option>
+                            <!-- <script >f_tvRemotesListUniq(); </script></p> -->
+                        </select>
+                    </form>
+                    </br>
+
+
+
+                    <!-- <div id="plansza">plansza1</div> -->
+                    <!-- <div id="szubienica"><img src="img/s0.jpg" alt="" /></div> -->
+                    <div class="pilot">
+                        <div id="plilot_nazwa"  class="blok blok_1 blue" style="text-align:center;font-size:15px;padding-bottom:8px">
+                            <?php
+                                if(isset($_POST["listaPilotow"])){
+                                    $pilot=$_POST["listaPilotow"];
+
+                                } else {
+                                    $pilot='TV_VOLTA';
+                                }
+                                echo  $pilot;
+                                ?>
+                        </div>
+                        <div id="BLOK_10" class="blok blok_1">
+                            <!-- <div id="przyciski_1"> </div> -->
+                            
+
+<!--                            <script th:inline="javascript">WyswietlTvPiloty('',''); </script>-->
+
+                        </div>
+
+                        <div id="BLOK_20"  class="blok_1">
+                            <!-- <div id="przyciski_2"></div> -->
+
+                        </div>
+
+                        <div id="BLOK_30"  class="blok_1">
+                            <!-- <div id="przyciski_2"></div> -->
+
+                        </div>
+
+                        <div id="BLOK_40"  class="blok_1">
+                            <!-- <div id="przyciski_2"></div> -->
+
+                        </div>
+
+                        <!-- <div style="clear:both;"></div> -->
+
+                    </div>
+                </div>
+
+            <div id="test"> .... </div>
+                <!-- PILOTY KONIEC -->
+
+                <!-- MUZA KONTENT:
+                 <div class="menu" onclick="window.open('https://www.youtube.com/watch?v=IUl6holsSeQ');">#84 inteligentny dom.1 - bezprzewodowe gniazdka</div>
+                 <div class="menu" onclick="window.open('https://www.youtube.com/watch?v=r83Vs3pcuVE');">Raspberry Pi 2 sterowanie oświetleniem/controlling home lighting - Wpi Apache PHP GPIO</div> -->
+
+            </div>
+        </div>
+
+</div>
 <!--        <div id="tvChannelsDetails" style="float: left;" ></div>-->
 
     </div>
@@ -124,9 +197,16 @@ console.log("html:tvChannels[0].name:"+tvChannels[0].name + "/" +tvChannelName )
 <!--<script th:inline="javascript">WyswietlTvKanaly2(); </script>-->
 
 <script th:inline="javascript">WyswietlTvKanaly(); </script>
+<script th:inline="javascript">WyswietlTvPiloty("TV_VOLTA","#BLOK_10","BLOK_10"); </script>
+<script th:inline="javascript">WyswietlTvPiloty("TV_VOLTA","#BLOK_20","BLOK_20"); </script>
+<script th:inline="javascript">WyswietlTvPiloty("TV_VOLTA","#BLOK_30","BLOK_30"); </script>
+<script th:inline="javascript">WyswietlTvPiloty("TV_VOLTA","#BLOK_40","BLOK_40"); </script>
+
 <!--<script th:inline="javascript">WyswietlTvKanaly2(); </script>-->
 <script th:inline="javascript">WyswietlMenu(); </script>
+
 <script type="text/javascript">
+
 
         $(document).ready(function () {
         console.log("dokument ready");
@@ -141,5 +221,21 @@ console.log("html:tvChannels[0].name:"+tvChannels[0].name + "/" +tvChannelName )
         });
 
     </script>
+
+<script type="text/javascript">
+
+        $(document).ready(function () {
+            $(".przycisk").click(function () {
+                var p =  $(this).attr('id');
+                $.get("http://192.168.1.5/genericArgs", { p: p });
+
+
+            });
+        });
+
+
+
+    </script>
+
 </body>
 </html>
