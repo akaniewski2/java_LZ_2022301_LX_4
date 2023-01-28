@@ -65,11 +65,15 @@ div_content="";
 c_in_line=0;
 m=0;
 
-$("#pilot_nazwa").append('<div>' + pilot +'</div>');
+
 
 tvRemotes.forEach(val=>{
-
+c=0;
 	if (val.name == pilot && val.block==block && val.button!='FIND') {
+
+        div=$("#pilot_nazwa");
+	    if (val.block=='BLOK_10' ) ;
+	    c++;
 
 		button=val.button;
 		dec_=val.dec_;
