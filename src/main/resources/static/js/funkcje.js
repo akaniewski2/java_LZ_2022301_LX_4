@@ -65,7 +65,7 @@ div_content="";
 c_in_line=0;
 m=0;
 
-$('#pilot_nazwa').text(pilot);
+$("#pilot_nazwa").append('<div>' + pilot +'</div>');
 
 tvRemotes.forEach(val=>{
 
