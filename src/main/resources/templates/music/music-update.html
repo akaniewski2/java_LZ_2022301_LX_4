@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>music-update</title>
+</head>
+<body>
+
+
+<form action="#"
+      th:action="@{/arkani2/music/update/{id}(id=${music.id})}"
+      th:object="${music}"
+      method="post">
+
+    <label for="author">Author</label><br>
+    <input type="text"  th:field="*{author}" id="author" placeholder="Author"><br>
+
+    <label for="album">Album</label><br>
+    <input type="text" th:field="*{album}" id="album" placeholder="album"><br>
+
+    <label for="url">Url</label><br>
+    <input type="text" th:field="*{url}" id="url" placeholder="url"><br>
+
+    <label for="type">Type</label><br>
+    <input type="text" th:field="*{type}" id="type" placeholder="type"><br>
+
+    <label for="rating">Rating</label><br>
+    <input type="text" th:field="*{rating}" id="rating" placeholder="rating"><br>
+
+    <span  th:if="${#fields.hasErrors('author')}"  th:errors="*{author}"></span>
+
+     <input type="submit" value="Update Music">
+</form>
+
+
+
+</body>
+</html>

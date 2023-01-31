@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>music</title>
+</head>
+<body>
+
+
+
+
+
+
+<div th:switch="${music}">
+    <h2 th:case="null">No music yet!</h2>
+    <div th:case="*">
+        <h2>music</h2>
+        <table>
+            <thead>
+            <tr>
+
+                <th>Author</th>
+                <th>Album</th>
+                <th>Url</th>
+                <th>Type</th>
+                <th>Rating</th>
+
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="music_ : ${music}">
+                <td th:text="${music_.author}"></td>
+                <td th:text="${music_.album}"></td>
+                <td th:text="${music_.url}"></td>
+                <td th:text="${music_.type}"></td>
+                <td th:text="${music_.rating}"></td>
+
+
+                <td><a th:href="@{/arkani2/music/edit/{id}(id=${music_.id})}">Edit</a></td>
+                <td><a th:href="@{/arkani2/music/delete/{id}(id=${music_.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/arkani2/music/add">Add a new music</a></p>
+</div>
+
+</body>
+</html>

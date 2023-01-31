@@ -15,7 +15,7 @@ import java.net.Inet4Address;
 import java.net.UnknownHostException;
 
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "/arkani2/")
 public class TvChannelController {
 
     private TvChannelRepo tvChannelRepo;

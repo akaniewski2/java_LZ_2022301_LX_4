@@ -8,8 +8,10 @@ import pl.arkani.LZ_2022301_LX.model.TvChannel;
 import java.util.List;
 
 @Repository
-public interface TvChannelRepo extends CrudRepository<TvChannel,Integer> {
+public interface TvChannelRepo extends JpaRepository<TvChannel,Integer> {
 
     List<TvChannel> findByName(String n);
+
+
 
 }

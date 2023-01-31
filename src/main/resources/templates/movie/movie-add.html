@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>movie-add</title>
+</head>
+<body>
+
+
+<form action="#" th:action="@{/arkani2/movie/add}" th:object="${movie}" method="post">
+  <label for="name">Name</label>
+  <input type="text" th:field="*{name}" id="name" placeholder="Name">
+  <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+  <label for="description">description</label>
+  <input type="text" th:field="*{description}" id="description" placeholder="description">
+  <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+  <input type="submit" value="Add Movie">
+</form>
+
+
+
+</body>
+</html>
