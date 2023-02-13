@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>hello-user</title>
+</head>
+<body>
+Hello <span th:text="${username}"/><br>
+Details: <span th:text="${details}"/>
+
+
+
+
+
+
+<table>
+    <tr th:each="auth: ${authorities}">
+        <td th:text="${auth}" />
+    </tr>
+    <table>
+
+</body>
+</html>

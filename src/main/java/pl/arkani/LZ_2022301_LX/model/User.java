@@ -2,6 +2,8 @@ package pl.arkani.LZ_2022301_LX.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,7 +16,7 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class User /*implements UserDetails*/{
+public class User implements UserDetails {
 
     public User(String name, String email) {
         this.username = name;
@@ -40,29 +42,27 @@ public class User /*implements UserDetails*/{
     private boolean isEnabled;
     @NotBlank(message = "Email is mandatory")
     private String email;
-/*
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
 
-
-
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
-*/
+
 
     // standard constructors / setters / getters / toString
 }

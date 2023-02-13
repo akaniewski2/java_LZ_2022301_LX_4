@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.arkani.LZ_2022301_LX.model.User;
 import pl.arkani.LZ_2022301_LX.repo.TvChannelRepo;
@@ -15,13 +16,13 @@ public class Start {
     private TvChannelRepo tvChannelRepo;
     private UserRepo userRepo;
 
-//    private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public Start(TvChannelRepo tvChannelRepo, UserRepo userRepo/*, PasswordEncoder passwordEncoder*/){
+    public Start(TvChannelRepo tvChannelRepo, UserRepo userRepo, PasswordEncoder passwordEncoder){
         this.tvChannelRepo=tvChannelRepo;
         this.userRepo = userRepo;
-//        this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @EventListener(ApplicationReadyEvent.class)
@@ -46,29 +47,31 @@ public class Start {
 //        all = tvChannelRepo.findByName("TVP1");
 //        all.forEach(System.out::println);
 
+        if (!userRepo.findByUsername("admin").isPresent()  ) {
 
-//        User user = new User();
-//        user.setUsername("admin");
-//        user.setPassword(passwordEncoder.encode("admin"));
-//        user.setRole("ADMIN");
-//        user.setEnabled(true);
-//
-//        User user2 = new User();
-//        user2.setUsername("user");
-//        user2.setPassword(passwordEncoder.encode("user"));
-//        user2.setRole("USER");
-//        user2.setEnabled(true);
-//
-//
-//        User user3 = new User();
-//        user3.setUsername("guest");
-//        user3.setPassword(passwordEncoder.encode("guest"));
-//        user3.setRole("GUEST");
-//        user3.setEnabled(true);
-//
-//        userRepo.save(user);
-//        userRepo.save(user2);
-//        userRepo.save(user3);
+            User user = new User();
+            user.setUsername("admin");
+            user.setPassword(passwordEncoder.encode("admin"));
+            user.setRole("ROLE_ADMIN");
+            user.setEnabled(true);
+
+            User user2 = new User();
+            user2.setUsername("user");
+            user2.setPassword(passwordEncoder.encode("user"));
+            user2.setRole("ROLE_USER");
+            user2.setEnabled(true);
+
+
+            User user3 = new User();
+            user3.setUsername("guest");
+            user3.setPassword(passwordEncoder.encode("guest"));
+            user3.setRole("ROLE_GUEST");
+            user3.setEnabled(true);
+
+            userRepo.save(user);
+            userRepo.save(user2);
+            userRepo.save(user3);
+        }
 
     }
 
