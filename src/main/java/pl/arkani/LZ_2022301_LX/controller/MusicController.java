@@ -74,6 +74,6 @@ public class MusicController {
         Music music = musicRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid music Id:" + id));
         musicRepo.delete(music);
-        return "redirect:/arkani2/musics";
+        return "redirect:/arkani2/music";
     }
 }

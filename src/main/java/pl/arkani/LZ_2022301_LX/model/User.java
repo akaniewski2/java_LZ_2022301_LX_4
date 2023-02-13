@@ -1,12 +1,12 @@
 package pl.arkani.LZ_2022301_LX.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Collection;
 
 @Entity
 @Setter
@@ -14,10 +14,10 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class User {
+public class User /*implements UserDetails*/{
 
     public User(String name, String email) {
-        this.name = name;
+        this.username = name;
         this.email = email;
     }
 
@@ -26,10 +26,43 @@ public class User {
     private long id;
     
     @NotBlank(message = "Name is mandatory")
-    private String name;
-    
+    private String username;
+
+
+    private String password;
+
+    @Transient
+    private String password2;
+
+    private String role;
+
+    private String Code;
+    private boolean isEnabled;
     @NotBlank(message = "Email is mandatory")
     private String email;
+/*
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+*/
 
     // standard constructors / setters / getters / toString
 }

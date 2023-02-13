@@ -148,8 +148,9 @@ margin-right:auto;*/
 float:left;
 box-sizing: border-box;	
 
-width:75%;
+width:auto;
 min-height:200px;
+min-width: 70%;
 border: 1px solid #a5cda5;	
 
 margin-top:1%;
@@ -348,7 +349,7 @@ box-shadow: 		0px 0px 6px 2px rgba(204,204,204,0.9);
 /*
 border: 1px solid #a5cda5;
 background-color: #e9f3e9;
-color: #428c42;	
+color: #999;
 */
 }
 input[type=text]:hover .tooltiptext {
@@ -367,7 +368,7 @@ box-shadow: 		0px 0px 6px 2px rgba(204,204,204,0.9);
 border: 2px solid red;
 border: 2px solid #a5cda5;
 background-color: #e9f3e9;
-color: #428c42;	
+color: #999;
 }
 */
 
@@ -488,11 +489,11 @@ input::-webkit-input-placeholder{
 }
 input:focus::-webkit-input-placeholder
 {
-color:#428C42; 	
+color:#999;
 }
 input:focus::-moz-placeholder
 {
-color:#428C42; 	
+color:#999;
 }
 
 input:-moz-placeholder
@@ -502,11 +503,11 @@ color:#999;
 
 input:focus:-moz-placeholder
 {
-color:#428C42; 
+color:#999;
 }
 input:focus:-ms-input-placeholder
 {
-color:#428C42; 
+color:#999;
 }
 
 
