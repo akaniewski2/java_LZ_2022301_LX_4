@@ -2,24 +2,24 @@ package pl.arkani.LZ_2022301_LX.config;
 
 
 //todo: https://www.javainterviewpoint.com/spring-security-jdbcuserdetailsmanager-example/
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import pl.arkani.LZ_2022301_LX.service.UserDetailsServiceImpl;
 
-import javax.sql.DataSource;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 // jakies wyrazenia regularne w sciezkach
 //https://4programmers.net/Forum/Java/303902-routing_single_page_application_w_spring_boot?p=1446995
@@ -30,8 +30,9 @@ import javax.sql.DataSource;
 //@Getter
 public class WebSecurityConfig {
 
+
     @Bean
-    public PasswordEncoder PasswordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
 
     }
@@ -42,14 +43,23 @@ public class WebSecurityConfig {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
-    public void WebSecurityConfig(UserDetailsServiceImpl userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
+//    public void WebSecurityConfig(UserDetailsServiceImpl userDetailsService) {
+//        this.userDetailsService = userDetailsService;
+//    }
 
-
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+    @Bean
+    AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
     }
+// to tez działało zamiast AuthenticationProvider
+//    protected void configure (AuthenticationManagerBuilder auth) throws Exception {
+//        System.out.println("# configure:" + userDetailsService.toString());
+//         auth.userDetailsService(userDetailsService);
+//    }
+
 //
 //    @Bean
 //    public UserDetailsService userDetailsService() {
@@ -75,33 +85,76 @@ public class WebSecurityConfig {
                 .cors().disable()
 //                .csrf().disable()
 //                .headers().disable()
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**","/css/**"))
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"))
                 //.cors(cors -> cors.configure()) todo
 
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                         .requestMatchers("/resources/**").permitAll()
-                         .requestMatchers("/","/index","/h2-console/**","/home","/welcome").permitAll()
+                              .requestMatchers("/","/index","/welcome").permitAll()
+//                                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+//                                .requestMatchers("/arkani2/music").hasAnyAuthority("ADMIN")
+//                                .requestMatchers("/hello").hasAnyAuthority("USER")
+////                                .requestMatchers("/resources/static/css/**/").permitAll()
+//                                .requestMatchers("/resources**/").permitAll()
+//                                .requestMatchers("/resources*/**/").permitAll()
+//                                .requestMatchers("/resources/**/").permitAll()
+//                                .requestMatchers("/static/css/**/").permitAll()
+//                                .requestMatchers("/css/**/").permitAll()
+//                                .requestMatchers("../static/css/").permitAll()
+//
+                             //   .requestMatchers("/**/").permitAll()
+//                            .requestMatchers("/arkani2/**").hasAnyAuthority("ADMIN")
+//                            .requestMatchers("/arkani2/**").hasAnyAuthority("ROLE_ADMIN")
+//                            .requestMatchers("/arkani2/**").hasAnyRole("ROLE_ADMIN")
+//                            .requestMatchers("/arkani2/**").hasAnyRole("ADMIN")
 
-                       //         .requestMatchers("/arkani2/**").hasAnyRole("ADMIN","USER")
-                             .anyRequest().authenticated()
-                        //  .requestMatchers("/arkani2/**").hasAnyRole()
+                        .anyRequest().authenticated()
 
                 )
+//                .authenticationManager(new CustomAuthenticationManager())
+
+                .httpBasic(withDefaults())
                 .headers(headers -> headers.frameOptions().sameOrigin())
                 .formLogin((form) -> form
-                              //  .loginPage("/login")
-                             //   .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/arkani2/music", true)
-                        .permitAll()
-                      //  .defaultSuccessUrl("/hello")
+                                //  .loginPage("/login")
+                                //   .loginProcessingUrl("/login")
+                                .defaultSuccessUrl("/hello")
+                                .permitAll()
+                        //  .defaultSuccessUrl("/hello")
                 )
-                .logout((logout) -> logout
-                        .logoutUrl("/logout")
-                        .deleteCookies("JSESSIONID")
-                        .permitAll());
+                .logout((logout) -> {
+                    try {
+                        logout
+                                .logoutUrl("/logout")
+                                .deleteCookies("JSESSIONID")
+                                .permitAll()
+                                .and()
+                                .rememberMe()
+                                .key("AAFADDDADsaADCCA_13654")
+                                .tokenValiditySeconds(7*24*60*60);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                })
+
+                ;
+
 
         return http.build();
+
+    }
+
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//       return (web) ->  web.ignoring().requestMatchers("/resources/**","static/**","/js/**","/css/*");
+//
+//    }
+}
+
+
+
+
+
+
 //
 ////                .formLogin(/*Customizer.withDefaults()*/).defaultSuccessUrl("/admin")
 ////                .logout((logout) -> logout.permitAll());
@@ -125,8 +178,7 @@ public class WebSecurityConfig {
 //
 //     return http.build();
 
-    }
-}
+
 
 //    @Bean
 //    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

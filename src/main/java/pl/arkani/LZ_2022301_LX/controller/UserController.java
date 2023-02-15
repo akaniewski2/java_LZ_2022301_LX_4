@@ -85,7 +85,7 @@ public class UserController {
     @PostMapping("/signup")
     public String register(User user) {
         System.out.println(user);
-        user.setRole("USER");
+
         System.out.println(user.getAuthorities());
         userService.addUser(user);
         return "user-signup";

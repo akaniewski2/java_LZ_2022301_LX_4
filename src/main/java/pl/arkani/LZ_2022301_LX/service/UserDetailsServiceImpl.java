@@ -4,6 +4,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import pl.arkani.LZ_2022301_LX.model.User;
 import pl.arkani.LZ_2022301_LX.repo.UserRepo;
 
 
@@ -21,6 +22,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
 
-         return userRepo.findByUsername(s).orElseThrow(()->new RuntimeException("Nieprawidłowy login lub hasło"));
+        User user = userRepo.findByUsername(s).orElseThrow(() -> new RuntimeException("Nieprawidłowy login lub hasło"));
+         System.out.println("# UserDetailsServiceImpl: "+  user);
+        return user;
     }
 }

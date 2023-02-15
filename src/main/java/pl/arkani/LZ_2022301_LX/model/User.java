@@ -38,6 +38,7 @@ public class User implements UserDetails {
     private String password2;
 
     private String role;
+    private String roles;
 
     private String Code;
     private boolean isEnabled;

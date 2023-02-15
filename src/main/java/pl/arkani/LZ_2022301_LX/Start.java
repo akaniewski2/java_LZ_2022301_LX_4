@@ -53,12 +53,14 @@ public class Start {
             user.setUsername("admin");
             user.setPassword(passwordEncoder.encode("a"));
             user.setRole("ADMIN");
+            user.setRoles("ADMIN");
             user.setEnabled(true);
 
             User user2 = new User();
             user2.setUsername("user");
             user2.setPassword(passwordEncoder.encode("u"));
             user2.setRole("USER");
+            user2.setRoles("USER");
             user2.setEnabled(true);
 
 
@@ -66,6 +68,7 @@ public class Start {
             user3.setUsername("guest");
             user3.setPassword(passwordEncoder.encode("g"));
             user3.setRole("GUEST");
+            user3.setRoles("GUEST");
             user3.setEnabled(true);
 
             userRepo.delete(user);
