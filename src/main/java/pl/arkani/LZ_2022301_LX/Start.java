@@ -47,27 +47,30 @@ public class Start {
 //        all = tvChannelRepo.findByName("TVP1");
 //        all.forEach(System.out::println);
 
-        if (!userRepo.findByUsername("admin").isPresent()  ) {
+        if (!userRepo.findByUsername("admin").isPresent()   ) {
 
             User user = new User();
             user.setUsername("admin");
-            user.setPassword(passwordEncoder.encode("admin"));
-            user.setRole("ROLE_ADMIN");
+            user.setPassword(passwordEncoder.encode("a"));
+            user.setRole("ADMIN");
             user.setEnabled(true);
 
             User user2 = new User();
             user2.setUsername("user");
-            user2.setPassword(passwordEncoder.encode("user"));
-            user2.setRole("ROLE_USER");
+            user2.setPassword(passwordEncoder.encode("u"));
+            user2.setRole("USER");
             user2.setEnabled(true);
 
 
             User user3 = new User();
             user3.setUsername("guest");
-            user3.setPassword(passwordEncoder.encode("guest"));
-            user3.setRole("ROLE_GUEST");
+            user3.setPassword(passwordEncoder.encode("g"));
+            user3.setRole("GUEST");
             user3.setEnabled(true);
 
+            userRepo.delete(user);
+            userRepo.delete(user2);
+            userRepo.delete(user3);
             userRepo.save(user);
             userRepo.save(user2);
             userRepo.save(user3);

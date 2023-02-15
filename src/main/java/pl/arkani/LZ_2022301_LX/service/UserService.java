@@ -37,7 +37,7 @@ public class UserService {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setPassword2(passwordEncoder.encode(user.getPassword2()));
 
-            user.setRole("ROLE_USER");
+            user.setRole("USER");
 
             if (!userRepo.findByUsername(user.getUsername()).isPresent() )  {
                 userRepo.save(user);

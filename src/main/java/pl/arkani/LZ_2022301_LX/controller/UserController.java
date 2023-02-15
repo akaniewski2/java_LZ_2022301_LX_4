@@ -42,17 +42,41 @@ public class UserController {
     @GetMapping("/")
     // @ResponseBody //for REST:  @ResponseBody  dodane bo jestesmy w @Controller, a nie @RestController ,w @RestController byłoby to zbedne
     public String start() {
-        return login() ;
+        return "login" ;
 
     }
 
-    //todo zwrotki ze zlego logowania
-    @GetMapping("/login")
-    public String login() {
-        return "login__";
+//    //todo zwrotki ze zlego logowania
+//    @GetMapping("/login")
+//    public String login() {
+//
+//        return "loginForm";
+//    }
+
+
+    @PostMapping("/login_auth2")
+    public String login_auth2(@Valid User user, BindingResult result, Model model) {
+
+
+        Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
+
+        return "/welcome";
+
     }
 
 
+    @PostMapping("/login_auth")
+    public String login_auth(Principal principal, Model model) {
+
+       model.addAttribute("username", principal.getName());
+        Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
+       model.addAttribute("authorities", authorities);
+       model.addAttribute("details", details);
+        return "/welcome";
+
+    }
     @GetMapping("/signup")
     public String showSignUpForm(User user) {
         return "user-signup";
