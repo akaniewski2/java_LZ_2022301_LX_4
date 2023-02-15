@@ -37,6 +37,22 @@ public class UserController {
         this.tokenRepo = tokenRepo;
     }
 
+
+
+    @GetMapping("/")
+    // @ResponseBody //for REST:  @ResponseBody  dodane bo jestesmy w @Controller, a nie @RestController ,w @RestController byłoby to zbedne
+    public String start() {
+        return login() ;
+
+    }
+
+    //todo zwrotki ze zlego logowania
+    @GetMapping("/login")
+    public String login() {
+        return "login__";
+    }
+
+
     @GetMapping("/signup")
     public String showSignUpForm(User user) {
         return "user-signup";

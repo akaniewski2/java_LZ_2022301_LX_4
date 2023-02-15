@@ -10,13 +10,18 @@
 
 
 
-
+<p>WELCOME</p>
 
 <!--<table>-->
 <!--<tr th:each="auth: ${authorities}">-->
 <!--    <td th:text="${auth}" />-->
 <!--</tr>-->
 <!--<table>-->
+
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 
 </body>
 </html>
