@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -88,26 +89,45 @@ public class WebSecurityConfig {
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"))
                 //.cors(cors -> cors.configure()) todo
 
-                .authorizeHttpRequests(auth -> auth
-                              .requestMatchers("/","/index","/welcome").permitAll()
-//                                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-//                                .requestMatchers("/arkani2/music").hasAnyAuthority("ADMIN")
-//                                .requestMatchers("/hello").hasAnyAuthority("USER")
-////                                .requestMatchers("/resources/static/css/**/").permitAll()
-//                                .requestMatchers("/resources**/").permitAll()
-//                                .requestMatchers("/resources*/**/").permitAll()
-//                                .requestMatchers("/resources/**/").permitAll()
-//                                .requestMatchers("/static/css/**/").permitAll()
-//                                .requestMatchers("/css/**/").permitAll()
-//                                .requestMatchers("../static/css/").permitAll()
-//
-                             //   .requestMatchers("/**/").permitAll()
-//                            .requestMatchers("/arkani2/**").hasAnyAuthority("ADMIN")
-//                            .requestMatchers("/arkani2/**").hasAnyAuthority("ROLE_ADMIN")
-//                            .requestMatchers("/arkani2/**").hasAnyRole("ROLE_ADMIN")
-//                            .requestMatchers("/arkani2/**").hasAnyRole("ADMIN")
+                .authorizeHttpRequests(auth -> {
+                            try {
+                                auth
 
-                        .anyRequest().authenticated()
+
+                                              .requestMatchers("/","/index","/welcome").permitAll()
+
+
+                //                                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                //                                .requestMatchers("/arkani2/music").hasAnyAuthority("ADMIN")
+                //                                .requestMatchers("/hello").hasAnyAuthority("USER")
+                ////                                .requestMatchers("/resources/static/css/**/").permitAll()
+                //                                .requestMatchers("/resources**/").permitAll()
+                //                                .requestMatchers("/resources*/**/").permitAll()
+                //                                .requestMatchers("/resources/**/").permitAll()
+                //                                .requestMatchers("/static/css/**/").permitAll()
+                //                                .requestMatchers("/css/**/").permitAll()
+                //                                .requestMatchers("../static/css/").permitAll()
+                //
+                                             //   .requestMatchers("/**/").permitAll()
+                //                            .requestMatchers("/arkani2/**").hasAnyAuthority("ADMIN")
+                //                            .requestMatchers("/arkani2/**").hasAnyAuthority("ROLE_ADMIN")
+                //                            .requestMatchers("/arkani2/**").hasAnyRole("ROLE_ADMIN")
+                                               // .anyRequest()
+
+                                                //.and()
+                //                                .authorizeHttpRequests()
+                                               // .authorizeHttpRequests()
+                                                .requestMatchers("**/admin/**").hasAnyRole("ADMIN")
+                                                .requestMatchers("**/user/**").hasAnyRole("USER")
+
+                                         //       .requestMatchers("/arkani2/**").hasAnyRole("ADMIN")
+
+
+                                        .anyRequest().authenticated();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
 
                 )
 //                .authenticationManager(new CustomAuthenticationManager())
@@ -117,7 +137,7 @@ public class WebSecurityConfig {
                 .formLogin((form) -> form
                                 //  .loginPage("/login")
                                 //   .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/hello")
+                                .defaultSuccessUrl("/hello",true)
                                 .permitAll()
                         //  .defaultSuccessUrl("/hello")
                 )
@@ -135,6 +155,8 @@ public class WebSecurityConfig {
                         e.printStackTrace();
                     }
                 })
+                .sessionManagement()
+           //     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 ;
 
