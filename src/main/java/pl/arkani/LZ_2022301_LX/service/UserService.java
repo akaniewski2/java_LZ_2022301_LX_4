@@ -38,12 +38,14 @@ public class UserService {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setPassword2(passwordEncoder.encode(user.getPassword2()));
 
-            user.setRole("USER");
+            user.setRole("ROLE_USER");
+            user.setAuthority("ROLE_USER");
+
 
             if (!userRepo.findByUsername(user.getUsername()).isPresent() )  {
                 userRepo.save(user);
                 sendToken(user);
-                System.out.println(user);
+              //  System.out.println(user);
             } else {
                 System.out.println("Podany login już istnieje");
 

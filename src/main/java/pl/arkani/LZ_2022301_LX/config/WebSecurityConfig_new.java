@@ -123,7 +123,9 @@ public class WebSecurityConfig_new {
 //        http.headers().disable();
 
 
-        http.authorizeHttpRequests()
+        http    .cors().disable()
+
+                .authorizeHttpRequests()
                 .requestMatchers("/welcome").permitAll()
                 .requestMatchers("/", "/index", "/welcome").permitAll()
                 .requestMatchers("/user-admin/**").hasAnyRole("USER", "ADMIN")

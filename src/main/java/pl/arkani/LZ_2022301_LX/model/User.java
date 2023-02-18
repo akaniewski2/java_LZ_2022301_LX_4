@@ -51,7 +51,7 @@ public class User implements UserDetails {
 
 //    @Enumerated(EnumType.STRING)
 //    private Role role;
-    private String role;
+    private String role ="USER_ROLE";
 
     @NotBlank(message = "Email is mandatory")
     private String email;
@@ -82,10 +82,10 @@ public class User implements UserDetails {
         return true;
     }
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+//    @Override
+//    public boolean isEnabled() {
+//        return true;
+//    }
 
 
     // standard constructors / setters / getters / toString

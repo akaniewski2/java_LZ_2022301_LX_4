@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
 
         User user = userRepo.findByUsername(s).orElseThrow(() -> new RuntimeException("Nieprawidłowy login lub hasło"));
-         System.out.println("# UserDetailsServiceImpl: "+  user);
+       //  System.out.println("# UserDetailsServiceImpl: "+  user);
         return user;
     }
 }
