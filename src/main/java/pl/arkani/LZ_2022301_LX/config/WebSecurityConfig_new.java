@@ -41,21 +41,30 @@ public class WebSecurityConfig_new {
 
     @Autowired
     private UserRepo userRepo;
+//
+//    @Autowired
+//    private UserDetailsServiceImpl userDetailsService;
+////
+//////    @Autowired
+//////    CustomAuthenticationProvider customAuthenticationProvider;
+////
+//    public WebSecurityConfig_new(UserDetailsServiceImpl userDetailsService) {
+//        this.userDetailsService = userDetailsService;
+//    }
 
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-//
-////    @Autowired
-////    CustomAuthenticationProvider customAuthenticationProvider;
-//
-    public WebSecurityConfig_new(UserDetailsServiceImpl userDetailsService) {
-        this.userDetailsService = userDetailsService;
+
+    //user details service moze byc zdefiniowane przez bean, albo jak to wczesniej było przez wstrzykniecie  private UserDetailsServiceImpl userDetailsService;
+    //reszta musi zostac jak jest
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return username ->  userRepo.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("User not found in DB"));
+
     }
-
+//
     @Bean
     public AuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setUserDetailsService(userDetailsService());
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
 
@@ -88,15 +97,15 @@ public class WebSecurityConfig_new {
 //    }
 
 
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-
-        authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
-
-    }
+//    @Bean
+//    public AuthenticationProvider authenticationProvider() {
+//        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+//
+//        authProvider.setUserDetailsService(userDetailsService);
+//        authProvider.setPasswordEncoder(passwordEncoder());
+//        return authProvider;
+//
+//    }
 
 
     @Bean
@@ -104,6 +113,41 @@ public class WebSecurityConfig_new {
         return config.getAuthenticationManager();
     }
 
+    //Spring Security Architecture Explained
+    //https://www.youtube.com/watch?v=h-9vhFeM3MY
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        // zmiana aby miec dostep do bazy h2
+//        http.csrf().disable();
+//        http.headers().disable();
+
+
+        http.authorizeHttpRequests()
+                .requestMatchers("/welcome").permitAll()
+                .requestMatchers("/", "/index", "/welcome").permitAll()
+                .requestMatchers("/user-admin/**").hasAnyRole("USER", "ADMIN")
+                //  .requestMatchers("/user-admin/**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
+                .requestMatchers("/guest/**").hasAnyRole("GUEST")
+                .requestMatchers("/admin/**").hasAnyRole("ADMIN")
+                .requestMatchers("/user/**").hasAnyRole("USER")
+                .anyRequest().authenticated()
+                .and()
+                .sessionManagement()
+                //        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authenticationProvider(authProvider())
+                .formLogin().defaultSuccessUrl("/welcome").permitAll()
+                //
+                .and()
+                .logout().logoutUrl("/logout")
+                .deleteCookies("JSESSIONID");
+
+        ;
+        return http.build();
+
+    }
+}
 //    @Bean
 //    public DaoAuthenticationConfigurer<AuthenticationManagerBuilder, UserDetailsServiceImpl> userDetailsService(AuthenticationManagerBuilder auth) throws Exception {
 //        return auth.userDetailsService(userDetailsService);
@@ -256,37 +300,7 @@ create unique index ix_auth_username on authorities (username,authority);
 
 
 
-    //Spring Security Architecture Explained
-    //https://www.youtube.com/watch?v=h-9vhFeM3MY
 
-        @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // zmiana aby miec dostep do bazy h2
-//        http.csrf().disable();
-//        http.headers().disable();
-
-
-        http.authorizeHttpRequests()
-                .requestMatchers("/welcome").permitAll()
-                     .requestMatchers("/", "/index", "/welcome").permitAll()
-               .requestMatchers("/user-admin/**").hasAnyRole("USER","ADMIN")
-          //  .requestMatchers("/user-admin/**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
-                 .requestMatchers("/admin/**").hasAnyRole("ADMIN")
-                .requestMatchers("/user/**").hasAnyRole("USER")
-                .anyRequest().authenticated()
-              .and()
-               .sessionManagement()
-        //        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authenticationProvider(authProvider())
-               .formLogin().defaultSuccessUrl("/welcome").permitAll()
-                //
-                .and()
-              .logout().logoutUrl("/logout")
-                        .deleteCookies("JSESSIONID");
-
-         ;
-    return http.build();
 
 //        http
 //
@@ -321,7 +335,6 @@ create unique index ix_auth_username on authorities (username,authority);
 
 
 
-    }
 
 //    @Bean
 //    public UserDetailsService userDetailsService() {
@@ -334,7 +347,7 @@ create unique index ix_auth_username on authorities (username,authority);
 //
 //        return new InMemoryUserDetailsManager(user);
 //    }
-}
+
 
 
 // tak jest wyciągany user w projekcie 01_SpringPodstawy
