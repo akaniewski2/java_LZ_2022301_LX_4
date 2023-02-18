@@ -15,3 +15,4 @@ public interface TvChannelRepo extends JpaRepository<TvChannel,Integer> {
 
 
 }
+

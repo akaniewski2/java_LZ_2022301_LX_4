@@ -6,6 +6,7 @@ import org.springframework.context.event.EventListener;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import pl.arkani.LZ_2022301_LX.model.Role;
 import pl.arkani.LZ_2022301_LX.model.User;
 import pl.arkani.LZ_2022301_LX.repo.TvChannelRepo;
 import pl.arkani.LZ_2022301_LX.repo.UserRepo;
@@ -52,23 +53,26 @@ public class Start {
             User user = new User();
             user.setUsername("admin");
             user.setPassword(passwordEncoder.encode("a"));
-            user.setRole("ADMIN");
-            user.setRoles("ADMIN");
+            user.setRole("ROLE_ADMIN");
+            user.setRoles("ROLE_ADMIN");
+            user.setAuthority("ROLE_ADMIN");
             user.setEnabled(true);
 
             User user2 = new User();
             user2.setUsername("user");
             user2.setPassword(passwordEncoder.encode("u"));
-            user2.setRole("USER");
-            user2.setRoles("USER");
+            user2.setRole("ROLE_ADMIN");
+            user2.setRoles("ROLE_USER");
+            user2.setAuthority("ROLE_USER");
             user2.setEnabled(true);
 
 
             User user3 = new User();
             user3.setUsername("guest");
             user3.setPassword(passwordEncoder.encode("g"));
-            user3.setRole("GUEST");
-            user3.setRoles("GUEST");
+            user3.setRole("ROLE_ADMIN");
+            user3.setRoles("ROLE_GUEST");
+            user3.setAuthority("ROLE_GUEST");
             user3.setEnabled(true);
 
             userRepo.delete(user);

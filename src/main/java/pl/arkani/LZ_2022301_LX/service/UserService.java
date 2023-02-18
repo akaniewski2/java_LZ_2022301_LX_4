@@ -4,6 +4,7 @@ package pl.arkani.LZ_2022301_LX.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.arkani.LZ_2022301_LX.model.Role;
 import pl.arkani.LZ_2022301_LX.model.Token;
 import pl.arkani.LZ_2022301_LX.model.User;
 import pl.arkani.LZ_2022301_LX.repo.TokenRepo;

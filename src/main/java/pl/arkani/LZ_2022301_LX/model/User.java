@@ -3,12 +3,14 @@ package pl.arkani.LZ_2022301_LX.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Setter
@@ -37,17 +39,32 @@ public class User implements UserDetails {
     @Transient
     private String password2;
 
-    private String role;
+
     private String roles;
 
     private String Code;
-    private boolean isEnabled;
+    private boolean enabled;
+
+
+    private String authority;
+
+
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
+    private String role;
+
     @NotBlank(message = "Email is mandatory")
     private String email;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+
+        return List.of(new SimpleGrantedAuthority(role));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
     @Override
@@ -62,6 +79,11 @@ public class User implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
         return true;
     }
 

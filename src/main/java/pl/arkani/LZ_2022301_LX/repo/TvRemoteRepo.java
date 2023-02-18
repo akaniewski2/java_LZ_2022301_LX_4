@@ -18,3 +18,4 @@ public interface TvRemoteRepo extends JpaRepository<TvRemote,Integer> {
     List<TvRemote> findByName(String n);
 
 }
+
