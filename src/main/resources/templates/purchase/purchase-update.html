@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>purchase-update</title>
+
+    <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
+</head>
+<body>
+
+
+<main id="main" class="article">
+    <header id="header" class="blue"><div > Update Purchase </div> </header>
+    <article class="article">
+
+
+<form action="#"
+      th:action="@{/arkani2/purchase/update/{id}(id=${purchase.id})}"
+      th:object="${purchase}"
+      method="post">
+
+
+    <div class="rejestracja">
+
+        <input style ="width:700px" type="text" th:field="*{id}" id="id" placeholder="id">
+        <input style ="width:700px" type="text"  th:field="*{name}" id="name" placeholder="name">
+        <input style ="width:700px" type="text"  th:field="*{purchased}" id="purchased" placeholder="purchased">
+
+
+        <input style ="width:700px" type="text"  th:field="*{state}" id="state" placeholder="state">
+        <input style ="width:700px" type="text"  th:field="*{category}" id="category" placeholder="category">
+
+        <input style ="width:700px" type="text"  th:field="*{toDelete}" id="toDelete" placeholder="toDelete">
+        <input style ="width:700px" type="text"  th:field="*{comment}" id="comment" placeholder="comment">
+
+
+
+
+    </div>
+
+
+    <span  th:if="${#fields.hasErrors('name')}"  th:errors="*{purchase}"></span><br>
+    <input type="submit" value="Update" style ="width:800px">
+</form>
+
+    </article>
+</main>
+
+
+</body>
+</html>

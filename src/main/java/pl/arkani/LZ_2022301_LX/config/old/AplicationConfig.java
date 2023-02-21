@@ -1,4 +1,4 @@
-package pl.arkani.LZ_2022301_LX.config;
+package pl.arkani.LZ_2022301_LX.config.old;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

@@ -15,9 +15,11 @@ import org.springframework.ui.Model;
 import pl.arkani.LZ_2022301_LX.repo.TokenRepo;
 import pl.arkani.LZ_2022301_LX.repo.UserRepo;
 import pl.arkani.LZ_2022301_LX.service.UserService;
+import pl.arkani.LZ_2022301_LX.utils.Functions;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.Collection;
 
 @Controller
@@ -110,6 +112,8 @@ public class UserController {
 
     @GetMapping("/hello")
     public String hello(Principal principal, Model model) {
+       // System.out.println(Arrays.toString(Functions.getHostAddresses()));
+        model.addAttribute("host",Functions.getHostName());
         model.addAttribute("username",principal.getName());
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
@@ -127,6 +131,7 @@ public class UserController {
         }
         
         userRepo.save(user);
+
         return "redirect:/users";
     }
 

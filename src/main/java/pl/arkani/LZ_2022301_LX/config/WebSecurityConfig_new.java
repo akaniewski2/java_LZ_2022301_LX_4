@@ -124,8 +124,13 @@ public class WebSecurityConfig_new {
 
 
         http    .cors().disable()
-
+//        https://www.baeldung.com/spring-channel-security-https
+//                .requiresChannel()
+//                .requestMatchers("/login*").requiresSecure()
+//                .and()
                 .authorizeHttpRequests()
+//                .requestMatchers("/welcome")
+
                 .requestMatchers("/welcome").permitAll()
                 .requestMatchers("/", "/index", "/welcome").permitAll()
                 .requestMatchers("/user-admin/**").hasAnyRole("USER", "ADMIN")
@@ -139,7 +144,7 @@ public class WebSecurityConfig_new {
                 //        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(authProvider())
-                .formLogin().defaultSuccessUrl("/welcome").permitAll()
+                .formLogin().defaultSuccessUrl("/hello",true).permitAll()
                 //
                 .and()
                 .logout().logoutUrl("/logout")
