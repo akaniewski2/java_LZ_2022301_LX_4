@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>add purchase</title>
@@ -22,13 +22,23 @@
 
         <div class="rejestracja">
 
-            <input style ="width:700px" type="text" th:field="*{id}" id="id" placeholder="id">
+<!--            <input style ="width:700px" type="text" th:field="*{id}" id="id" placeholder="id">-->
             <input style ="width:700px" type="text"  th:field="*{name}" id="name" placeholder="name">
-            <input style ="width:700px" type="text"  th:field="*{purchased}" id="purchased" placeholder="purchased">
+<!--            <input style ="width:700px" type="text"  th:field="*{purchased}" id="purchased" placeholder="purchased">-->
 
 
             <input style ="width:700px" type="text"  th:field="*{state}" id="state" placeholder="state">
-            <input style ="width:700px" type="text"  th:field="*{category}" id="category" placeholder="category">
+
+<!--            th:object="${purchaseCategoryClass}"-->
+            <select  th:object="${purchase}"  th:field="*{purchaseCategory}" class="menu;color:white;" id="purchaseCategory">
+                <option value="0">select option</option>
+                <option th:each="p:${purchaseCategory}" th:value="${p.id}" th:text="${p.name}"></option>
+            </select>
+
+<!--            th:text="${test.testCode}+' : '+${test.testName}"></option>-->
+
+
+<!--            <input style ="width:700px" type="text"  th:field="*{category}" id="category" placeholder="category">-->
 
             <input style ="width:700px" type="text"  th:field="*{toDelete}" id="toDelete" placeholder="toDelete">
             <input style ="width:700px" type="text"  th:field="*{comment}" id="comment" placeholder="comment">

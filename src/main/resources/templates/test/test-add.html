@@ -8,29 +8,27 @@
 <body>
 
 <main id="main" class="article">
-    <header id="header" class="blue" ><div > Add Music  </div> </header>
+    <header id="header" class="blue" ><div > Add test  </div> </header>
     <article class="article">
 
 <div>
-    <form  action="#" th:action="@{/arkani2/music/add}" th:object="${music}" method="post">
+    <form  action="#" th:action="@{/arkani2/test/add}" th:object="${test}" method="post">
 
 <!--        class="menu" style="padding:20px;margin:50px;"-->
 
 
         <div class="rejestracja">
 
-        <input style ="width:700px" type="text" th:field="*{author}" id="author" placeholder="author">
-        <input style ="width:700px" type="text"  th:field="*{album}" id="album" placeholder="album">
-        <input style ="width:700px" type="text"  th:field="*{type}" id="type" placeholder="type">
-        <input style ="width:700px" type="text"  th:field="*{rating}" id="rating" placeholder="rating">
-        <input style ="width:700px" type="text"  th:field="*{cd}" id="cd" placeholder="cd">
-        <input style ="width:700px" type="text" th:field="*{url}" id="url" placeholder="url" >
+        <input style ="width:700px" type="text" th:field="*{id}" id="id" placeholder="id">
+        <input style ="width:700px" type="text"  th:field="*{name}" id="na,e" placeholder="name">
+        <input style ="width:700px" type="text"  th:field="*{date}" id="date" placeholder="date">
+
 
 
         </div>
 
 
-        <span  th:if="${#fields.hasErrors('author')}"  th:errors="*{author}"></span><br>
+        <span  th:if="${#fields.hasErrors('name')}"  th:errors="*{test}"></span><br>
         <input type="submit" value="Add" style ="width:800px">
     </form>
 </div>

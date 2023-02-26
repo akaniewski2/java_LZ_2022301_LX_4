@@ -24,15 +24,16 @@
 
 
 <main id="main" class="article">
-    <header id="header" class="blue"><div > Purchase List </div> </header>
+    <header id="header" class="blue"><div > Purchase List  <br>[<span th:text="${username}"/>] </div> </header>
     <article class="article">
 
 
 
 <div th:switch="${purchase}" >
-    <h2 th:case="null">No purchase yet!</h2>
+    <h2 th:case="null">No purchase yet! </h2>
 
     <div th:case="*">
+
 
 
         <input id="myInput" type="text" placeholder="Search.."><br><br>
@@ -61,8 +62,10 @@
                 <th class="menu">addDt</th>
                 <th class="menu">modDt</th>
 
-                <th class="menu">addBy</th>
-                <th class="menu">modBy</th>
+<!--                <th class="menu">addBy</th>-->
+<!--                <th class="menu">modBy</th>-->
+                <th class="menu">lastModBy</th>
+<!--                <th class="menu">tmp</th>-->
 
             </tr>
             </thead >
@@ -84,11 +87,14 @@
 
                 <td th:text="${purchase_.toDelete}" class="menu" ></td>
                 <td th:text="${purchase_.comment}" class="menu" ></td>
-                <td th:text="${purchase_.addDt}" class="menu"></td>
-                <td th:text="${purchase_.modDt}" class="menu"></td>
+                <td th:text="${purchase_.getAddDtFormatted}" class="menu"></td>
+                <td th:text="${purchase_.getModDtFormatted}" class="menu"></td>
 
-                <td th:text="${purchase_.addBy}" class="menu"></td>
-                <td th:text="${purchase_.modBy}" class="menu"></td>
+<!--                <td th:text="${purchase_.addBy}" class="menu"></td>-->
+<!--                <td th:text="${purchase_.modBy}" class="menu"></td>-->
+                <td th:text="${purchase_.lastModBy}" class="menu"></td>
+<!--                <td th:text="${purchase_.getPurchaseCategory()}" class="menu"></td>-->
+<!--                <td th:text="${purchase_.tmp}" class="menu"></td>-->
 
 
 

@@ -13,8 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -91,4 +90,7 @@ public class User implements UserDetails {
 
 
     // standard constructors / setters / getters / toString
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.PERSIST)
+    private List<Purchase> purchases;
 }

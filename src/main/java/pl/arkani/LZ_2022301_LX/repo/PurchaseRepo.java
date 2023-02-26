@@ -11,7 +11,8 @@ import java.util.Optional;
 
 @Repository
 public interface PurchaseRepo extends JpaRepository<Purchase, Long> {
-    @Query(value = "SELECT s FROM Purchase s where coalesce(s.purchased,'N')='N' ORDER BY category,name,coalesce(addDt,modDt)")
+    //where coalesce(s.purchased,'N')='N'
+    @Query(value = "SELECT s FROM Purchase s  ORDER BY category,name,coalesce(addDt,modDt)")
 //    @Query(value = "SELECT s.*,FROM_UNIXTIME(addDt ),FROM_UNIXTIME(modDt ) FROM Purchase s where coalesce(s.purchased,'N')='N' ORDER BY category,name,coalesce(addDt,modDt)")
     List<Purchase> findAll();
 

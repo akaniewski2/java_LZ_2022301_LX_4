@@ -32,12 +32,12 @@ public class MusicController {
     @PostMapping("music/add")
     public String addMusic(@Valid Music music, BindingResult result, Model model) {
         if (result.hasErrors() || music.getAuthor().isBlank() ) {
-            System.out.println("1");
+            //system.out.println("1");
             return "music/music-add"; // lokalizacja html
         }
-        System.out.println("2");
+        //system.out.println("2");
         musicRepo.save(music);
-        System.out.println("3");
+        //system.out.println("3");
         return "redirect:/arkani2/music"; //redirect przekierowuje na url
     }
 

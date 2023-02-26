@@ -65,7 +65,7 @@ public class TvChannelController {
 //        try {
 //            EmailSimpleSend.emailSend("START MAPA");
 //        } catch (Exception e) {
-//            System.out.println("# ERR ! : EMAIL : " + e.getMessage());
+//            //system.out.println("# ERR ! : EMAIL : " + e.getMessage());
 //        }
 
 
@@ -87,8 +87,8 @@ public class TvChannelController {
 //            ipAddress = httpServletRequest.getRemoteAddr();
 //        }
 
-//        System.out.println("IP: "+Funkcje.getClientIp(re));
-//        System.out.println("IP: "+httpServletRequest.getRequestURL());
+//        //system.out.println("IP: "+Funkcje.getClientIp(re));
+//        //system.out.println("IP: "+httpServletRequest.getRequestURL());
 
         return "tv_channels_test";
 

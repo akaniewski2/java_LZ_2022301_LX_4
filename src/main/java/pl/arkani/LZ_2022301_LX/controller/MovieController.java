@@ -34,12 +34,12 @@ public class MovieController {
     @PostMapping("movie/add")
     public String addMovie(@Valid Movie movie, BindingResult result, Model model) {
         if (result.hasErrors() || movie.getName().isBlank() ) {
-            System.out.println("1");
+            //system.out.println("1");
             return "movie/movie-add"; // lokalizacja html
         }
-        System.out.println("2");
+        //system.out.println("2");
         movieRepo.save(movie);
-        System.out.println("3");
+        //system.out.println("3");
         return "redirect:/arkani2/movies"; //redirect przekierowuje na url
     }
 

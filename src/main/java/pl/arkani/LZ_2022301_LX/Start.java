@@ -6,8 +6,10 @@ import org.springframework.context.event.EventListener;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import pl.arkani.LZ_2022301_LX.model.Purchase;
 import pl.arkani.LZ_2022301_LX.model.Role;
 import pl.arkani.LZ_2022301_LX.model.User;
+import pl.arkani.LZ_2022301_LX.repo.PurchaseRepo;
 import pl.arkani.LZ_2022301_LX.repo.TvChannelRepo;
 import pl.arkani.LZ_2022301_LX.repo.UserRepo;
 
@@ -21,17 +23,23 @@ public class Start {
     private UserRepo userRepo;
 
     private PasswordEncoder passwordEncoder;
+    private final PurchaseRepo purchaseRepo;
 
     @Autowired
-    public Start(TvChannelRepo tvChannelRepo, UserRepo userRepo, PasswordEncoder passwordEncoder){
+    public Start(TvChannelRepo tvChannelRepo, UserRepo userRepo, PasswordEncoder passwordEncoder,
+                 PurchaseRepo purchaseRepo){
         this.tvChannelRepo=tvChannelRepo;
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
+        this.purchaseRepo = purchaseRepo;
     }
 
     @EventListener(ApplicationReadyEvent.class)
     public void runExample() throws UnknownHostException {
-        System.out.println(InetAddress.getLocalHost().getHostName());
+        //system.out.println(InetAddress.getLocalHost().getHostName());
+
+       // Purchase purchase = new Purchase();
+
 
 //      --zapis
 //        TvChannel tvChannel = new TvChannel();

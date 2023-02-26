@@ -49,6 +49,7 @@
             <tr th:each="test_ : ${test}">
 
 
+
                 <td class="menu"><a th:href="@{/arkani2/test/delete/{id}(id=${test_.id})}">Delete</a></td>
                 <td class="menu"><a th:href="@{/arkani2/test/edit/{id}(id=${test_.id})}">Edit</a></td>
 
@@ -56,7 +57,12 @@
                 <td th:text="${test_.id}" class="menu"></td>
                 <td th:text="${test_.name}" class="menu"></td>
 
+
                 <td th:text="${test_.date}" class="menu"></td>
+
+                <td> <form  action="#"  th:action="@{/arkani2/test/update/{id}(id=${test_.id})}" th:object="${test}" method="post">  <input style="margin:none;border: none !important;width:inherit !important;" name="name" type="text"  id="name" placeholder="name" th:value="${test_.name}"></td>
+<!--                field="*{name}"-->
+                <td> <input type="submit" value="aktualizuj" style ="display: none"></form></td>
 
 
 

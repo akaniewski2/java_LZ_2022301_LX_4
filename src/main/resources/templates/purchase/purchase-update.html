@@ -14,34 +14,75 @@
     <article class="article">
 
 
-<form action="#"
-      th:action="@{/arkani2/purchase/update/{id}(id=${purchase.id})}"
-      th:object="${purchase}"
-      method="post">
+        <form action="#"
+              th:action="@{/arkani2/purchase/update/{id}(id=${purchase.id})}"
+              th:object="${purchase}"
+              method="post">
 
 
-    <div class="rejestracja">
-
-        <input style ="width:700px" type="text" th:field="*{id}" id="id" placeholder="id">
-        <input style ="width:700px" type="text"  th:field="*{name}" id="name" placeholder="name">
-        <input style ="width:700px" type="text"  th:field="*{purchased}" id="purchased" placeholder="purchased">
-
-
-        <input style ="width:700px" type="text"  th:field="*{state}" id="state" placeholder="state">
-        <input style ="width:700px" type="text"  th:field="*{category}" id="category" placeholder="category">
-
-        <input style ="width:700px" type="text"  th:field="*{toDelete}" id="toDelete" placeholder="toDelete">
-        <input style ="width:700px" type="text"  th:field="*{comment}" id="comment" placeholder="comment">
+            <div class="rejestracja">
 
 
 
+<!--                <input style ="width:700px" type="text" th:field="*{id}" id="id" placeholder="id">&ndash;&gt;-->
+<!--                <input style ="width:700px" type="text"  th:field="*{name}" id="name" placeholder="name">-->
+<!--                &lt;!&ndash;            <input style ="width:700px" type="text"  th:field="*{purchased}" id="purchased" placeholder="purchased">&ndash;&gt;-->
 
-    </div>
+
+<!--                <input style ="width:700px" type="text"  th:field="*{state}" id="state" placeholder="state">-->
+
+<!--                &lt;!&ndash;            th:object="${purchaseCategoryClass}"&ndash;&gt;-->
+<!--                <select  th:object="${purchase}"  th:field="*{purchaseCategory}" class="menu;color:white;" id="purchaseCategory">-->
+<!--                    <option value="0">select option</option>-->
+<!--                    <option th:each="p:${purchaseCategory}" th:value="${p.id}" th:text="${p.name}"></option>-->
+<!--                </select>-->
+
+<!--                &lt;!&ndash;            th:text="${test.testCode}+' : '+${test.testName}"></option>&ndash;&gt;-->
 
 
-    <span  th:if="${#fields.hasErrors('name')}"  th:errors="*{purchase}"></span><br>
-    <input type="submit" value="Update" style ="width:800px">
-</form>
+<!--                &lt;!&ndash;            <input style ="width:700px" type="text"  th:field="*{category}" id="category" placeholder="category">&ndash;&gt;-->
+
+<!--                <input style ="width:700px" type="text"  th:field="*{toDelete}" id="toDelete" placeholder="toDelete">-->
+<!--                <input style ="width:700px" type="text"  th:field="*{comment}" id="comment" placeholder="comment">-->
+
+
+                <input style ="width:700px" type="text" th:field="*{id}" id="id" placeholder="id">
+                <input style ="width:700px" type="text"  th:field="*{name}" id="name" placeholder="name">
+                <input style ="width:700px" type="text"  th:field="*{purchased}" id="purchased" placeholder="purchased">
+
+
+                <input style ="display:none" type="text"  th:field="*{addDt}" id="addDt" placeholder="addDt">
+                <input style ="display:none" type="text"  th:field="*{modDt}" id="modDt" placeholder="modDt">
+
+
+                <input style ="display:none" type="text"  th:field="*{addBy}" id="addBy" placeholder="addBy">
+                <input style ="display:none" type="text"  th:field="*{modBy}" id="modBy" placeholder="modBy">
+                <input style ="display:none" type="text"  th:field="*{lastModBy}" id="lastModBy" placeholder="lastModBy">
+                <input style ="display:none" type="text"  th:field="*{tmp}" id="tmp" placeholder="tmp">
+
+
+                <input style ="width:700px" type="text"  th:field="*{state}" id="state" placeholder="state">
+                <input style ="width:700px" type="text"  th:field="*{category}" id="category" placeholder="category">
+
+
+                <input style ="width:700px" type="text"  th:field="*{toDelete}" id="toDelete" placeholder="toDelete">
+                <input style ="width:700px" type="text"  th:field="*{comment}" id="comment" placeholder="comment">
+
+
+
+<!--                 <input style ="width:700px" type="text"  th:field="*{purchaseCategory}" id="purchaseCategory" placeholder="purchaseCategory">-->
+                <select  th:object="${purchase}"  th:field="*{purchaseCategory}" class="menu;color:white;" id="purchaseCategory">
+                    <option value="0">select option</option>
+                    <option th:each="p:${purchaseCategory}" th:value="${p.id}" th:text="${p.name}"></option>
+                </select>
+
+
+            </div>
+
+
+            <span  th:if="${#fields.hasErrors('name')}"  th:errors="*{purchase}"></span><br>
+            <input type="submit" value="Update" style ="width:800px">
+        </form>
 
     </article>
 </main>

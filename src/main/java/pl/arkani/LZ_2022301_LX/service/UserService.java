@@ -45,15 +45,15 @@ public class UserService {
             if (!userRepo.findByUsername(user.getUsername()).isPresent() )  {
                 userRepo.save(user);
                 sendToken(user);
-              //  System.out.println(user);
+              //  //system.out.println(user);
             } else {
-                System.out.println("Podany login już istnieje");
+                //system.out.println("Podany login już istnieje");
 
             }
 
 
         } else {
-           System.out.println("Hasła nie zgadzają się 1");
+           //system.out.println("Hasła nie zgadzają się 1");
 
        }
 

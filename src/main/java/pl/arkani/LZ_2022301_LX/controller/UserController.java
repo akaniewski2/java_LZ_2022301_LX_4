@@ -86,9 +86,9 @@ public class UserController {
 
     @PostMapping("/signup")
     public String register(User user) {
-        //System.out.println(user);
+        ////system.out.println(user);
 
-        System.out.println(user.getAuthorities());
+        //system.out.println(user.getAuthorities());
         userService.addUser(user);
         return "user-signup";
     }
@@ -112,7 +112,7 @@ public class UserController {
 
     @GetMapping("/hello")
     public String hello(Principal principal, Model model) {
-       // System.out.println(Arrays.toString(Functions.getHostAddresses()));
+       // //system.out.println(Arrays.toString(Functions.getHostAddresses()));
         model.addAttribute("host",Functions.getHostName());
         model.addAttribute("username",principal.getName());
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();

@@ -49,7 +49,7 @@ public class Functions {
         try {
          //   String hostname = InetAddress.getLocalHost().getCanonicalHostName();
             String hostname = InetAddress.getLocalHost().getHostName();
-            System.out.println("Hostname: " + hostname);
+            //system.out.println("Hostname: " + hostname);
             return hostname;
         } catch (Exception e) {
         }

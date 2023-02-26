@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>purchaseCategory-update</title>
+
+    <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
+</head>
+<body>
+
+
+<main id="main" class="article">
+    <header id="header" class="blue"><div > Save PurchaseCategory </div> </header>
+    <article class="article">
+
+
+<form action="#"
+      th:action="@{/arkani2/purchaseCategory/update/{id}(id=${purchaseCategory.id})}"
+      th:object="${purchaseCategory}"
+      method="post">
+
+
+    <div class="rejestracja">
+
+        <input style ="width:700px" type="text" th:field="*{id}" id="id" placeholder="id">
+        <input style ="width:700px" type="text"  th:field="*{name}" id="name" placeholder="name">
+        <input style ="width:700px" type="text"  th:field="*{orderr}" id="orderr" placeholder="orderr">
+        <input style ="width:700px" type="text"  th:field="*{activeRec}" id="activeRec" placeholder="activeRec">
+
+
+
+
+    </div>
+
+
+    <span  th:if="${#fields.hasErrors('name')}"  th:errors="*{purchaseCategory}"></span><br>
+    <input type="submit" value="Save" style ="width:800px">
+</form>
+
+    </article>
+</main>
+
+
+</body>
+</html>

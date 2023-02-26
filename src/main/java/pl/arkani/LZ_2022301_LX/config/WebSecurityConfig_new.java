@@ -131,6 +131,7 @@ public class WebSecurityConfig_new {
                 .authorizeHttpRequests()
 //                .requestMatchers("/welcome")
 
+            //    .requestMatchers("/**").permitAll()
                 .requestMatchers("/welcome").permitAll()
                 .requestMatchers("/", "/index", "/welcome").permitAll()
                 .requestMatchers("/user-admin/**").hasAnyRole("USER", "ADMIN")
@@ -144,7 +145,7 @@ public class WebSecurityConfig_new {
                 //        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(authProvider())
-                .formLogin().defaultSuccessUrl("/hello",true).permitAll()
+                .formLogin().defaultSuccessUrl("/arkani2/tv_channels",true).permitAll()
                 //
                 .and()
                 .logout().logoutUrl("/logout")
@@ -279,7 +280,7 @@ create unique index ix_auth_username on authorities (username,authority);
 //        jdbcUserDetailsManager.createUser(user);
 //        jdbcUserDetailsManager.createUser(guest);
 //
-//        System.out.println(admin.getPassword());
+//        //system.out.println(admin.getPassword());
 //        connection.close();
 //        return jdbcUserDetailsManager;
 //    }

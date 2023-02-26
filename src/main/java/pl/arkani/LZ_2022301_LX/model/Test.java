@@ -25,7 +25,7 @@ public class Test {
     @NotBlank(message = "name is mandatory")
     private String name;
 
-    private Date date;
+    private String date;
 
 
 

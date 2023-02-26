@@ -32,12 +32,12 @@ public class TestController {
     @PostMapping("test/add")
     public String addTest(@Valid Test test, BindingResult result, Model model) {
         if (result.hasErrors() || test.getName().isBlank() ) {
-            System.out.println("1");
+            //system.out.println("1."+result.getAllErrors());
             return "test/test-add"; // lokalizacja html
         }
-        System.out.println("2");
+        //system.out.println("2");
         testRepo.save(test);
-        System.out.println("3");
+        //system.out.println("3");
         return "redirect:/arkani2/test"; //redirect przekierowuje na url
     }
 
