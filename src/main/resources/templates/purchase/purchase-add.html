@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>add purchase</title>
+
     <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
 </head>
 <body>
@@ -22,26 +23,32 @@
 
         <div class="rejestracja">
 
+            <TABLE>
+
 <!--            <input style ="width:700px" type="text" th:field="*{id}" id="id" placeholder="id">-->
-            <input style ="width:700px" type="text"  th:field="*{name}" id="name" placeholder="name">
+           <tr><td> name: </td> <td><input style ="width:700px" type="text"  th:field="*{name}" id="name" placeholder="name"></td></tr>
 <!--            <input style ="width:700px" type="text"  th:field="*{purchased}" id="purchased" placeholder="purchased">-->
 
 
-            <input style ="width:700px" type="text"  th:field="*{state}" id="state" placeholder="state">
+                <tr><td> state: </td> <td><input style ="width:700px" type="text"  th:field="*{state}" id="state" placeholder="state"></td></tr>
 
+                <tr><td> category: </td> <td>
 <!--            th:object="${purchaseCategoryClass}"-->
-            <select  th:object="${purchase}"  th:field="*{purchaseCategory}" class="menu;color:white;" id="purchaseCategory">
-                <option value="0">select option</option>
-                <option th:each="p:${purchaseCategory}" th:value="${p.id}" th:text="${p.name}"></option>
+            <select  th:object="${purchase}"  th:field="*{purchaseCategory}" class="select;color:white;" id="purchaseCategory" >
+<!--                <option selected="selected">tmp</option>-->
+
+                <option value="1">select option</option>
+                <option th:each="p:${purchaseCategory}" th:value="${p.id}" th:text="${p.name}" th:selected="${p.id == 1}"></option>
             </select>
+                    </td></tr>
 
 <!--            th:text="${test.testCode}+' : '+${test.testName}"></option>-->
 
 
 <!--            <input style ="width:700px" type="text"  th:field="*{category}" id="category" placeholder="category">-->
 
-            <input style ="width:700px" type="text"  th:field="*{toDelete}" id="toDelete" placeholder="toDelete">
-            <input style ="width:700px" type="text"  th:field="*{comment}" id="comment" placeholder="comment">
+                <tr><td> toDelete: </td><td><input style ="width:700px" type="text"  th:field="*{toDelete}" id="toDelete" placeholder="toDelete"></td></tr>
+                <tr><td> comment: </td><td> <input style ="width:700px" type="text"  th:field="*{comment}" id="comment" placeholder="comment"></td></tr>
 
 
 
@@ -49,8 +56,10 @@
         </div>
 
 
-        <span  th:if="${#fields.hasErrors('name')}"  th:errors="*{purchase}"></span><br>
-        <input type="submit" value="Add" style ="width:800px">
+        <tr><td></td><td> <input type="submit" value="Add" style ="width:800px"></td></tr>
+        <tr><td></td><td> <span  th:if="${#fields.hasErrors('name')}"  th:errors="*{purchase}"></span></td></tr>
+
+        </TABLE>
     </form>
 </div>
 

@@ -24,6 +24,7 @@ import pl.arkani.LZ_2022301_LX.repo.UserRepo;
 import pl.arkani.LZ_2022301_LX.service.UserDetailsServiceImpl;
 
 import javax.sql.DataSource;
+import java.security.Principal;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -123,6 +124,8 @@ public class WebSecurityConfig_new {
 //        http.headers().disable();
 
 
+
+
         http    .cors().disable()
 //        https://www.baeldung.com/spring-channel-security-https
 //                .requiresChannel()
@@ -131,7 +134,7 @@ public class WebSecurityConfig_new {
                 .authorizeHttpRequests()
 //                .requestMatchers("/welcome")
 
-            //    .requestMatchers("/**").permitAll()
+              //  .requestMatchers("/**").permitAll()
                 .requestMatchers("/welcome").permitAll()
                 .requestMatchers("/", "/index", "/welcome").permitAll()
                 .requestMatchers("/user-admin/**").hasAnyRole("USER", "ADMIN")
@@ -145,7 +148,7 @@ public class WebSecurityConfig_new {
                 //        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(authProvider())
-                .formLogin().defaultSuccessUrl("/arkani2/tv_channels",true).permitAll()
+                .formLogin().loginPage("/login").defaultSuccessUrl("/arkani2/tv_channels",true).permitAll()
                 //
                 .and()
                 .logout().logoutUrl("/logout")

@@ -3,6 +3,7 @@ package pl.arkani.LZ_2022301_LX.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +15,12 @@ import pl.arkani.LZ_2022301_LX.model.User;
 import org.springframework.ui.Model;
 import pl.arkani.LZ_2022301_LX.repo.TokenRepo;
 import pl.arkani.LZ_2022301_LX.repo.UserRepo;
+import pl.arkani.LZ_2022301_LX.service.UserDetailsServiceImpl;
 import pl.arkani.LZ_2022301_LX.service.UserService;
 import pl.arkani.LZ_2022301_LX.utils.Functions;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Arrays;
 import java.util.Collection;
 
 @Controller
@@ -32,28 +33,38 @@ public class UserController {
     private UserService userService;
     private TokenRepo tokenRepo;
 
+    private UserDetailsServiceImpl userDetailsService;
+
     @Autowired
-    public UserController(UserRepo userRepo, UserService userService, TokenRepo tokenRepo) {
+    public UserController(UserRepo userRepo, UserService userService, TokenRepo tokenRepo, UserDetailsServiceImpl userDetailsService) {
         this.userRepo = userRepo;
         this.userService = userService;
         this.tokenRepo = tokenRepo;
+        this.userDetailsService = userDetailsService;
     }
 
 
 
-    @GetMapping("/")
+//    @GetMapping("/")
+//    // @ResponseBody //for REST:  @ResponseBody  dodane bo jestesmy w @Controller, a nie @RestController ,w @RestController byłoby to zbedne
+//    public String start() {
+//        return "login" ;
+//
+//    }
+//
+    @GetMapping("/login")
     // @ResponseBody //for REST:  @ResponseBody  dodane bo jestesmy w @Controller, a nie @RestController ,w @RestController byłoby to zbedne
     public String start() {
-        return "login" ;
+        return "loginForm" ;
 
     }
 
-//    //todo zwrotki ze zlego logowania
-//    @GetMapping("/login")
-//    public String login() {
-//
-//        return "loginForm";
-//    }
+////    //todo zwrotki ze zlego logowania
+////    @GetMapping("/login")
+////    public String login() {
+////
+////        return "loginForm";
+////    }
 
 
     @PostMapping("/login_auth2")
@@ -68,8 +79,11 @@ public class UserController {
     }
 
 
-    @PostMapping("/login_auth")
-    public String login_auth(Principal principal, Model model) {
+    @PostMapping("/loginMy")
+    public String login_auth(@Valid User user ,Principal principal, Model model,BindingResult result) {
+
+       UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+
 
        model.addAttribute("username", principal.getName());
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();

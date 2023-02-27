@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>Please sign in (login1)</title>
+</head>
+<body>
+
+
+<form action="#" th:action="@{/login}" th:object="${user}" method="post">
+  <label for="username">Username</label>
+  <input type="text" field="*{username}" id="username" name="username" placeholder="username">
+  <input type="password" field="*{password}" id="password" name="password" placeholder="password">
+<!--  <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>-->
+<!--  <label for="email">Email</label>-->
+<!--  <input type="text" field="*{email}" id="email" placeholder="Email">-->
+<!--  <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
+  <input type="submit" value="Login">
+</form>
+
+
+
+
+
+</body>
+</html>

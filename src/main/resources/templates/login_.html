@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>Arkani-Logowanie</title>
+    <!--    <link rel="stylesheet" href="/css/style.css"  />-->
+    <!--    <link rel="stylesheet" href="/css/style2a.css"  />-->
+        <link rel="stylesheet" href="/css/styleLoginForm.css"  />
+
+
+    <link rel="stylesheet" th:href="@{/css/styleLoginForm.css}"  />
+
+
+</head>
+
+<body>
+
+<div class = "glowny">
+
+
+
+    <div class="tresc">
+
+        <div class="naglowek">
+
+            <i>Strona o niczym...</i>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="panel_prawy" >
+        <div class="logowanie_form" >
+
+        <!--            <form action="zaloguj.php" method="post">-->
+<!--                <input type ="text" name ="login" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'" />-->
+<!--                <input type ="password" name ="haslo"placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'" />-->
+<!--                <input type="submit" value="Logowanie"  />-->
+
+
+                <form action="#" th:action="@{/login}" th:object="${user}" method="post">
+                    <label for="username">Username</label>
+                    <input type="text" field="*{username}" id="username" name="username" placeholder="username">
+                    <input type="password" field="*{password}" id="password" name="password" placeholder="password">
+                    <!--  <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>-->
+                    <!--  <label for="email">Email</label>-->
+                    <!--  <input type="text" field="*{email}" id="email" placeholder="Email">-->
+                    <!--  <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
+                    <input type="submit" value="Login">
+                </form>
+
+
+
+
+
+                <div class="error">
+<!--                    <?php-->
+
+<!--					if(isset($_SESSION['blad'])) echo $_SESSION['blad'];-->
+<!--					unset($_SESSION['blad']);-->
+<!--					?>-->
+
+                </div>
+
+
+        </div>
+
+</div>
+
+
+
+    <div style="clear:both;">
+    </div>
+
+
+
+
+
+
+
+    <!-- <a href="rejestracja.php" ><div id="rejestracja">Rejestracja</div></a> -->
+
+
+</body>
+</html>
+
+
+
