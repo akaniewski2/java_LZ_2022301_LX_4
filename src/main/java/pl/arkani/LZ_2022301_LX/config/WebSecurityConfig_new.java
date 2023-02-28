@@ -11,7 +11,9 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.authentication.configurers.provisioning.JdbcUserDetailsManagerConfigurer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -108,7 +110,15 @@ public class WebSecurityConfig_new {
 //
 //    }
 
+//   @Bean
+//    public void configure(WebSecurity web) {
+//        web.ignoring().requestMatchers("/css/**", "/js/**");
+//    }
 
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/images/**", "/js/**", "/webjars/**","/css/**");
+    }
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration  config) throws Exception {
         return config.getAuthenticationManager();
@@ -135,8 +145,18 @@ public class WebSecurityConfig_new {
 //                .requestMatchers("/welcome")
 
               //  .requestMatchers("/**").permitAll()
-                .requestMatchers("/welcome").permitAll()
-                .requestMatchers("/", "/index", "/welcome").permitAll()
+
+//                .requestMatchers("/resources*/**").permitAll()
+//
+//                .requestMatchers("/resources/static/css/**/").permitAll()
+////                .requestMatchers("/resources**/").permitAll()
+////                .requestMatchers("/resources*/**/").permitAll()
+////                                .requestMatchers("/static/css/**/").permitAll()
+//                                .requestMatchers("/css/**/").permitAll()
+////                                .requestMatchers("../static/css/").permitAll()
+
+             // .requestMatchers("/welcome","login_TEST").permitAll()
+
                 .requestMatchers("/user-admin/**").hasAnyRole("USER", "ADMIN")
                 //  .requestMatchers("/user-admin/**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
                 .requestMatchers("/guest/**").hasAnyRole("GUEST")
@@ -148,7 +168,8 @@ public class WebSecurityConfig_new {
                 //        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(authProvider())
-                .formLogin().loginPage("/login").defaultSuccessUrl("/arkani2/tv_channels",true).permitAll()
+                .formLogin().loginPage("/login")//.permitAll()
+                .defaultSuccessUrl("/arkani2/tv_channels",true).permitAll()
                 //
                 .and()
                 .logout().logoutUrl("/logout")

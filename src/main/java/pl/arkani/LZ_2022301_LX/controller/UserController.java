@@ -6,10 +6,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import pl.arkani.LZ_2022301_LX.model.LoginForm;
 import pl.arkani.LZ_2022301_LX.model.Token;
 import pl.arkani.LZ_2022301_LX.model.User;
 import org.springframework.ui.Model;
@@ -43,6 +41,10 @@ public class UserController {
         this.userDetailsService = userDetailsService;
     }
 
+    @GetMapping(value = {"/",""} )
+    public String homePage(){
+        return welcome();
+    }
 
 
 //    @GetMapping("/")
@@ -52,10 +54,39 @@ public class UserController {
 //
 //    }
 //
+    // !!!!  login @POST https://www.youtube.com/watch?v=Tke5zjCshkc !!!
+    // prosty mapping, ale pokazane jak odebrac cały formularz jako model
+
+    @PostMapping("/login_TEST")
+    public String login(@ModelAttribute(name="loginForm") LoginForm loginForm , Model model, @Valid User user ,Principal principal,BindingResult result) {
+
+        System.out.println("# my login controller");
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+
+
+        model.addAttribute("username", principal.getName());
+        Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
+        model.addAttribute("authorities", authorities);
+        model.addAttribute("details", details);
+        return "/welcome";
+
+
+
+    }
+
+
     @GetMapping("/login")
     // @ResponseBody //for REST:  @ResponseBody  dodane bo jestesmy w @Controller, a nie @RestController ,w @RestController byłoby to zbedne
     public String start() {
         return "loginForm" ;
+
+    }
+
+    @GetMapping("/login2")
+    // @ResponseBody //for REST:  @ResponseBody  dodane bo jestesmy w @Controller, a nie @RestController ,w @RestController byłoby to zbedne
+    public String start2() {
+        return "loginForm2" ;
 
     }
 
@@ -120,7 +151,7 @@ public class UserController {
     }
 
     @GetMapping("/welcome")
-    public String welcome(User user) {
+    public String welcome() {
         return "welcome";
     }
 
