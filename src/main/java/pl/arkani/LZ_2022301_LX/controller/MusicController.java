@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.arkani.LZ_2022301_LX.model.Music;
 import pl.arkani.LZ_2022301_LX.repo.MusicRepo;
+import pl.arkani.LZ_2022301_LX.repo.TechPageRepo;
 
 import javax.validation.Valid;
 
@@ -19,9 +20,11 @@ public class MusicController {
 
 
     private MusicRepo musicRepo;
+    private TechPageRepo techPageRepo;
     @Autowired
-    public MusicController(MusicRepo musicRepo) {
+    public MusicController(MusicRepo musicRepo, TechPageRepo techPageRepo) {
         this.musicRepo = musicRepo;
+        this.techPageRepo = techPageRepo;
     }
 
     @GetMapping("music/add")
@@ -45,6 +48,7 @@ public class MusicController {
     @GetMapping("music")
     public String showMusicList(Model model) {
         model.addAttribute("music", musicRepo.findAll());
+        model.addAttribute("techPage", techPageRepo.findAll());
         return "music/music";
     }
 

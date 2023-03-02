@@ -11,6 +11,7 @@ import pl.arkani.LZ_2022301_LX.model.LoginForm;
 import pl.arkani.LZ_2022301_LX.model.Token;
 import pl.arkani.LZ_2022301_LX.model.User;
 import org.springframework.ui.Model;
+import pl.arkani.LZ_2022301_LX.repo.TechPageRepo;
 import pl.arkani.LZ_2022301_LX.repo.TokenRepo;
 import pl.arkani.LZ_2022301_LX.repo.UserRepo;
 import pl.arkani.LZ_2022301_LX.service.UserDetailsServiceImpl;
@@ -30,14 +31,16 @@ public class UserController {
     private UserRepo userRepo;
     private UserService userService;
     private TokenRepo tokenRepo;
+    private TechPageRepo techPageRepo;
 
     private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    public UserController(UserRepo userRepo, UserService userService, TokenRepo tokenRepo, UserDetailsServiceImpl userDetailsService) {
+    public UserController(UserRepo userRepo, UserService userService, TokenRepo tokenRepo, TechPageRepo techPageRepo, UserDetailsServiceImpl userDetailsService) {
         this.userRepo = userRepo;
         this.userService = userService;
         this.tokenRepo = tokenRepo;
+        this.techPageRepo = techPageRepo;
         this.userDetailsService = userDetailsService;
     }
 
@@ -45,6 +48,15 @@ public class UserController {
     public String homePage(){
         return welcome();
     }
+
+//    @GetMapping(value = "/logout" )
+//    public String logout(){
+//        return "/logout";
+//    }
+
+
+
+
 
 
 //    @GetMapping("/")

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.arkani.LZ_2022301_LX.repo.TechPageRepo;
 import pl.arkani.LZ_2022301_LX.repo.TvChannelRepo;
 import pl.arkani.LZ_2022301_LX.repo.TvRemoteRepo;
 
@@ -20,10 +21,13 @@ public class TvChannelController {
 
     private TvChannelRepo tvChannelRepo;
     private TvRemoteRepo tvRemoteRepo;
+
+    private TechPageRepo techPageRepo;
     @Autowired
-    public TvChannelController(TvChannelRepo tvChannelRepo, TvRemoteRepo tvRemoteRepo) {
+    public TvChannelController(TvChannelRepo tvChannelRepo, TvRemoteRepo tvRemoteRepo, TechPageRepo techPageRepo) {
         this.tvChannelRepo = tvChannelRepo;
         this.tvRemoteRepo = tvRemoteRepo;
+        this.techPageRepo = techPageRepo;
     }
 
         @GetMapping(path = "/a")
@@ -44,6 +48,7 @@ public class TvChannelController {
 
         model.addAttribute("tvChannels",tvChannelRepo.findAll());
         model.addAttribute("tvRemotes",tvRemoteRepo.findAll());
+        model.addAttribute("techPage", techPageRepo.findAll());
 
 
 
