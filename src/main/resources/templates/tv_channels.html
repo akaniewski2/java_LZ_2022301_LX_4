@@ -6,6 +6,10 @@
 <!--https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html#listing-seed-starter-data-->
 
 <html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+
+<!-- xmlns:th="http://www.w3.org/1999/xhtml" />-->
+
+
 <head>
     <meta charset="UTF-8">
     <title>tvChannels</title>
@@ -77,8 +81,8 @@ var techPage =[[${techPage}]];
 
 
 
-            <p style="text-align:center;font-size:15px;">
-                <?php $strona->WyswietlNaglowek(); ?></p>
+            <p style="text-align:center;font-size:15px;"  th:text="${#strings.toUpperCase(thisTechPage.name)}">    </p>
+
 
         </div>
 
