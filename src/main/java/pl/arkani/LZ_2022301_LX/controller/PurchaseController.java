@@ -67,7 +67,7 @@ public class PurchaseController {
     // additional CRUD methods
     @GetMapping("purchase")
     public String showPurchaseList(Model model,Principal principal) {
-        model.addAttribute("purchase", purchaseRepo.findAll());
+        model.addAttribute("purchase", purchaseService.findAllWithLimit(1000));
         model.addAttribute("username", principal.getName());
         return "purchase/purchase";
     }

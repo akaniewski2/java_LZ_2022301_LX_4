@@ -31,7 +31,7 @@ public class MusicController {
     public String showSignUpForm(Music music) {
         return "music/music-add";
     }
-    
+
     @PostMapping("music/add")
     public String addMusic(@Valid Music music, BindingResult result, Model model) {
         if (result.hasErrors() || music.getAuthor().isBlank() ) {

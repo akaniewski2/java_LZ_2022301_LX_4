@@ -38,8 +38,8 @@ public class UserService {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setPassword2(passwordEncoder.encode(user.getPassword2()));
 
-            user.setRole("ROLE_USER");
-            user.setAuthority("ROLE_USER");
+            user.setRole("ROLE_GUEST");
+            user.setAuthority("ROLE_GUEST");
 
 
             if (!userRepo.findByUsername(user.getUsername()).isPresent() )  {

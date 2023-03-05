@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.arkani.LZ_2022301_LX.model.Purchase;
 import pl.arkani.LZ_2022301_LX.model.Role;
+import pl.arkani.LZ_2022301_LX.model.TechPage;
 import pl.arkani.LZ_2022301_LX.model.User;
 import pl.arkani.LZ_2022301_LX.repo.PurchaseRepo;
 import pl.arkani.LZ_2022301_LX.repo.TvChannelRepo;
@@ -15,6 +16,7 @@ import pl.arkani.LZ_2022301_LX.repo.UserRepo;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Optional;
 
 @Component
 public class Start {
@@ -36,6 +38,19 @@ public class Start {
 
     @EventListener(ApplicationReadyEvent.class)
     public void runExample() throws UnknownHostException {
+
+
+        //-- OPTIONAL -----------------------------------------------------------------------------
+
+//        Optional.of(techpagePrivilege.get().getName()); // zakłada ze optional nigdy nie bedzie nullem
+//
+//        System.out.println("-- # OPTIONAL ---");
+//        if (techpagePrivilege.isPresent() ) {
+//
+//            System.out.println(techpagePrivilege.get().getName());
+//        }
+
+
         //system.out.println(InetAddress.getLocalHost().getHostName());
 
        // Purchase purchase = new Purchase();

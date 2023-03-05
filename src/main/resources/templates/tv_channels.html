@@ -57,6 +57,7 @@ $(document).ready(function(){
 
 <!--var x="[[${x}]]";-->
 <!--var y="[[${y}]]";-->
+<!--var techPageList =[[${techPageList}]];-->
 
 console.log("html:START");
 
@@ -66,7 +67,6 @@ var tvChannelName = tvChannels[0].name;
 console.log("html:tvChannels[0].name:"+tvChannels[0].name + "/" +tvChannelName );
 
 var tvRemotes =[[${tvRemotes}]];
-var techPage =[[${techPage}]];
 
 
 </script>
@@ -191,19 +191,47 @@ var techPage =[[${techPage}]];
             <!--<div class="menu" onclick="location.href=/logout.php?dis=yes">Wyloguj się</div> -->
             <!--<div class="menu" onclick='open.href=logout.php'>Wyloguj się</div>-->
 
-
-
-<!--            <div id="menu">-->
-
-<!--                <?php $strona->WyswietlMenu(); ?>-->
-<!--                &lt;!&ndash; https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_close &ndash;&gt;-->
-<!--            </div>-->
-            <!--defer -->
-<!--            <script   src="funkcje.js" ></script>-->
+            <div  th:each="page: ${techPageList}">
+                <!--        działa ,ale nie łapie całego przycisku tylko napis-->
+                <!--            <a th:href="@{{url}(url=${page.url})}"  th:text="${page.button}"> </a>-->
+                <div  class="menu" th:onclick="'window.location.href = \'' + @{{id}(id=${page.url})} + '\''"  th:text="${page.button}">  </div>
+            </div>
 
         </div>
     </div>
     <div style="clear:both;"></div>
+
+
+<!--<div class="panel_prawy" >-->
+<!--    <div class="menu_kontener2">-->
+<!--        &lt;!&ndash;<div class="menu" onclick="location.href=/logout.php?dis=yes">Wyloguj się</div> &ndash;&gt;-->
+<!--        &lt;!&ndash;<div class="menu" onclick='open.href=logout.php'>Wyloguj się</div>&ndash;&gt;-->
+
+<!--        <div id="purchase" class="menu" onclick=window.location="/arkani2/purchase"> purchase </div>-->
+
+
+
+<!--        <div  th:each="page: ${techPageList}">-->
+
+<!--            &lt;!&ndash;        działa ,ale nie łapie całego przycisku tylko napis&ndash;&gt;-->
+<!--&lt;!&ndash;            <a th:href="@{{url}(url=${page.url})}"  th:text="${page.button}"> </a>&ndash;&gt;-->
+<!--            <div  class="menu" style="color:red" th:onclick="'window.location.href = \'' + @{{id}(id=${page.url})} + '\''"  th:text="${page.button}">  </div>-->
+
+<!--        </div>-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;https://stackoverflow.com/questions/32650536/using-thymeleaf-variable-in-onclick-attribute&ndash;&gt;-->
+
+<!--        &lt;!&ndash;            <div id="menu">&ndash;&gt;-->
+
+<!--        &lt;!&ndash;                <?php $strona->WyswietlMenu(); ?>&ndash;&gt;-->
+<!--        &lt;!&ndash;                &lt;!&ndash; https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_close &ndash;&gt;&ndash;&gt;-->
+<!--        &lt;!&ndash;            </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;defer &ndash;&gt;-->
+<!--        &lt;!&ndash;            <script   src="funkcje.js" ></script>&ndash;&gt;-->
+
+<!--    </div>-->
+<!--</div>-->
+<!--<div style="clear:both;"></div>-->
 </div>
 
 <!-- <script crs="jquery.min.js"></script> -->
@@ -221,7 +249,7 @@ var techPage =[[${techPage}]];
 <script th:inline="javascript">WyswietlTvPiloty("TV_VOLTA","#BLOK_50","BLOK_50"); </script>
 
 <!--<script th:inline="javascript">WyswietlTvKanaly2(); </script>-->
-<script th:inline="javascript">WyswietlMenu(); </script>
+<!--<script th:inline="javascript">WyswietlMenu(); </script>-->
 
 <script type="text/javascript">
 

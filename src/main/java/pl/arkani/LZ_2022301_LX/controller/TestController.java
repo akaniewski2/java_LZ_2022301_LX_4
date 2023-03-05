@@ -12,6 +12,10 @@ import pl.arkani.LZ_2022301_LX.model.Test;
 import pl.arkani.LZ_2022301_LX.repo.TestRepo;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/arkani2/")
@@ -44,7 +48,22 @@ public class TestController {
     // additional CRUD methods
     @GetMapping("test")
     public String showTestList(Model model) {
+
+        List<String> headers = Arrays.asList("ID", "Name", "Salary", "Status");
+        List<Map<String, Object>> rows = new ArrayList<>();
+        rows.add(Map.of("ID", "1", "Name", "Jim", "Salary", "50000", "Status", "active"));
+        rows.add(Map.of("ID", "2", "Name", "Sally", "Salary", "50000", "Status", "inactive"));
+
+        for (Test  t: testRepo.findAll()) {
+
+            rows.add(Map.of(headers.get(0),t.getId(),headers.get(1),t.getName(),headers.get(2),"50",headers.get(3),"active"));
+
+
+        }
+
         model.addAttribute("test", testRepo.findAll());
+        model.addAttribute("headers",headers);
+        model.addAttribute("rows", rows);
         return "test/test";
     }
 

@@ -1,5 +1,7 @@
 package pl.arkani.LZ_2022301_LX.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.arkani.LZ_2022301_LX.model.Purchase;
 import pl.arkani.LZ_2022301_LX.model.User;
@@ -7,6 +9,7 @@ import pl.arkani.LZ_2022301_LX.repo.PurchaseRepo;
 import pl.arkani.LZ_2022301_LX.repo.UserRepo;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +21,8 @@ public class PurchaseService {
     private UserDetailsServiceImpl userDetailsService;
 
 
+
+
     public PurchaseService(PurchaseRepo purchaseRepo, UserRepo userRepo, UserDetailsServiceImpl userDetailsService) {
         this.purchaseRepo = purchaseRepo;
         this.userRepo = userRepo;
@@ -25,7 +30,10 @@ public class PurchaseService {
     }
 
 
-
+    public List<Purchase> findAllWithLimit(int limit) {
+        Page<Purchase> page = purchaseRepo.findAll(Pageable.ofSize(limit));
+        return page.getContent();
+    }
 
 
     public void save (Purchase purchase, Principal principal) {

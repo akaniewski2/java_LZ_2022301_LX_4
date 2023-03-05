@@ -34,7 +34,7 @@ function WyswietlMenu() {
 //var techPage = [(${techPage})];
 //var techPage = ([[${techPage}]]);
 //var techPage = x;
-techPage.forEach(val=>{
+techPageList.forEach(val=>{
 //  eval($(".menu_kontener").append('<div id='+val.name  +' class="menu" onclick "window.location='+val.url+' " > '+val.name+' </div>'));
 var str =
   $(".menu_kontener").append(('<div id='+val.name  +' class="menu" onclick="window.location=val.url"> '+val.button+' </div>').replace('val.url',"'"+val.url+"'") );

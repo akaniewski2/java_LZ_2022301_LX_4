@@ -3,6 +3,7 @@ package pl.arkani.LZ_2022301_LX.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -129,45 +130,44 @@ public class WebSecurityConfig_new {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // zmiana aby miec dostep do bazy h2
-//        http.csrf().disable();
-//        http.headers().disable();
-
-
-
-
-        http    .cors().disable()
 //        https://www.baeldung.com/spring-channel-security-https
-//                .requiresChannel()
-//                .requestMatchers("/login*").requiresSecure()
-//                .and()
+
+        // zmiana aby miec dostep do bazy h2
+        http.csrf().disable();
+        http.headers().disable();
+
+        http
+
                 .authorizeHttpRequests()
-//                .requestMatchers("/welcome")
-
-              //  .requestMatchers("/**").permitAll()
-
-//                .requestMatchers("/resources*/**").permitAll()
-//
-//                .requestMatchers("/resources/static/css/**/").permitAll()
-////                .requestMatchers("/resources**/").permitAll()
-////                .requestMatchers("/resources*/**/").permitAll()
-////                                .requestMatchers("/static/css/**/").permitAll()
-//                                .requestMatchers("/css/**/").permitAll()
-////                                .requestMatchers("../static/css/").permitAll()
-
-             // .requestMatchers("/welcome","login_TEST").permitAll()
 
                 .requestMatchers("/user-admin/**").hasAnyRole("USER", "ADMIN")
                 //  .requestMatchers("/user-admin/**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
                 .requestMatchers("/guest/**").hasAnyRole("GUEST")
                 .requestMatchers("/admin/**").hasAnyRole("ADMIN")
                 .requestMatchers("/user/**").hasAnyRole("USER")
+
+
+
+                .requestMatchers(HttpMethod.POST  ,"/arkani2/**").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.PUT   ,"/arkani2/**").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.PATCH ,"/arkani2/**").hasAnyRole("ADMIN","USER")
+                .requestMatchers(HttpMethod.DELETE,"/arkani2/**").hasAnyRole("ADMIN","USER")
+
+                .requestMatchers(HttpMethod.GET,"/arkani2/*/delete/**").hasAnyRole("ADMIN","USER")
+
+
+                .requestMatchers(HttpMethod.POST  ,"/**").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT   ,"/**").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.PATCH ,"/**").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE,"/**").hasAnyRole("ADMIN")
+
+
                 .anyRequest().authenticated()
                 .and()
-                .sessionManagement()
+                .sessionManagement();
                 //        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authenticationProvider(authProvider())
+               // .and()
+                http.authenticationProvider(authProvider())
                 .formLogin().loginPage("/login")//.permitAll()
                 .defaultSuccessUrl("/arkani2/tv_channels",true).permitAll()
                 //

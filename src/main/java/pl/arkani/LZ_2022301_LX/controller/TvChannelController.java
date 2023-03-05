@@ -1,6 +1,8 @@
 package pl.arkani.LZ_2022301_LX.controller;
 
+import com.mysql.cj.xdevapi.DocResultImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,31 +11,39 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.arkani.LZ_2022301_LX.model.TechPage;
-import pl.arkani.LZ_2022301_LX.repo.TechPageRepo;
-import pl.arkani.LZ_2022301_LX.repo.TvChannelRepo;
-import pl.arkani.LZ_2022301_LX.repo.TvRemoteRepo;
+import pl.arkani.LZ_2022301_LX.model.TechPageTmp;
+import pl.arkani.LZ_2022301_LX.model.User;
+import pl.arkani.LZ_2022301_LX.repo.*;
 
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
-import java.util.List;
+import java.security.Principal;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/arkani2/")
 public class TvChannelController {
 
+    private UserRepo userRepo;
     private TvChannelRepo tvChannelRepo;
     private TvRemoteRepo tvRemoteRepo;
 
     private TechPageRepo techPageRepo;
 
     private TechPage techPage;
+    private final TestRepo testRepo;
+
     @Autowired
-    public TvChannelController(TvChannelRepo tvChannelRepo, TvRemoteRepo tvRemoteRepo, TechPageRepo techPageRepo) {
+    public TvChannelController(UserRepo userRepo, TvChannelRepo tvChannelRepo, TvRemoteRepo tvRemoteRepo, TechPageRepo techPageRepo,
+                               TestRepo testRepo) {
+        this.userRepo = userRepo;
         this.tvChannelRepo = tvChannelRepo;
         this.tvRemoteRepo = tvRemoteRepo;
         this.techPageRepo = techPageRepo;
 
-        this.techPage = techPageRepo.findByName("tv_channels");
+        this.techPage = techPageRepo.findByName("tv_channels"); // definiuje raz strone na której dotyczy kontroler
+        this.testRepo = testRepo;
     }
 
         @GetMapping(path = "/a")
@@ -48,14 +58,41 @@ public class TvChannelController {
 
 
     @RequestMapping(path = "tv_channels",method = RequestMethod.GET)
-    public String tv_channels(Model model, @RequestParam(required =false) String dt)  {
+    public String tv_channels(Model model, @RequestParam(required =false) String dt, Principal principal)  {
+
+       // #--- Privileges START ----------------------------------------------------------------------------------------------------------------
+        User user = userRepo.findByUsername(principal.getName()).orElseThrow(()->new UsernameNotFoundException("User not found in DB"));
+        String userRole =  user.getRole();
+        List<TechPage> techPageList = techPageRepo.findByMethodAndRole("GET", userRole);
+//        List<TechPage> techPageList2 = techPageList.stream().filter(s -> s.getRoles().equals(userRole)).collect(Collectors.toList());
+
+        List<TechPageTmp> techPageList2 = new ArrayList<>();
+
+
+        for (TechPage s :techPageList) {
+
+            techPageList2.add(new TechPageTmp(s.getName(), s.getButton(), s.getHeader(),s.getUrl()));
+        }
 
 
 
-        model.addAttribute("thisTechPage",techPage);
+        // Set<TechPage> techPageList2 = new HashSet<TechPage>();
+       // techPageList2.addAll(techPageList);
+
+        Optional<TechPage> techpagePrivilege= techPageRepo.findByMethodAndNameAndRole("GET",this.techPage.getName(),userRole);
+        if (techpagePrivilege.isEmpty()) {return "/home";}
+        System.out.println("# techPage:" + techPage);
+        System.out.println("# techPageList2:" + techPageList2);
+        techPageList.forEach(System.out::println);
+
+        // System.out.println("#techpageRole: "+ techpagePrivilege);
+       model.addAttribute("thisTechPage",techPage);
+       model.addAttribute("techPageList",techPageList2);//przekazuje tylko te definicje stron , do których user ma uprawnienia
+        // #--- Privileges END ------------------------------------------------------------------------------------------------------------------
+
+
         model.addAttribute("tvChannels",tvChannelRepo.findAll());
         model.addAttribute("tvRemotes",tvRemoteRepo.findAll());
-        model.addAttribute("techPage", techPageRepo.findAll());
 
 
 
@@ -64,6 +101,20 @@ public class TvChannelController {
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         }
+
+        //-- OPTIONAL -----------------------------------------------------------------------------
+
+        System.out.println("Optional #1 of"+Optional.of(techpagePrivilege.get().getName())); // zakłada ze optional nigdy nie bedzie nullem
+        System.out.println("Optional #2 ofNullable  "+Optional.ofNullable(techpagePrivilege.get().getName())); // zakłada ze optional nigdy nie bedzie nullem
+
+        System.out.println("-- # OPTIONAL ---");
+        if (techpagePrivilege.isPresent() ) {
+
+            System.out.println(techpagePrivilege.get().getName());
+        }
+
+
+        //------------------------------------------------------------------------------------------
 
         return "tv_channels";
 
