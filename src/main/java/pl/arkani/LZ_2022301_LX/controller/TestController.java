@@ -57,7 +57,9 @@ public class TestController {
         for (Test  t: testRepo.findAll()) {
 
             rows.add(Map.of(headers.get(0),t.getId(),headers.get(1),t.getName(),headers.get(2),"50",headers.get(3),"active"));
-
+         //   rows.add(Map.of(headers.get(0),t.getId()+10));
+            rows.add(Map.of(headers.get(1),t.getName()));
+            rows.add(Map.of(headers.get(3),"no active"));
 
         }
 
