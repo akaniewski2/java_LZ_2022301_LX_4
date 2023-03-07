@@ -83,12 +83,29 @@
             </thead>
 
             <tbody>
-            <tr class="even pointer" th:each="row: ${rows}" id="tablerow">
+            <tr class="even pointer" th:each="row: ${rows2}" id="tablerow2">
                 <td th:each="header: ${headers}" th:text="${row.get(header)}" />
             </tr>
             </tbody>
         </table>
 
+
+
+
+
+        <table>
+            <thead>
+            <tr class="headings">
+                <th th:each="header: ${headers}" class="column-title" th:text="${header}" />
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="even pointer" th:each="row: ${rows}" id="tablerow">
+                <td th:each="r: ${row}" th:text="${r}" />
+            </tr>
+            </tbody>
+        </table>
 
 
     </article>
