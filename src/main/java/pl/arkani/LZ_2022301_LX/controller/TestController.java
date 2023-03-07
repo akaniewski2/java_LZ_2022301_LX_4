@@ -62,6 +62,24 @@ public class TestController {
             rows.add(Map.of(headers.get(3),"no active"));
 
         }
+//
+//        List<Test> listOfClass = new ArrayList<>();
+//
+//
+//
+//        ArrayList<ArrayList<String>> listOfLists = new ArrayList<ArrayList<String>>();
+//        ArrayList<String> singleList = new ArrayList<String>();
+//        singleList.add("hello");
+//        singleList.add("world");
+//        listOfLists.add(singleList);
+//
+//        ArrayList<String> anotherList = new ArrayList<String>();
+//        anotherList.add("this is another list");
+//        listOfLists.add(anotherList);
+
+
+
+
 
         model.addAttribute("test", testRepo.findAll());
         model.addAttribute("headers",headers);

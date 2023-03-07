@@ -36,20 +36,20 @@ public interface TechPageRepo extends JpaRepository<TechPage,Long> {
 
 
    @Query(value = """
-                     SELECT p.* FROM tech_page p\s
-                     inner join tech_page_tech_page_role w on p.id=w.page_Id\s
-                     inner join tech_page_role r on r.id=w.role_Id  \s
-                     where p.active_Row=1 and p.name=?2 and r.method=?1 and  r.role = ?3 \s
+                     SELECT p.* FROM tech_page p
+                     inner join tech_page_tech_page_role w on p.id=w.page_Id
+                     inner join tech_page_role r on r.id=w.role_Id
+                     where p.active_Row=1 and p.name=?2 and r.method=?1 and  r.role = ?3
                      order by p.order_Row,p.name
            """,nativeQuery = true)
     Optional<TechPage> findByMethodAndNameAndRole( String Method, String name, String role) ;
 
    @Query(value = """
-                    SELECT p.* FROM tech_page p\s
-                    inner join tech_page_tech_page_role w on p.id=w.page_Id\s
-                    inner join tech_page_role r on r.id=w.role_Id  \s
-                    where p.active_Row=1  and r.method=?1 and  r.role = ?2\s   
-                    order by p.order_Row,p.name\s
+                    SELECT p.* FROM tech_page p
+                    inner join tech_page_tech_page_role w on p.id=w.page_Id
+                    inner join tech_page_role r on r.id=w.role_Id
+                    where p.active_Row=1  and r.method=?1 and  r.role = ?2   
+                    order by p.order_Row,p.name
            """,nativeQuery = true)
     List<TechPage> findByMethodAndRole(String Method,String role);
 
