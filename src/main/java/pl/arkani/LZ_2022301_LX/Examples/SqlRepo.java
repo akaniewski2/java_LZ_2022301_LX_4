@@ -21,7 +21,8 @@ public class SqlRepo {
 
         String q_tmp = sqlStatement;
         Query q = em.createNativeQuery(q_tmp);
-        System.out.println(q.getResultStream());
+
+        //System.out.println(q.getResultStream());
         List<Object[]> wynik = q.getResultList();
 
         //SqlSelectAll("test.KoronawirusZakazeni","*");

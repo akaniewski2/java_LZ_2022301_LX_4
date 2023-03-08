@@ -1,0 +1,39 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>movies</title>
+</head>
+<body>
+<div th:switch="${movies}">
+    <h2 th:case="null">No movies yet!</h2>
+    <div th:case="*">
+        <h2>movies</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="movie : ${movies}">
+                <td th:text="${movie.name}"></td>
+                <td th:text="${movie.description}"></td>
+                <td><a th:href="@{/arkani2/movie/edit/{id}(id=${movie.id})}">Edit</a></td>
+                <td><a th:href="@{/arkani2/movie/delete/{id}(id=${movie.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/arkani2/movie/add">Add a new movie</a></p>
+</div>
+
+</body>
+</html>

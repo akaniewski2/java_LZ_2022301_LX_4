@@ -67,9 +67,9 @@ public class TestController {
 
         }
 
-
-        /*List<String> */headers = Arrays.asList("id", "username", "role");
-        List<List<String>> rows= sqlRepoExec.sqlRepoExecTest("select id,username,role from arkani_1.user order by id");
+        //sqlRepoExec.getTableHeaders("user");
+        /*List<String> */headers = sqlRepoExec.getTableHeaders("user_v"); // Arrays.asList("id", "username", "role");
+        List<List<String>> rows= sqlRepoExec.getTableData("select * from arkani_1.user_v order by id");
 
 
         model.addAttribute("test", testRepo.findAll());

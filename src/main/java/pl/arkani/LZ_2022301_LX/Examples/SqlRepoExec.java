@@ -2,6 +2,8 @@ package pl.arkani.LZ_2022301_LX.Examples;
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,44 @@ public class SqlRepoExec {
     }
 
 
-    public List<List<String>> sqlRepoExecTest (String sql) {
+
+
+        public List<String> getTableHeaders(/*@Param("tableName")*/String tableName) {
+
+
+            List <String> row ;//= new ArrayList<>();
+
+            List<List<String>> rows = new ArrayList<List<String>>();
+
+        String sql = """
+                select column_name,"cos"
+                from  information_schema.COLUMNS c
+                where table_schema='arkani_1' and table_name=':tableName'     
+                order by ordinal_position
+                """  ;
+         sql=sql.replace(":tableName",tableName);
+
+            System.out.println("# sql:"+sql);
+
+            List<Object[]> wynik;
+            wynik = sqlRepo.SqlSelectAll(sql);
+
+
+            List<String> columns = new ArrayList<>();
+            for (Object[] a:wynik) {
+                columns.add(String.valueOf(a[0]));
+
+
+            }
+
+            System.out.println("# columns:" );
+            columns.forEach( System.out::println);
+            return  columns;
+
+
+
+        }
+         public List<List<String>> getTableData (String sql) {
         List <String> row ;//= new ArrayList<>();
 
         List<List<String>> rows = new ArrayList<List<String>>();
@@ -41,7 +80,7 @@ public class SqlRepoExec {
         List<Object[]> wynik;
         wynik = sqlRepo.SqlSelectAll(sql);
 
-        wynik.forEach(System.out::println);
+      //  wynik.forEach(System.out::println);
 
 
         int aLen;
@@ -56,19 +95,19 @@ public class SqlRepoExec {
 
 
 
-
-
-                System.out.println( "----------------------------");
-                System.out.println(a[i]);
-                System.out.println("MOD:" +(i % a.length-1));
-                System.out.println( "----------------------------");
+//
+//
+//                System.out.println( "----------------------------");
+//                System.out.println(a[i]);
+//                System.out.println("MOD:" +(i % a.length-1));
+//                System.out.println( "----------------------------");
                 row.add(String.valueOf(a[i]));
 
 
 
 
             }
-            System.out.println( "----------------------------");
+//            System.out.println( "----------------------------");
             rows.add(row);
 
 
@@ -76,10 +115,10 @@ public class SqlRepoExec {
         }
 
 
-        System.out.println( "--------------------");
+   //     System.out.println( "--------------------");
        // row.forEach(System.out::println);
-        System.out.println( "---------------");
-        rows.forEach(System.out::println);
+     //   System.out.println( "---------------");
+   //     rows.forEach(System.out::println);
 
 
         return rows;

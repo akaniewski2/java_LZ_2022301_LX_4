@@ -45,7 +45,7 @@
 
             </tr>
             </thead >
-            <tbody id="myTable">
+            <tbody id="myTable_">
             <tr th:each="test_ : ${test}">
 
 
@@ -74,6 +74,7 @@
 
 </div>
 
+<!--        automatyczne generowanie v1-->
 
         <table>
             <thead>
@@ -90,19 +91,19 @@
         </table>
 
 
-
+        <!--        automatyczne generowanie v2-->
 
 
         <table>
             <thead>
-            <tr class="headings">
-                <th th:each="header: ${headers}" class="column-title" th:text="${header}" />
+            <tr >
+                <th class="menu" th:each="header: ${headers}"   th:text="${header}" />
             </tr>
             </thead>
 
             <tbody>
-            <tr class="even pointer" th:each="row: ${rows}" id="tablerow">
-                <td th:each="r: ${row}" th:text="${r}" />
+            <tr  th:each="row: ${rows}" id="myTable">
+                <td class="menu" th:each="r: ${row}" th:text="${r}" />
             </tr>
             </tbody>
         </table>
