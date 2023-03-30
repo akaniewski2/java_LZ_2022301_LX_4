@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>GoodsRaiting</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
+    <!--    <link rel="stylesheet" th:href="@{static/css/style2a.css}"  />-->
+    <!--    <link rel="stylesheet" th:href="@{/static/css/style2a.css}"  />-->
+    <!--    <link rel="stylesheet" th:href="@{resources/static/css/style2a.css}"  />-->
+    <!--    <link rel="stylesheet" href="../static/css/style2a.css" th:href="@{../static/css/style2a.css}"  />-->
+    <!--    <link rel="stylesheet" href="D:\PROGRAMOWANIE\Intellij_IDEA\java_LZ_2022301_LX\src\main\resources\static\css\style2a.css"  \>-->
+
+    <!--    <link rel="stylesheet" href="style2a.css" type="text/css"/>-->
+
+
+
+
+</head>
+<body>
+
+
+
+
+
+<main id="main" class="article">
+    <header id="header" class="blue"><div > GoodsRaiting
+<!--        <br>[<span th:text="${username}"/>] </div> -->
+    </header>
+    <article class="article">
+
+
+        <form th:action="@{/test/person/add}" th:object="${person}" method="post" class="form">
+            <div class="form-group">
+                <label for="fullName">Name</label>
+                <input class="form-control" type="text" th:field="*{fullName}" id="fullName" placeholder="Full Name">
+                <div class="alert alert-warning" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" type="text" th:field="*{email}" id="email" placeholder="Email">
+                <div class="alert alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input class="form-control" type="text" th:field="*{age}" id="age" placeholder="Age">
+                <div class="alert alert-warning" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+            </div>
+            <input type="submit"  class="btn btn-success" value="Add User">
+        </form>
+
+
+
+    </article>
+</main>
+
+<footer></footer>
+
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+</body>
+
+
+</html>

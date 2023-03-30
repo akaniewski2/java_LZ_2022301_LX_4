@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>music</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}"  />
+    <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
+    <script type="text/javascript" th:src="@{/js/funkcje.js}"></script>
+<!--    <link rel="stylesheet" th:href="@{static/css/style2a.css}"  />-->
+<!--    <link rel="stylesheet" th:href="@{/static/css/style2a.css}"  />-->
+<!--    <link rel="stylesheet" th:href="@{resources/static/css/style2a.css}"  />-->
+<!--    <link rel="stylesheet" href="../static/css/style2a.css" th:href="@{../static/css/style2a.css}"  />-->
+<!--    <link rel="stylesheet" href="D:\PROGRAMOWANIE\Intellij_IDEA\java_LZ_2022301_LX\src\main\resources\static\css\style2a.css"  \>-->
+
+<!--    <link rel="stylesheet" href="style2a.css" type="text/css"/>-->
+
+
+</head>
+<body>
+
+
+
+
+
+
+<main id="main" class="article">
+    <header id="header" class="blue"><div > Music List </div> </header>
+    <article class="article">
+
+
+
+<div th:switch="${music}" >
+    <h2 th:case="null">No music yet!</h2>
+
+    <div th:case="*">
+
+
+        <input id="myInput" type="text" placeholder="Search.."><br><br>
+        <p class="menu" style = "text-align:center"><a href="/arkani2/music/add">Add a new music</a></p>
+
+        <table>
+            <thead >
+            <tr >
+
+                <th class="menu">Delete</th>
+                <th class="menu">Edit</th>
+
+                <th class="menu">Author</th>
+                <th class="menu">Album</th>
+
+                <th class="menu">publish Date</th>
+
+                <th class="menu">Type</th>
+                <th class="menu">Rating</th>
+
+                <th class="menu">cd</th>
+                <th class="menu">Owner</th>
+                <th class="menu">Borrower</th>
+
+                <th class="menu">Url</th>
+
+            </tr>
+            </thead >
+            <tbody id="myTable">
+            <tr th:each="music_ : ${music}">
+
+
+                <td class="menu"><a th:href="@{/arkani2/music/delete/{id}(id=${music_.id})}" onclick="return confirm(' you want to delete?');">Delete</a></td>
+                <td class="menu"><a th:href="@{/arkani2/music/edit/{id}(id=${music_.id})}">Edit</a></td>
+
+
+                <td th:text="${music_.author}" class="menu"></td>
+                <td th:text="${music_.album}" class="menu"></td>
+
+                <td th:text="${music_.publishDate}" class="menu"></td>
+
+                <td th:text="${music_.type}" class="menu"></td>
+                <td th:text="${music_.rating}" class="menu"></td>
+
+                <td th:text="${music_.cd}" class="menu" ></td>
+                <td th:text="${music_.owner}" class="menu"></td>
+                <td th:text="${music_.borrower}" class="menu"></td>
+
+                <td th:text="${music_.url}" class="menu"></td>
+
+
+
+    </tr>
+    </tbody>
+    </table>
+    </div>
+
+
+
+
+    </article>
+
+
+    <div class="panel_prawy" >
+    <div class="menu_kontener">
+    </div>
+    </div>
+    <div style="clear:both;"></div>
+
+
+</main>
+
+<footer></footer>
+
+<script th:inline="javascript">WyswietlMenu(); </script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+</body>
+</html>

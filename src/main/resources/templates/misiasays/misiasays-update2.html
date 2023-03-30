@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>purchase-update</title>
+
+    <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
+</head>
+<body>
+
+
+<main id="main" class="article">
+    <header id="header" class="blue"><div > Zapisz </div> </header>
+    <article class="article">
+
+
+        <form action="#"
+              th:action="@{/arkani2/misiasays/update/{id}(id=${misiaSays.id})}"
+              th:object="${misiaSays}"
+              method="post">
+
+
+            <div class="rejestracja">
+
+                <table>
+
+
+                    <tr><td> </td> <td><input style ="width:700px;visibility: hidden;" type="text"  id="id" name="id"   ></td></tr>
+                    <tr><td> wiek: </td> <td><input style ="width:700px;" type="text"  id="age" name="age"    ></td></tr>
+                    <tr><td> powiedzonko: </td> <td><input style ="width:700px;" type="text"  id="phrase" name="phrase"    ></td></tr>
+                    <tr><td> tłumaczenie: </td> <td><input style ="width:700px" type="text"  id="translation" name="translation"   ></td></tr>
+                    <tr><td> uwagi: </td> <td><input style ="width:700px" type="text"  id="comment" name="comment"    ></td></tr>
+
+                </table>
+
+
+<!--                <input style ="width:700px;visibility: hidden;" type="text" th:field="*{id}" id="id" placeholder="id">-->
+<!--                <input style ="width:700px" type="text"  th:field="*{age}" id="age" placeholder="age">-->
+<!--                <input style ="width:700px" type="text"  th:field="*{phrase}" id="phrase" placeholder="phrase">-->
+<!--                <input style ="width:700px" type="text"  th:field="*{translation}" id="translation" placeholder="translation">-->
+
+<!--                <input style ="width:700px" type="text"  th:field="*{comment}" id="comment" placeholder="comment">-->
+
+
+
+            </div>
+
+
+             <input type="submit" value="Zapisz" style ="width:800px">
+        </form>
+
+    </article>
+</main>
+
+
+</body>
+</html>

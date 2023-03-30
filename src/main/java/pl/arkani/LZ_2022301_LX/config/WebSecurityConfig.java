@@ -7,30 +7,17 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.authentication.configurers.provisioning.JdbcUserDetailsManagerConfigurer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import pl.arkani.LZ_2022301_LX.repo.UserRepo;
-import pl.arkani.LZ_2022301_LX.service.UserDetailsServiceImpl;
-
-import javax.sql.DataSource;
-import java.security.Principal;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 ////todo: https://www.javainterviewpoint.com/spring-security-jdbcuserdetailsmanager-example/
 // jakies wyrazenia regularne w sciezkach
 //https://4programmers.net/Forum/Java/303902-routing_single_page_application_w_spring_boot?p=1446995
@@ -38,7 +25,7 @@ import java.sql.Statement;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-public class WebSecurityConfig_new {
+public class WebSecurityConfig {
 //
 //    @Autowired
 //    public DataSource dataSource;
@@ -169,7 +156,7 @@ public class WebSecurityConfig_new {
                // .and()
                 http.authenticationProvider(authProvider())
                 .formLogin().loginPage("/login")//.permitAll()
-                .defaultSuccessUrl("/arkani2/tv_channels",true).permitAll()
+                .defaultSuccessUrl("/arkani2/tv_channels"/*,true*/).permitAll()
                 //
                 .and()
                 .logout().logoutUrl("/logout")

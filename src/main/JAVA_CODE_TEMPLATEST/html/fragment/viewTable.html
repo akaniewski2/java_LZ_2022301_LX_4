@@ -1,0 +1,23 @@
+  <table>
+    <thead>
+    <tr>
+
+        <th class="menu">Delete</th>
+        <th class="menu">Edit</th>
+
+        <fieldNmTh>
+
+
+    </tr>
+    </thead >
+    <tbody id="myTable">
+    <tr th:each="s : ${<classNm>}">
+
+        <td class="menu"><a th:href="@{<@RequestMapping><@GetMapping>/delete/{id}(id=${s.id})}" onclick="return confirm(' you want to delete?');">Delete</a></td>
+        <td class="menu"><a th:href="@{<@RequestMapping><@GetMapping>/edit/{id}(id=${s.id})}">Edit</a></td>
+
+
+        <fieldNmTd>
+    </tr>
+    </tbody>
+</table>

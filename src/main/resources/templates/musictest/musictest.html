@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>MusicTest</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
+
+</head>
+<body>
+
+
+<main id="main" class="article">
+    <header id="header" class="blue"><div> MusicTest </div>
+        <!--        <br>[<span th:text="${username}"/>] </div> -->
+    </header>
+    <article class="article">
+
+
+        <div th:switch="${musicTest}" >
+
+
+            <input id="myInput" type="text" placeholder="Search.."><br><br>
+            <p class="menu" style = "text-align:center"><a href="/arkani2/musictest/add">Dodaj</a></p>
+
+            <table>
+                <thead>
+                <tr>
+
+                    <th class="menu">Delete</th>
+                    <th class="menu">Edit</th>
+
+                    <th class="menu">id</th>
+                    <th class="menu">author</th>
+                    <th class="menu">album</th>
+                    <th class="menu">url</th>
+                    <th class="menu">type</th>
+                    <th class="menu">rating</th>
+                    <th class="menu">cd</th>
+                    <th class="menu">owner</th>
+                    <th class="menu">borrower</th>
+                    <th class="menu">publishDate</th>
+
+
+
+                </tr>
+                </thead >
+                <tbody id="myTable">
+                <tr th:each="s : ${musicTest}">
+
+                    <td class="menu"><a th:href="@{/arkani2/musictest/delete/{id}(id=${s.id})}" onclick="return confirm(' you want to delete?');">Delete</a></td>
+                    <td class="menu"><a th:href="@{/arkani2/musictest/edit/{id}(id=${s.id})}">Edit</a></td>
+
+
+                    <td class="menu" th:text="${s.id}"></td>
+                    <td class="menu" th:text="${s.author}"></td>
+                    <td class="menu" th:text="${s.album}"></td>
+                    <td class="menu" th:text="${s.url}"></td>
+                    <td class="menu" th:text="${s.type}"></td>
+                    <td class="menu" th:text="${s.rating}"></td>
+                    <td class="menu" th:text="${s.cd}"></td>
+                    <td class="menu" th:text="${s.owner}"></td>
+                    <td class="menu" th:text="${s.borrower}"></td>
+                    <td class="menu" th:text="${s.publishDate}"></td>
+
+                </tr>
+                </tbody>
+            </table>
+
+
+
+        </div>
+
+
+
+    </article>
+</main>
+
+<footer></footer>
+
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+</body>
+
+
+</html>

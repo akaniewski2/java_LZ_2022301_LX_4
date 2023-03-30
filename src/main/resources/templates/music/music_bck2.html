@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <titlet h:text="${#strings.toUpperCase(thisTechPage.name)}"></titlet>
+    <link rel="stylesheet" th:href="@{/css/style.css}"  />
+    <link rel="stylesheet" th:href="@{/css/style0.css}"  />
+    <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
+    <script type="text/javascript" th:src="@{/js/funkcje.js}"></script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+<main id="main" class="article">
+<!--    <header id="header" class="blue"><div > Music List </div> </header>-->
+    <article class="article">
+
+        <div class="naglowek">
+
+            <p style="text-align:center;font-size:15px;"  th:text="${#strings.toUpperCase(thisTechPage.name)}">    </p>
+
+        </div>
+
+
+        <div th:switch="${music}" >
+            <h2 th:case="null">No music yet!</h2>
+
+            <div th:case="*">
+
+
+                <input id="myInput" type="text" placeholder="Search.."><br><br>
+                <p class="menu" style = "text-align:center"><a href="/arkani2/music/add">Add a new music</a></p>
+
+                <table>
+                    <thead >
+                    <tr >
+
+                        <th class="menu">Delete</th>
+                        <th class="menu">Edit</th>
+
+                        <th class="menu">Author</th>
+                        <th class="menu">Album</th>
+
+                        <th class="menu">publish Date</th>
+
+                        <th class="menu">Type</th>
+                        <th class="menu">Rating</th>
+
+                        <th class="menu">cd</th>
+                        <th class="menu">Owner</th>
+                        <th class="menu">Borrower</th>
+
+                        <th class="menu">Url</th>
+
+                    </tr>
+                    </thead >
+                    <tbody id="myTable">
+                    <tr th:each="music_ : ${music}">
+
+
+                        <td class="menu"><a th:href="@{/arkani2/music/delete/{id}(id=${music_.id})}" onclick="return confirm(' you want to delete?');">Delete</a></td>
+                        <td class="menu"><a th:href="@{/arkani2/music/edit/{id}(id=${music_.id})}">Edit</a></td>
+
+
+                        <td th:text="${music_.author}" class="menu"></td>
+                        <td th:text="${music_.album}" class="menu"></td>
+
+                        <td th:text="${music_.publishDate}" class="menu"></td>
+
+                        <td th:text="${music_.type}" class="menu"></td>
+                        <td th:text="${music_.rating}" class="menu"></td>
+
+                        <td th:text="${music_.cd}" class="menu" ></td>
+                        <td th:text="${music_.owner}" class="menu"></td>
+                        <td th:text="${music_.borrower}" class="menu"></td>
+
+                        <td th:text="${music_.url}" class="menu"></td>
+
+
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+    </div>
+<!--------------------------------------------------------------------------------------------------------->
+    <div class="panel_prawy" >
+        <div>
+
+            <!--            <form action="zaloguj.php" method="post">-->
+            <!--                <input type ="text" name ="login" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'" />-->
+            <!--                <input type ="password" name ="haslo"placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'" />-->
+            <!--                <input type="submit" value="Logowanie"  />-->
+
+
+            <div class="menu_kontener">
+                <!--<div class="menu" onclick="location.href=/logout.php?dis=yes">Wyloguj się</div> -->
+                <!--<div class="menu" onclick='open.href=logout.php'>Wyloguj się</div>-->
+
+                <div  th:each="page: ${techPageList}">
+                    <!--        działa ,ale nie łapie całego przycisku tylko napis-->
+                    <!--            <a th:href="@{{url}(url=${page.url})}"  th:text="${page.button}"> </a>-->
+                    <div  class="menu" th:onclick="'window.location.href = \'' + @{{id}(id=${page.url})} + '\''"  th:text="${page.button}">  </div>
+                </div>
+
+            </div>
+
+
+
+
+
+            <div class="error">
+                <!--                    <?php-->
+
+                <!--					if(isset($_SESSION['blad'])) echo $_SESSION['blad'];-->
+                <!--					unset($_SESSION['blad']);-->
+                <!--					?>-->
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <div style="clear:both;">
+    </div>
+
+    <!-- <a href="rejestracja.php" ><div id="rejestracja">Rejestracja</div></a> -->
+    </article>
+</div>
+</body>
+</html>

@@ -43,6 +43,9 @@
                         <td th:text="${movie.description}"></td>
                         <td><a th:href="@{/arkani2/movie/edit/{id}(id=${movie.id})}">Edit</a></td>
                         <td><a th:href="@{/arkani2/movie/delete/{id}(id=${movie.id})}">Delete</a></td>
+
+                        <td><a th:href="${'/arkani2/movie/edit/'+movie.id}">Edit_test</a></td>
+
                     </tr>
                     </tbody>
                 </table>

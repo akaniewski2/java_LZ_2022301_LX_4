@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>purchase-update</title>
+
+    <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
+</head>
+<body>
+
+
+<main id="main" class="article">
+    <header id="header" class="blue"><div > Zapisz </div> </header>
+    <article class="article">
+
+
+        <form action="#"
+              th:action="@{/arkani2/importantdates/update/{id}(id=${importantDates.id})}"
+              th:object="${importantDates}"
+              method="post">
+
+
+            <div class="rejestracja">
+
+                <table>
+
+                <tr><td> </td> <td><input style ="width:700px;visibility: hidden;" type="text"  th:field="*{id}" id="id" ></td></tr>
+                <tr><td> item: </td> <td><input style ="width:700px;" type="text"  th:field="*{event}" id="event"  ></td></tr>
+                <tr><td> mark: </td> <td><input style ="width:700px;" type="text"  th:field="*{date}" id="date"  ></td></tr>
+                <tr><td> comment: </td> <td><input style ="width:700px" type="text"  th:field="*{comment}" id="comment"  ></td></tr>
+<!--                <tr style="visibility: hidden;"><td> createdOn: </td> <td><input style ="width:700px" type="text"  th:field="*{createdOn}" id="createdOn"  ></td></tr>-->
+<!--                <tr style="visibility: hidden;"><td> updatedOn: </td> <td><input style ="width:700px" type="text"  th:field="*{updatedOn}" id="updatedOn"  ></td></tr>-->
+
+<!--                    <p th:if="${#fields.hasErrors('item')}">Invalid item</p>-->
+
+                </table>
+
+<!--                <div th:if="${#fields.hasErrors('global')}">-->
+<!--                    <h3>Global errors:</h3>-->
+<!--                    <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />-->
+<!--                </div>-->
+
+
+<!--                <input style ="width:700px;visibility: hidden;" type="text" th:field="*{id}" id="id" placeholder="id">-->
+<!--                <input style ="width:700px" type="text"  th:field="*{age}" id="age" placeholder="age">-->
+<!--                <input style ="width:700px" type="text"  th:field="*{phrase}" id="phrase" placeholder="phrase">-->
+<!--                <input style ="width:700px" type="text"  th:field="*{translation}" id="translation" placeholder="translation">-->
+
+<!--                <input style ="width:700px" type="text"  th:field="*{comment}" id="comment" placeholder="comment">-->
+
+
+
+            </div>
+
+
+             <input type="submit" value="Zapisz" style ="width:800px">
+        </form>
+
+    </article>
+</main>
+
+
+</body>
+</html>

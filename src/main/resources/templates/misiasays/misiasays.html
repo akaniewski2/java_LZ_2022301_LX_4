@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>MisiaSays</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
+    <!--    <link rel="stylesheet" th:href="@{static/css/style2a.css}"  />-->
+    <!--    <link rel="stylesheet" th:href="@{/static/css/style2a.css}"  />-->
+    <!--    <link rel="stylesheet" th:href="@{resources/static/css/style2a.css}"  />-->
+    <!--    <link rel="stylesheet" href="../static/css/style2a.css" th:href="@{../static/css/style2a.css}"  />-->
+    <!--    <link rel="stylesheet" href="D:\PROGRAMOWANIE\Intellij_IDEA\java_LZ_2022301_LX\src\main\resources\static\css\style2a.css"  \>-->
+
+    <!--    <link rel="stylesheet" href="style2a.css" type="text/css"/>-->
+
+
+
+
+</head>
+<body>
+
+
+
+
+
+<main id="main" class="article">
+    <header id="header" class="blue"><div > Powiedzonka Misi
+<!--        <br>[<span th:text="${username}"/>] </div> -->
+    </header>
+    <article class="article">
+
+
+
+        <div th:switch="${misiaSays}" >
+<!--            <h2 th:case="null">No item yet! </h2>-->
+
+            <div th:case="*">
+
+
+
+                <input id="myInput" type="text" placeholder="Search.."><br><br>
+                <p class="menu" style = "text-align:center"><a href="/arkani2/misiasays/add">Dodaj</a></p>
+
+                <table>
+                    <thead >
+                    <tr >
+
+                        <th class="menu">Delete</th>
+                        <th class="menu">Edit</th>
+
+                        <th class="menu">id</th>
+
+                        <th class="menu">age</th>
+                        <th class="menu">phrase</th>
+
+
+                        <th class="menu">translation</th>
+                        <th class="menu">comment</th>
+
+                        <!--                <th class="menu">tmp</th>-->
+
+                    </tr>
+                    </thead >
+                    <tbody id="myTable">
+                    <tr th:each="s : ${misiaSays}">
+
+
+                        <td class="menu"><a th:href="@{/arkani2/misiasays/delete/{id}(id=${s.id})}" onclick="return confirm(' you want to delete?');">Delete</a></td>
+                        <td class="menu"><a th:href="@{/arkani2/misiasays/edit/{id}(id=${s.id})}">Edit</a></td>
+
+
+                        <td th:text="${s.id}" class="menu"></td>
+                        <td th:text="${s.age}" class="menu"></td>
+
+                        <td style = "max-width: 60%;" th:text="${s.phrase}" class="menu"></td>
+                        <td th:text="${s.translation}" class="menu"></td>
+
+                        <td th:text="${s.comment}" class="menu"></td>
+                        <td th:text="${s.createdOn}" class="menu" style="visibility: hidden;"></td>
+                        <td th:text="${s.updatedOn}" class="menu" style="visibility: hidden;"></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+
+    </article>
+</main>
+
+<footer></footer>
+
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+</body>
+
+
+</html>

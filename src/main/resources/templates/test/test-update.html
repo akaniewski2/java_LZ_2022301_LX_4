@@ -15,19 +15,22 @@
 
 
 <form action="#"
-      th:action="@{/arkani2/music/update/{id}(id=${music.id})}"
-      th:object="${music}"
+      th:action="@{/arkani2/test/update/{id}(id=${test.id})}"
+      th:object="${test}"
       method="post">
 
 
     <div class="rejestracja">
 
-        <input style ="width:700px" type="text" th:field="*{author}" id="author" placeholder="author">
-        <input style ="width:700px" type="text"  th:field="*{album}" id="album" placeholder="album">
-        <input style ="width:700px" type="text"  th:field="*{type}" id="type" placeholder="type">
-        <input style ="width:700px" type="text"  th:field="*{rating}" id="rating" placeholder="rating">
-        <input style ="width:700px" type="text"  th:field="*{cd}" id="cd" placeholder="cd">
-        <input style ="width:700px" type="text" th:field="*{url}" id="url" placeholder="url" >
+
+        <input style ="width:700px" type="text" th:field="*{id}"  >
+        <input style ="width:700px" type="text" th:field="*{name}"  >
+        <input style ="width:700px" type="text" th:field="*{date}"  >
+<!--        <input style ="width:700px" type="text" th:field="*{code}"      >-->
+<!--        <input style ="width:700px" type="text" th:field="*{email}"     >-->
+<!--        <input style ="width:700px" type="text" th:field="*{enable}"     >-->
+<!--        <input style ="width:700px" type="text" th:field="*{password}"    >-->
+
 
 
     </div>

@@ -96,14 +96,15 @@
 
         <table>
             <thead>
-            <tr >
-                <th class="menu" th:each="header: ${headers}"   th:text="${header}" />
-            </tr>
+            <tr><th class="menu" th:each="header: ${headers}"   th:text="${header}" /></tr>
             </thead>
+            <tbody><tr  th:each="row: ${rows}" id="myTable">
 
-            <tbody>
-            <tr  th:each="row: ${rows}" id="myTable">
+
+<!--              <td class="menu"><a th:href="@{/arkani2/test/edit/{id}(id=${r})}">Edit</a></td>-->
+
                 <td class="menu" th:each="r: ${row}" th:text="${r}" />
+<!--                <td><a th:href="${'/arkani2/test/edit/'+row.id}">Edit2</a></td>-->
             </tr>
             </tbody>
         </table>

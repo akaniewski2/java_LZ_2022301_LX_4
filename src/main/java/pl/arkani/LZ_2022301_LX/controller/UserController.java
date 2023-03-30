@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.arkani.LZ_2022301_LX.model.LoginForm;
-import pl.arkani.LZ_2022301_LX.model.Token;
-import pl.arkani.LZ_2022301_LX.model.User;
+import pl.arkani.LZ_2022301_LX.Examples.SqlRepoExec;
+import pl.arkani.LZ_2022301_LX.model.*;
 import org.springframework.ui.Model;
 import pl.arkani.LZ_2022301_LX.repo.TechPageRepo;
 import pl.arkani.LZ_2022301_LX.repo.TokenRepo;
@@ -20,7 +20,10 @@ import pl.arkani.LZ_2022301_LX.utils.Functions;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -32,15 +35,20 @@ public class UserController {
     private UserService userService;
     private TokenRepo tokenRepo;
     private TechPageRepo techPageRepo;
+    private TechPage techPage;
+
+    private SqlRepoExec sqlRepoExec;
 
     private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    public UserController(UserRepo userRepo, UserService userService, TokenRepo tokenRepo, TechPageRepo techPageRepo, UserDetailsServiceImpl userDetailsService) {
+    public UserController(UserRepo userRepo, UserService userService, TokenRepo tokenRepo, TechPageRepo techPageRepo, SqlRepoExec sqlRepoExec, UserDetailsServiceImpl userDetailsService) {
         this.userRepo = userRepo;
         this.userService = userService;
         this.tokenRepo = tokenRepo;
         this.techPageRepo = techPageRepo;
+        this.techPage = techPageRepo.findByName("users"); // definiuje raz strone na której dotyczy kontroler
+        this.sqlRepoExec = sqlRepoExec;
         this.userDetailsService = userDetailsService;
     }
 
@@ -139,16 +147,21 @@ public class UserController {
     }
     @GetMapping("/signup")
     public String showSignUpForm(User user) {
-        return "user-signup";
+        return "user/user-signup";
     }
 
     @PostMapping("/signup")
-    public String register(User user) {
+    public String register(@Valid User user,BindingResult bindingResult) {
         ////system.out.println(user);
-
         //system.out.println(user.getAuthorities());
+
+        if(bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(System.out::println);
+            return "user/user-signup";
+        }
+
         userService.addUser(user);
-        return "user-signup";
+        return "user/user-signup";
     }
 
 
@@ -195,37 +208,86 @@ public class UserController {
 
     // additional CRUD methods
     @GetMapping("/users")
-    public String showUserList(Model model) {
+    public String showUserList(Model model,Principal principal) {
         model.addAttribute("users", userRepo.findAll());
-        return "users";
+
+
+        // #--- Privileges START ----------------------------------------------------------------------------------------------------------------
+        User user = userRepo.findByUsername(principal.getName()).orElseThrow(()->new UsernameNotFoundException("User not found in DB"));
+        String userRole =  user.getRole();
+        List<TechPage> techPageList = techPageRepo.findByMethodAndRole("GET", userRole);
+//        List<TechPage> techPageList2 = techPageList.stream().filter(s -> s.getRoles().equals(userRole)).collect(Collectors.toList());
+        List<TechPageTmp> techPageList2 = new ArrayList<>();
+
+        for (TechPage s :techPageList) {
+
+            techPageList2.add(new TechPageTmp(s.getName(), s.getButton(), s.getHeader(),s.getUrl()));
+        }
+
+        // Set<TechPage> techPageList2 = new HashSet<TechPage>();
+        // techPageList2.addAll(techPageList);
+
+        Optional<TechPage> techpagePrivilege= techPageRepo.findByMethodAndNameAndRole("GET",this.techPage.getName(),userRole);
+        if (techpagePrivilege.isEmpty()) {return "/home";}
+        System.out.println("# techPage:" + techPage);
+        System.out.println("# techPageList2:" + techPageList2);
+        techPageList.forEach(System.out::println);
+
+        // System.out.println("#techpageRole: "+ techpagePrivilege);
+        model.addAttribute("thisTechPage",techPage);
+        model.addAttribute("techPageList",techPageList2);//przekazuje tylko te definicje stron , do których user ma uprawnienia
+        // #--- Privileges END ------------------------------------------------------------------------------------------------------------------
+
+        // #--- Pobranie auto-table START ------------------------------------------------------------------------------------------------------------------
+
+        List<String> headers =new ArrayList<>();
+        headers.add("Edit");
+        headers.add("Delete");
+        headers = sqlRepoExec.getTableHeaders("user_v"); // Arrays.asList("id", "username", "role");
+
+        List<List<String>> rows= sqlRepoExec.getTableData("select concat('/user/edit/',s.id) edit,  '_' de ,s.* from arkani_1.user_v s order by id");
+
+
+
+       // model.addAttribute("test", testRepo.findAll());
+        model.addAttribute("headers",headers);
+
+        model.addAttribute("headers",headers);
+        model.addAttribute("rows", rows);
+
+        // #--- Pobranie auto-table END ------------------------------------------------------------------------------------------------------------------
+
+        return "user/users";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/user/edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
+
+
         User user = userRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 
         model.addAttribute("user", user);
-        return "user-update";
+        return "user/user-update";
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/user/update/{id}")
     public String updateUser(@PathVariable("id") long id, @Valid User user,
                              BindingResult result, Model model) {
         if (result.hasErrors()) {
             user.setId(id);
-            return "user-update";
+            return "user/user-update";
         }
 
         userRepo.save(user);
-        return "redirect:/users";
+        return "redirect:/user/users";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("user/delete/{id}")
     public String deleteUser(@PathVariable("id") long id, Model model) {
         User user = userRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         userRepo.delete(user);
-        return "redirect:/users";
+        return "redirect:user/users";
     }
 }

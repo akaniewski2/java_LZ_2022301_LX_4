@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
+
 import java.util.Date;
 
 @Entity
@@ -24,10 +24,10 @@ public class Music {
 
     long id;
     // @Column(name="`desc`")
-    @NotBlank(message = "author is mandatory")
+    //@NotBlank(message = "author is mandatory")
     private String author;
 
-    @NotBlank(message = "album is mandatory")
+   // @NotBlank(message = "album is mandatory")
     private String album;
 
     private String url;

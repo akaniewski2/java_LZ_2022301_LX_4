@@ -4,31 +4,37 @@ package pl.arkani.LZ_2022301_LX.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.arkani.LZ_2022301_LX.model.Role;
-import pl.arkani.LZ_2022301_LX.model.Token;
-import pl.arkani.LZ_2022301_LX.model.User;
+import pl.arkani.LZ_2022301_LX.model.*;
 import pl.arkani.LZ_2022301_LX.repo.TokenRepo;
 import pl.arkani.LZ_2022301_LX.repo.UserRepo;
 
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
 
     private UserRepo userRepo;
+    private UserDTOMapper userDTOMapper;
     private PasswordEncoder passwordEncoder;
 
     //testowo wstrzykuje przez zmienna
     private TokenRepo tokenRepo;
     private MailService mailService;
 
-    public UserService(UserRepo userRepo, PasswordEncoder passwordEncoder, TokenRepo tokenRepo, MailService mailService) {
+    public UserService(UserRepo userRepo,
+                       UserDTOMapper userDTOMapper,
+                       PasswordEncoder passwordEncoder, TokenRepo tokenRepo, MailService mailService) {
         this.userRepo = userRepo;
+        this.userDTOMapper = userDTOMapper;
         this.passwordEncoder = passwordEncoder;
         this.tokenRepo = tokenRepo;
         this.mailService = mailService;
     }
+
+
 
     public void addUser(User user)  {
       //  if (appUser.getPassword().equals(appUser.getPassword2())
@@ -74,5 +80,20 @@ public class UserService {
         }
 
     }
+
+    ///--API------------------------
+    public List<UserDTO> getAllUsersDTO() {
+        return userRepo.findAll()
+                .stream()
+                .map(userDTOMapper)
+                .collect(Collectors.toList());
+    }
+
+   public UserDTO getUserDTO(long id) {
+       return userRepo.findById(id)
+               .map(userDTOMapper)
+               .orElseThrow(()-> new RuntimeException("user with id [%s] not found".formatted(id)));
+   }
+
 
 }

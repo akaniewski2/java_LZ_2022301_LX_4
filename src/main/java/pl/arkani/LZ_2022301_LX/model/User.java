@@ -9,8 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -29,11 +32,17 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    private UUID uuid;
     
     @NotBlank(message = "Name is mandatory")
+    @Column(unique=true)
     private String username;
 
 
+
+   // @Pattern(regexp ="(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{6,}$" )
+    @Size( min=6,max=20)
     private String password;
 
     @Transient
@@ -41,6 +50,7 @@ public class User implements UserDetails {
 
 
     private String roles;
+
 
     private String Code;
     private boolean enabled;

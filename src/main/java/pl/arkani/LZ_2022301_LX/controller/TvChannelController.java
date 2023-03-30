@@ -65,16 +65,12 @@ public class TvChannelController {
         String userRole =  user.getRole();
         List<TechPage> techPageList = techPageRepo.findByMethodAndRole("GET", userRole);
 //        List<TechPage> techPageList2 = techPageList.stream().filter(s -> s.getRoles().equals(userRole)).collect(Collectors.toList());
-
         List<TechPageTmp> techPageList2 = new ArrayList<>();
-
 
         for (TechPage s :techPageList) {
 
             techPageList2.add(new TechPageTmp(s.getName(), s.getButton(), s.getHeader(),s.getUrl()));
         }
-
-
 
         // Set<TechPage> techPageList2 = new HashSet<TechPage>();
        // techPageList2.addAll(techPageList);
@@ -116,7 +112,7 @@ public class TvChannelController {
 
         //------------------------------------------------------------------------------------------
 
-        return "tv_channels";
+        return "tv/tv_channels";
 
 
     }

@@ -1,6 +1,7 @@
 package pl.arkani.LZ_2022301_LX.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,10 +10,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.arkani.LZ_2022301_LX.model.Music;
+import pl.arkani.LZ_2022301_LX.model.TechPage;
+import pl.arkani.LZ_2022301_LX.model.TechPageTmp;
+import pl.arkani.LZ_2022301_LX.model.User;
 import pl.arkani.LZ_2022301_LX.repo.MusicRepo;
 import pl.arkani.LZ_2022301_LX.repo.TechPageRepo;
+import pl.arkani.LZ_2022301_LX.repo.UserRepo;
 
 import javax.validation.Valid;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/arkani2/")
@@ -21,10 +30,16 @@ public class MusicController {
 
     private MusicRepo musicRepo;
     private TechPageRepo techPageRepo;
+
+    private TechPage techPage;
+    private UserRepo userRepo;
+
     @Autowired
-    public MusicController(MusicRepo musicRepo, TechPageRepo techPageRepo) {
+    public MusicController(MusicRepo musicRepo, TechPageRepo techPageRepo, UserRepo userRepo) {
         this.musicRepo = musicRepo;
         this.techPageRepo = techPageRepo;
+        this.techPage = techPageRepo.findByName("music");
+        this.userRepo = userRepo;
     }
 
     @GetMapping("music/add")
@@ -46,7 +61,34 @@ public class MusicController {
 
     // additional CRUD methods
     @GetMapping("music")
-    public String showMusicList(Model model) {
+    public String showMusicList(Model model, Principal principal) {
+
+        // #--- Privileges START ----------------------------------------------------------------------------------------------------------------
+        User user = userRepo.findByUsername(principal.getName()).orElseThrow(()->new UsernameNotFoundException("User not found in DB"));
+        String userRole =  user.getRole();
+        List<TechPage> techPageList = techPageRepo.findByMethodAndRole("GET", userRole);
+//        List<TechPage> techPageList2 = techPageList.stream().filter(s -> s.getRoles().equals(userRole)).collect(Collectors.toList());
+        List<TechPageTmp> techPageList2 = new ArrayList<>();
+
+        for (TechPage s :techPageList) {
+
+            techPageList2.add(new TechPageTmp(s.getName(), s.getButton(), s.getHeader(),s.getUrl()));
+        }
+
+        // Set<TechPage> techPageList2 = new HashSet<TechPage>();
+        // techPageList2.addAll(techPageList);
+
+        Optional<TechPage> techpagePrivilege= techPageRepo.findByMethodAndNameAndRole("GET",this.techPage.getName(),userRole);
+        if (techpagePrivilege.isEmpty()) {return "/home";}
+        System.out.println("# techPage:" + techPage);
+        System.out.println("# techPageList2:" + techPageList2);
+        techPageList.forEach(System.out::println);
+
+        // System.out.println("#techpageRole: "+ techpagePrivilege);
+        model.addAttribute("thisTechPage",techPage);
+        model.addAttribute("techPageList",techPageList2);//przekazuje tylko te definicje stron , do których user ma uprawnienia
+        // #--- Privileges END ------------------------------------------------------------------------------------------------------------------
+
         model.addAttribute("music", musicRepo.findAll());
         model.addAttribute("techPage", techPageRepo.findAll());
         return "music/music";
