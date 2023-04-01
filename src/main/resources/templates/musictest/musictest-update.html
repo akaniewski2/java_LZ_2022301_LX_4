@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>MusicTest - update</title>
+
+
+    <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
+</head>
+<body>
+
+
+<main id="main" class="article">
+    <header id="header" class="blue">
+        <div> MusicTest </div></header>
+    <article class="article">
+
+
+                <form action="#"
+              th:action="@{/arkani2/musictest/update/{id}(id=${musicTest.id})}"
+              th:object="${musicTest}"
+              method="post">
+
+
+            <div class="rejestracja">
+                visibility: hidden;
+                <table>
+
+                    <tr style="<styleTr>"><td> id:</td> <td><input style ="<styleTd>" type="text"  th:field="*{id}" id="id"  ></td></tr>
+                    <tr style="<styleTr>"><td> author:</td> <td><input style ="<styleTd>" type="text"  th:field="*{author}" id="author"  ></td></tr>
+                    <tr style="<styleTr>"><td> album:</td> <td><input style ="<styleTd>" type="text"  th:field="*{album}" id="album"  ></td></tr>
+                    <tr style="<styleTr>"><td> url:</td> <td><input style ="<styleTd>" type="text"  th:field="*{url}" id="url"  ></td></tr>
+                    <tr style="<styleTr>"><td> type:</td> <td><input style ="<styleTd>" type="text"  th:field="*{type}" id="type"  ></td></tr>
+                    <tr style="<styleTr>"><td> rating:</td> <td><input style ="<styleTd>" type="text"  th:field="*{rating}" id="rating"  ></td></tr>
+                    <tr style="<styleTr>"><td> cd:</td> <td><input style ="<styleTd>" type="text"  th:field="*{cd}" id="cd"  ></td></tr>
+                    <tr style="<styleTr>"><td> owner:</td> <td><input style ="<styleTd>" type="text"  th:field="*{owner}" id="owner"  ></td></tr>
+                    <tr style="<styleTr>"><td> borrower:</td> <td><input style ="<styleTd>" type="text"  th:field="*{borrower}" id="borrower"  ></td></tr>
+                    <tr style="<styleTr>"><td> publishDate:</td> <td><input style ="<styleTd>" type="text"  th:field="*{publishDate}" id="publishDate"  ></td></tr>
+
+
+<!--                    <p th:if="${#fields.hasErrors('item')}">Invalid item</p>-->
+
+                </table>
+
+                <div th:if="${#fields.hasErrors('global')}">
+                    <h3>Global errors:</h3>
+                    <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+                </div>
+
+
+                <!--                <input style ="width:700px;visibility: hidden;" type="text" th:field="*{id}" id="id" placeholder="id">-->
+                <!--                <input style ="width:700px" type="text"  th:field="*{age}" id="age" placeholder="age">-->
+                <!--                <input style ="width:700px" type="text"  th:field="*{phrase}" id="phrase" placeholder="phrase">-->
+                <!--                <input style ="width:700px" type="text"  th:field="*{translation}" id="translation" placeholder="translation">-->
+
+                <!--                <input style ="width:700px" type="text"  th:field="*{comment}" id="comment" placeholder="comment">-->
+
+
+
+            </div>
+
+
+            <input type="submit" value="Zapisz" style ="width:800px">
+        </form>
+
+
+    </article>
+</main>
+
+
+</body>
+</html>

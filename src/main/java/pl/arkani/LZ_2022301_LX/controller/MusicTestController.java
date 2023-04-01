@@ -33,7 +33,7 @@ public class MusicTestController {
 
     @GetMapping("musictest/add")
     public String add(MusicTest musicTest ) {
-        return "musictest/musictest-update";
+        return "musictest/musictest-update.html";
     }
 
     @GetMapping("musictest/edit/{id}")
@@ -42,7 +42,7 @@ public class MusicTestController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid musicTest Id:" + id));
 
         model.addAttribute("musicTest", musicTest);
-        return "musictest/musictest-update";
+        return "musictest/musictest-update.html";
     }
 
 

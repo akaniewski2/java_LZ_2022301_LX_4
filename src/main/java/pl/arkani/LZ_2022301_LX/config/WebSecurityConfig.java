@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -115,6 +116,9 @@ public class WebSecurityConfig {
     //Spring Security Architecture Explained
     //https://www.youtube.com/watch?v=h-9vhFeM3MY
 
+    // 7:49 login page
+    //https://www.youtube.com/watch?v=5IuK5emO_t4&t=231s
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 //        https://www.baeldung.com/spring-channel-security-https
@@ -151,7 +155,12 @@ public class WebSecurityConfig {
 
                 .anyRequest().authenticated()
                 .and()
-                .sessionManagement();
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                ;
+             //   .invalidSessionUrl("/invalidSession.html")
+
+
                 //        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                // .and()
                 http.authenticationProvider(authProvider())
@@ -160,7 +169,8 @@ public class WebSecurityConfig {
                 //
                 .and()
                 .logout().logoutUrl("/logout")
-                .deleteCookies("JSESSIONID");
+                .deleteCookies("JSESSIONID")
+                ;
 
         ;
         return http.build();
