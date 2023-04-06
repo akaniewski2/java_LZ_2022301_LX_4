@@ -24,8 +24,9 @@
 
 
 <main id="main" class="article">
-    <header id="header" class="blue"><div > ImportanDates
+    <header id="header" class="blue" onclick="window.location='/home'"><div > ImportanDates
 <!--        <br>[<span th:text="${username}"/>] </div> -->
+
     </header>
     <article class="article">
 
@@ -53,6 +54,7 @@
                         <th class="menu">id</th>
 
                         <th class="menu">event</th>
+                        <th class="menu">who/what</th>
                         <th class="menu">date</th>
                         <th class="menu">comment</th>
 
@@ -72,6 +74,7 @@
 
                         <td th:text="${s.id}" class="menu"></td>
                         <td th:text="${s.event}" class="menu"></td>
+                        <td th:text="${s.who}" class="menu"></td>
                         <td th:text="${s.date}" class="menu"></td>
 
 

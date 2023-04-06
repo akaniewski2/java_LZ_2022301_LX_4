@@ -10,13 +10,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.arkani.LZ_2022301_LX.model.Purchase;
 
+import pl.arkani.LZ_2022301_LX.model.User;
 import pl.arkani.LZ_2022301_LX.repo.PurchaseCategoryRepo;
 import pl.arkani.LZ_2022301_LX.repo.PurchaseRepo;
+import pl.arkani.LZ_2022301_LX.repo.UserRepo;
 import pl.arkani.LZ_2022301_LX.service.PurchaseCategoryService;
 import pl.arkani.LZ_2022301_LX.service.PurchaseService;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/arkani2/")
@@ -30,13 +33,16 @@ public class PurchaseController {
     private PurchaseService purchaseService;
     private PurchaseCategoryService purchaseCategoryService;
     private PurchaseCategoryRepo purchaseCategoryRepo;
+    private final UserRepo userRepo;
 
     @Autowired
-    public PurchaseController(PurchaseRepo purchaseRepo, PurchaseService purchaseService, PurchaseCategoryService purchaseCategoryService, PurchaseCategoryRepo purchaseCategoryRepo) {
+    public PurchaseController(PurchaseRepo purchaseRepo, PurchaseService purchaseService, PurchaseCategoryService purchaseCategoryService, PurchaseCategoryRepo purchaseCategoryRepo,
+                              UserRepo userRepo) {
         this.purchaseRepo = purchaseRepo;
         this.purchaseService = purchaseService;
         this.purchaseCategoryService = purchaseCategoryService;
         this.purchaseCategoryRepo = purchaseCategoryRepo;
+        this.userRepo = userRepo;
     }
 
 
@@ -67,8 +73,14 @@ public class PurchaseController {
     // additional CRUD methods
     @GetMapping("purchase")
     public String showPurchaseList(Model model,Principal principal) {
+//        Optional<User> user = userRepo.findByUsername(principal.getName());
+//        if (user.isPresent()) {
+//            user.get().getAuthorities();
+//        }
+
         model.addAttribute("purchase", purchaseService.findAllWithLimit(1000));
         model.addAttribute("username", principal.getName());
+
         return "purchase/purchase";
     }
 

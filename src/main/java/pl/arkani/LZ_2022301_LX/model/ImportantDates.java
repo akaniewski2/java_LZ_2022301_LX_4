@@ -24,6 +24,8 @@ public class ImportantDates {
     @NotBlank(message = "name is mandatory")
     private String event;
 
+    private String who;
+
     private String date;
 
     private String comment;

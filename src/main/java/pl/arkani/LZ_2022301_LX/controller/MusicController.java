@@ -79,7 +79,7 @@ public class MusicController {
         // techPageList2.addAll(techPageList);
 
         Optional<TechPage> techpagePrivilege= techPageRepo.findByMethodAndNameAndRole("GET",this.techPage.getName(),userRole);
-        if (techpagePrivilege.isEmpty()) {return "/home";}
+        if (techpagePrivilege.isEmpty()) {return "/templates/_home";}
         System.out.println("# techPage:" + techPage);
         System.out.println("# techPageList2:" + techPageList2);
         techPageList.forEach(System.out::println);

@@ -1,21 +1,33 @@
 /*
 html
 {
+background-color: #000;
 margin: 0px;
 height: 100%;
 width: 100%;
 }
-
 */
-
 body {
-background-color: #000; 
-color: #efefef; 
+background-color: #000;
+color: #efefef;
 font-size: 20px;
-font-family:verdana; 
+font-family:verdana;
 height:100%;
+width: 100%;
 }
+/*
+body
+{
+	background-color: #000000;
 
+	color: lightgray;
+	font-size: 28px;
+	font-family: 'Inconsolata';
+	font-weight: 10;
+	/* padding: 10px; */
+	width:auto;
+}
+*/
 .filterDiv {
 
 }
@@ -144,8 +156,11 @@ color:	rgb(229, 66, 244);
 {
 
 width:100%;
-min-height:70%;
+/*min-height:70%;*/
 background-color: #000;
+
+	background-color: #000000;
+height:auto;
 /*border: 1px solid red;
 border-radius:10px;	
 */
@@ -175,7 +190,9 @@ font-size:15px;
 font-align:justify;
 
 border: 1px solid grey;
-border-radius:10px;	
+border-radius:10px;
+
+
 }
 
 .tresc:hover{

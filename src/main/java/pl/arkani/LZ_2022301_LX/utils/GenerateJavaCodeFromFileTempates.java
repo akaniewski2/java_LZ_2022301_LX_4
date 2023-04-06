@@ -1,6 +1,7 @@
 package pl.arkani.LZ_2022301_LX.utils;
 
 
+import pl.arkani.LZ_2022301_LX.model.ImportantDates;
 import pl.arkani.LZ_2022301_LX.model.MusicTest;
 
 import java.io.File;
@@ -45,7 +46,7 @@ public class GenerateJavaCodeFromFileTempates {
         System.out.println("-------------------------------------------------------------------");
         System.out.println("-- # CLASS INFO");
 
-        MusicTest ft = new MusicTest();
+        ImportantDates ft = new ImportantDates();
 
         Class ftClass = ft.getClass();
         String ClassNm = ftClass.getSimpleName();

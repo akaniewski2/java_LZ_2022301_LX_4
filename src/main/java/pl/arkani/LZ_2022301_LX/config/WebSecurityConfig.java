@@ -165,7 +165,7 @@ public class WebSecurityConfig {
                // .and()
                 http.authenticationProvider(authProvider())
                 .formLogin().loginPage("/login")//.permitAll()
-                .defaultSuccessUrl("/arkani2/tv_channels"/*,true*/).permitAll()
+                .defaultSuccessUrl("/home",true).permitAll()
                 //
                 .and()
                 .logout().logoutUrl("/logout")

@@ -1,6 +1,5 @@
 package pl.arkani.LZ_2022301_LX.controller;
 
-import com.mysql.cj.xdevapi.DocResultImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,6 @@ import java.net.Inet4Address;
 import java.net.UnknownHostException;
 import java.security.Principal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/arkani2/")
@@ -76,7 +74,7 @@ public class TvChannelController {
        // techPageList2.addAll(techPageList);
 
         Optional<TechPage> techpagePrivilege= techPageRepo.findByMethodAndNameAndRole("GET",this.techPage.getName(),userRole);
-        if (techpagePrivilege.isEmpty()) {return "/home";}
+        if (techpagePrivilege.isEmpty()) {return "/templates/_home";}
         System.out.println("# techPage:" + techPage);
         System.out.println("# techPageList2:" + techPageList2);
         techPageList.forEach(System.out::println);

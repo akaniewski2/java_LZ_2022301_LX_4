@@ -3,6 +3,9 @@ html
 margin: 0px;
 height: 100%;
 width: 100%;
+background-color: black !important;
+
+
 }
 
 
@@ -17,6 +20,9 @@ height:100%;
 height: 100%;
 width: 100%;
 min-height: 100%;
+
+
+
 }
 .filterDiv {
   /* box-sizing: border-box;
@@ -147,6 +153,8 @@ border-radius:10px;
 */
 /* margin-left:auto;
 margin-right:auto;*/
+
+
 }
 
 .tresc
@@ -171,6 +179,8 @@ font-align:justify;
 
 border: 1px solid grey;
 border-radius:10px;
+
+
 }
 
 .tresc:hover{

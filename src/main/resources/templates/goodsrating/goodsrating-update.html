@@ -5,6 +5,7 @@
     <title>purchase-update</title>
 
     <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
+    <script type="text/javascript" th:src="@{/js/funkcje.js}"></script>
 </head>
 <body>
 
@@ -56,7 +57,10 @@
             </div>
 
 
-            <input type="submit" value="Zapisz" style ="width:800px">
+            <input type="submit" value="Zapisz" style ="width:800px"/>
+            <button th:onclick="'f_cancelButton()'" id="cancel-button"  style ="width:800px">Anuluj</button>
+            <a class="input" href="javascript:history.back()">Cancel</a>
+
         </form>
 
     </article>

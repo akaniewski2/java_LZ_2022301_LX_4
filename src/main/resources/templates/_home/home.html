@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
 <head>
     <meta charset="UTF-8">
-    <title>movies</title>
+    <titlet h:text="${#strings.toUpperCase(thisTechPage.name)}"></titlet>
     <link rel="stylesheet" th:href="@{/css/style0.css}"  />
 </head>
 <body>
@@ -16,46 +16,37 @@
 
     <div class="tresc">
 
-        <div class="naglowek" onclick="window.location='/home'">
+        <div class="naglowek">
 
-            <i>Strona o niczym...</i>
+            <p style="text-align:center;font-size:15px;"  th:text="${#strings.toUpperCase(thisTechPage.name)}">    </p>
 
         </div>
 
+        Cześć   <span th:text="${#strings.toUpperCase(username)}"></span> <br>
 
 
-        <div th:switch="${movies}">
-            <h2 th:case="null">No movies yet!</h2>
-            <div th:case="*">
-                <h2>movies</h2>
-                <table>
-                    <thead>
-                    <tr class="menu">
-                        <th >Name</th>
-                        <th>Description</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="menu" th:each="movie : ${movies}">
-                        <td th:text="${movie.name}"></td>
-                        <td th:text="${movie.description}"></td>
-                        <td><a th:href="@{/arkani2/movie/edit/{id}(id=${movie.id})}">Edit</a></td>
-                        <td><a th:href="@{/arkani2/movie/delete/{id}(id=${movie.id})}">Delete</a></td>
+<!--        <div>-->
+<!--        host: <span th:text="${host}"/><br>-->
 
-                        <td><a th:href="${'/arkani2/movie/edit/'+movie.id}">Edit_test</a></td>
+<!--        Hello: <span th:text="${username}"/><br>-->
+<!--        Details: <span th:text="${details}"/><br>-->
 
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p><a href="/arkani2/movie/add">Add a new movie</a></p>
-        </div>
+
+<!--        Roles/authorities:-->
+<!--        <table>-->
+<!--            <tr th:each="auth: ${authorities}">-->
+<!--                <td th:text="${auth}" />-->
+<!--            </tr>-->
+<!--         <table>-->
+
+<!--        Role:  <span th:text="${userRole}"/>-->
+<!--        </div>-->
+
 
     </div>
-
-
+<!--    <div style="clear:both;">-->
+<!--    </div>-->
+<!--------------------------------------------------------------------------------------------------------->
     <div class="panel_prawy" >
         <div>
 
@@ -88,17 +79,17 @@
                 <!--					unset($_SESSION['blad']);-->
                 <!--					?>-->
 
-            </div>
-
-
         </div>
 
+
     </div>
 
+</div>
 
 
-    <div style="clear:both;">
-    </div>
+
+<!--    <div style="clear:both;">-->
+<!--    </div>-->
 
     <!-- <a href="rejestracja.php" ><div id="rejestracja">Rejestracja</div></a> -->
 

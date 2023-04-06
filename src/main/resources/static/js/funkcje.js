@@ -24,6 +24,14 @@ function numberWithSpaces(x) {
 function numberWithSpaces(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 };
+function f_cancelButton() {
+const cancelButton = document.getElementById("cancel-button");
+
+cancelButton.addEventListener("click", function() {
+  window.history.back();
+});
+};
+
 //-- # FUKCJE DLA PROJEKTU JAVA START ----------------------------------------
 // <?php   $strona->WyswietlTvKanaly();   ?>
 //<div style="clear:both"></div><div id=1153155135,1153122495 class="kanal filterDiv ogolny film menu")  style="text-align: left;" ";> 2. TVP 2  </div>

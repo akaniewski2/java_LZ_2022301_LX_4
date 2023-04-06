@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc" xmlns="http://www.w3.org/1999/html">
+<!--      style="background-color:black;">-->
+<head>
+    <meta charset="UTF-8">
+    <titlet h:text="${#strings.toUpperCase(thisTechPage.name)}"></titlet>
+    <link rel="stylesheet" th:href="@{/css/style0.css}"  />
+</head>
+<body >
+
+
+
+
+<div class = "glowny">
+
+
+
+            <div class="tresc">
+
+                <div class="naglowek" onclick="window.location='/home'">
+
+                    <p style="text-align:center;font-size:15px;"  th:text="${#strings.toUpperCase(thisTechPage.name)}">    </p>
+
+        <!--            nagłówek-->
+
+                </div>
+
+
+
+                <div >
+                    host: <span th:text="${host}"></span><br>
+
+                    Hello: <span th:text="${username}"></span><br>
+                            Details: <span th:text="${details}"></span><br>
+                        Authorities: <span th:text="${authorities}"></span><br>
+
+
+                    authorities:
+                    <table>
+                        <tr th:each="auth: ${authorities}">
+                            <td th:text="${auth}" />
+                        </tr>
+                     </table>
+
+                    Role:  <span th:text="${userRole}"></span>
+
+<!--                    <br><br><br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+<!--                    tresc:<br><br><br>-->
+
+                </div>
+
+
+            </div>
+        <!--    <div style="clear:both;">-->
+        <!--    </div>-->
+        <!--------------------------------------------------------------------------------------------------------->
+            <div class="panel_prawy" >
+        <!--        <div>-->
+        <!--            panel_prawy-->
+
+                    <!--            <form action="zaloguj.php" method="post">-->
+                    <!--                <input type ="text" name ="login" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'" />-->
+                    <!--                <input type ="password" name ="haslo"placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'" />-->
+                    <!--                <input type="submit" value="Logowanie"  />-->
+
+
+                    <div class="menu_kontener">
+        <!--                menu_kontener-->
+                        <!--<div class="menu" onclick="location.href=/logout.php?dis=yes">Wyloguj się</div> -->
+                        <!--<div class="menu" onclick='open.href=logout.php'>Wyloguj się</div>-->
+
+                        <div  th:each="page: ${techPageList}">
+                            <!--        działa ,ale nie łapie całego przycisku tylko napis-->
+                            <!--            <a th:href="@{{url}(url=${page.url})}"  th:text="${page.button}"> </a>-->
+                            <div  class="menu" th:onclick="'window.location.href = \'' + @{{id}(id=${page.url})} + '\''"  th:text="${page.button}">  </div>
+                        </div>
+
+                    </div>
+
+
+
+        <!--a-->
+
+                    <div class="error">
+                        error
+                        <!--                    <?php-->
+
+                        <!--					if(isset($_SESSION['blad'])) echo $_SESSION['blad'];-->
+                        <!--					unset($_SESSION['blad']);-->
+                        <!--					?>-->
+
+                    </div>
+
+<!--b-->
+            </div>
+<!--c-->
+</div>
+
+
+
+<!--    <div style="clear:both;">-->
+<!--    </div>-->
+
+    <!-- <a href="rejestracja.php" ><div id="rejestracja">Rejestracja</div></a> -->
+
+
+</body>
+</html>

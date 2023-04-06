@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://www.springframework.org/schema/mvc" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>purchase-update</title>
+    <title>ImportantDates - update</title>
+
 
     <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
 </head>
@@ -10,7 +11,8 @@
 
 
 <main id="main" class="article">
-    <header id="header" class="blue"><div > Zapisz </div> </header>
+    <header id="header" class="blue">
+        <div> ImportantDates - update </div></header>
     <article class="article">
 
 
@@ -21,24 +23,24 @@
 
 
             <div class="rejestracja">
-
+                <!--                visibility: hidden;-->
                 <table>
 
-                    <tr><td> </td> <td><input style ="width:700px;visibility: hidden;" type="text"  th:field="*{id}" id="id" ></td></tr>
-                    <tr><td> event: </td> <td><input style ="width:700px;" type="text"  th:field="*{event}" id="event"  ></td></tr>
-                    <tr><td> date: </td> <td><input style ="width:700px;" type="text"  th:field="*{date}" id="date"  ></td></tr>
-                    <tr><td> comment: </td> <td><input style ="width:700px" type="text"  th:field="*{comment}" id="comment"  ></td></tr>
-                    <!--                <tr style="visibility: hidden;"><td> createdOn: </td> <td><input style ="width:700px" type="text"  th:field="*{createdOn}" id="createdOn"  ></td></tr>-->
-                    <!--                <tr style="visibility: hidden;"><td> updatedOn: </td> <td><input style ="width:700px" type="text"  th:field="*{updatedOn}" id="updatedOn"  ></td></tr>-->
+                    <tr style="<styleTr>"><td> id:</td> <td><input style ="width:700px;<styleTd>" type="text"  th:field="*{id}" id="id"  ></td></tr>
+                    <tr style="<styleTr>"><td> event:</td> <td><input style ="width:700px;<styleTd>" type="text"  th:field="*{event}" id="event"  ></td></tr>
+                    <tr style="<styleTr>"><td> who/what:</td> <td><input style ="width:700px;<styleTd>" type="text"  th:field="*{who}" id="who"  ></td></tr>
+                    <tr style="<styleTr>"><td> date:</td> <td><input style ="width:700px;<styleTd>" type="text"  th:field="*{date}" id="date"  ></td></tr>
+                    <tr style="<styleTr>"><td> comment:</td> <td><input style ="width:700px;<styleTd>" type="text"  th:field="*{comment}" id="comment"  ></td></tr>
+
 
                     <!--                    <p th:if="${#fields.hasErrors('item')}">Invalid item</p>-->
 
                 </table>
 
-                <!--                <div th:if="${#fields.hasErrors('global')}">-->
-                <!--                    <h3>Global errors:</h3>-->
-                <!--                    <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />-->
-                <!--                </div>-->
+                <div th:if="${#fields.hasErrors('global')}">
+                    <h3>Global errors:</h3>
+                    <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+                </div>
 
 
                 <!--                <input style ="width:700px;visibility: hidden;" type="text" th:field="*{id}" id="id" placeholder="id">-->
@@ -55,6 +57,7 @@
 
             <input type="submit" value="Zapisz" style ="width:800px">
         </form>
+
 
     </article>
 </main>
