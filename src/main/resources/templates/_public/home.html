@@ -16,13 +16,13 @@
 
     <div class="tresc">
 
-        <div class="naglowek">
+        <div class="naglowek" onclick="window.location='/home'">
 
             <p style="text-align:center;font-size:15px;"  th:text="${#strings.toUpperCase(thisTechPage.name)}">    </p>
 
         </div>
 
-        Cześć   <span th:text="${#strings.toUpperCase(username)}"></span> <br>
+        Cześć   <span th:text="${#strings.capitalize(username)}"></span> ! <br>
 
 
 <!--        <div>-->

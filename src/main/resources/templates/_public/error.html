@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+<!--    <titlet h:text="${#strings.toUpperCase(thisTechPage.name)}"></titlet>-->
+    <link rel="stylesheet" th:href="@{/css/style0.css}"  />
+</head>
+<body>
+
+
+
+
+<div class = "glowny">
+
+
+
+    <div class="tresc">
+
+        <div class="naglowek" onclick="window.location='/home'">
+
+<!--            <p style="text-align:center;font-size:15px;"  th:text="${#strings.toUpperCase(thisTechPage.name)}">    </p>-->
+            <p style="text-align:center;font-size:15px;"  > Wystąpił błąd !   </p>
+
+
+        </div>
+
+         <br>
+        Strona nie istnieje lub nie masz uprawnień do jej wyświetlenia.<br><br>
+
+<!--        <table border="1">-->
+<!--            <tr><td>Error Message</td><td th:text="${message}"></td></tr>-->
+<!--            <tr><td>Status Code</td><td th:text="${status}"></td></tr>-->
+<!--            <tr><td>Exception</td><td th:text="${exception}"></td></tr>-->
+<!--            <tr><td>Stacktrace</td><td><pre th:text="${trace}"></pre></td></tr>-->
+<!--            <tr><td>Binding Errors</td><td th:text="${errors}"></td></tr>-->
+<!--        </table>-->
+<!--        Cześć   <span th:text="${#strings.capitalize(username)}"></span> ! <br>-->
+
+
+<!--        <div>-->
+<!--        host: <span th:text="${host}"/><br>-->
+
+<!--        Hello: <span th:text="${username}"/><br>-->
+<!--        Details: <span th:text="${details}"/><br>-->
+
+
+<!--        Roles/authorities:-->
+<!--        <table>-->
+<!--            <tr th:each="auth: ${authorities}">-->
+<!--                <td th:text="${auth}" />-->
+<!--            </tr>-->
+<!--         <table>-->
+
+<!--        Role:  <span th:text="${userRole}"/>-->
+<!--        </div>-->
+
+
+    </div>
+<!--    <div style="clear:both;">-->
+<!--    </div>-->
+<!--------------------------------------------------------------------------------------------------------->
+    <div class="panel_prawy" >
+
+        <div class="menu" onclick="window.location.href = '/home'">HOME</div>
+<!--        <div>-->
+
+<!--            &lt;!&ndash;            <form action="zaloguj.php" method="post">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <input type ="text" name ="login" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'" />&ndash;&gt;-->
+<!--            &lt;!&ndash;                <input type ="password" name ="haslo"placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'" />&ndash;&gt;-->
+<!--            &lt;!&ndash;                <input type="submit" value="Logowanie"  />&ndash;&gt;-->
+
+
+<!--            <div class="menu_kontener">-->
+<!--                &lt;!&ndash;<div class="menu" onclick="location.href=/logout.php?dis=yes">Wyloguj się</div> &ndash;&gt;-->
+<!--                &lt;!&ndash;<div class="menu" onclick='open.href=logout.php'>Wyloguj się</div>&ndash;&gt;-->
+
+<!--                <div  th:each="page: ${techPageList}">-->
+<!--                    &lt;!&ndash;        działa ,ale nie łapie całego przycisku tylko napis&ndash;&gt;-->
+<!--                    &lt;!&ndash;            <a th:href="@{{url}(url=${page.url})}"  th:text="${page.button}"> </a>&ndash;&gt;-->
+<!--                    <div  class="menu" th:onclick="'window.location.href = \'' + @{{id}(id=${page.url})} + '\''"  th:text="${page.button}">  </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+
+
+
+
+
+            <div class="error">
+                <!--                    <?php-->
+
+                <!--					if(isset($_SESSION['blad'])) echo $_SESSION['blad'];-->
+                <!--					unset($_SESSION['blad']);-->
+                <!--					?>-->
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!--    <div style="clear:both;">-->
+<!--    </div>-->
+
+    <!-- <a href="rejestracja.php" ><div id="rejestracja">Rejestracja</div></a> -->
+
+</div>
+</body>
+</html>

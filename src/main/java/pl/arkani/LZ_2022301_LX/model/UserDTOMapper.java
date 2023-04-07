@@ -8,18 +8,32 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserDTOMapper implements Function<User, UserDTO> {
+//    @Override
+//    public UserDTO apply(User user) {
+//        return new UserDTO(
+//                user.getId(),
+//                user.getEmail(),
+//                user.getUsername()//,
+////                user.getAuthorities()
+////                    .stream()
+////                    .map(GrantedAuthority::getAuthority)
+////                    .collect(Collectors.toList())
+//        );
+//
+//
+//
+//   }
+
     @Override
     public UserDTO apply(User user) {
-        return new UserDTO(
-                user.getId(),
-                user.getEmail(),
-                user.getUsername()//,
-//                user.getAuthorities()
-//                    .stream()
-//                    .map(GrantedAuthority::getAuthority)
-//                    .collect(Collectors.toList())
-        );
+        return UserDTO.fromEntity(user);
 
-   }
+    }
+
+
+
 
 }
+
+
+

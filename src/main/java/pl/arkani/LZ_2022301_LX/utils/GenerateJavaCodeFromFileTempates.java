@@ -3,6 +3,7 @@ package pl.arkani.LZ_2022301_LX.utils;
 
 import pl.arkani.LZ_2022301_LX.model.ImportantDates;
 import pl.arkani.LZ_2022301_LX.model.MusicTest;
+import pl.arkani.LZ_2022301_LX.model.UserDTO;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,7 +47,7 @@ public class GenerateJavaCodeFromFileTempates {
         System.out.println("-------------------------------------------------------------------");
         System.out.println("-- # CLASS INFO");
 
-        ImportantDates ft = new ImportantDates();
+        UserDTO ft = new UserDTO();
 
         Class ftClass = ft.getClass();
         String ClassNm = ftClass.getSimpleName();

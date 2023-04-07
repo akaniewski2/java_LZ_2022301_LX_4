@@ -194,17 +194,7 @@ public class UserController {
         return "hello";
     }
 //---------------------------------------------------------------------------------
-    
-    @PostMapping("/user-add")
-    public String addUser(@Valid User user, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "user-add";
-        }
-        
-        userRepo.save(user);
 
-        return "redirect:/users";
-    }
 
     // additional CRUD methods
     @GetMapping("/users")
@@ -228,7 +218,10 @@ public class UserController {
         // techPageList2.addAll(techPageList);
 
         Optional<TechPage> techpagePrivilege= techPageRepo.findByMethodAndNameAndRole("GET",this.techPage.getName(),userRole);
-        if (techpagePrivilege.isEmpty()) {return "/templates/_home";}
+        if (techpagePrivilege.isEmpty()) {
+        //    return "redirect:_home/error";
+            return "_public/error";
+        }
         System.out.println("# techPage:" + techPage);
         System.out.println("# techPageList2:" + techPageList2);
         techPageList.forEach(System.out::println);
@@ -260,6 +253,16 @@ public class UserController {
         return "user/users";
     }
 
+    @PostMapping("/user-add")
+    public String addUser(@Valid User user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "user-add";
+        }
+
+        userRepo.save(user);
+
+        return "redirect:/users";
+    }
     @GetMapping("/user/edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
 

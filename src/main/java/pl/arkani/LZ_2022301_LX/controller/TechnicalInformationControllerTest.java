@@ -25,10 +25,9 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 @Controller
-//@RequestMapping(value = "/")
-public class HomeController {
+@RequestMapping(value = "/test/")
+public class TechnicalInformationControllerTest {
 
     private UserRepo userRepo;
     private UserService userService;
@@ -40,24 +39,25 @@ public class HomeController {
 
     private UserDetailsServiceImpl userDetailsService;
 
-    public HomeController(UserRepo userRepo, UserService userService, TokenRepo tokenRepo, TechPageRepo techPageRepo,  SqlRepoExec sqlRepoExec, UserDetailsServiceImpl userDetailsService) {
+    public TechnicalInformationControllerTest(UserRepo userRepo, UserService userService, TokenRepo tokenRepo, TechPageRepo techPageRepo, SqlRepoExec sqlRepoExec, UserDetailsServiceImpl userDetailsService) {
         this.userRepo = userRepo;
         this.userService = userService;
         this.tokenRepo = tokenRepo;
         this.techPageRepo = techPageRepo;
 
-        this.techPage = techPageRepo.findByName("home"); // get info from sql table about thie page
+        this.techPage = techPageRepo.findByName("technicalInformation"); // get info from sql table about thie page
         this.sqlRepoExec = sqlRepoExec;
         this.userDetailsService = userDetailsService;
     }
 
-    @GetMapping("/home")
+    @GetMapping("/technicalinformation")
     public String showHome(Model model, Principal principal) {
         model.addAttribute("users", userRepo.findAll());
         // #--- Privileges START ----------------------------------------------------------------------------------------------------------------
         User user = userRepo.findByUsername(principal.getName()).orElseThrow(() -> new UsernameNotFoundException("User not found in DB"));
         String userRole = user.getRole();
-        List<TechPage> techPageList = techPageRepo.findByMethodAndRole("GET", userRole);
+        String httpMethod = "GET";
+        List<TechPage> techPageList = techPageRepo.findByMethodAndRole(httpMethod.toUpperCase(), userRole);
         //        List<TechPage> techPageList2 = techPageList.stream().filter(s -> s.getRoles().equals(userRole)).collect(Collectors.toList());
         List<TechPageTmp> techPageList2 = new ArrayList<>();
 
@@ -69,9 +69,9 @@ public class HomeController {
         // Set<TechPage> techPageList2 = new HashSet<TechPage>();
         // techPageList2.addAll(techPageList);
 
-        Optional<TechPage> techpagePrivilege = techPageRepo.findByMethodAndNameAndRole("GET", this.techPage.getName(), userRole);
+        Optional<TechPage> techpagePrivilege = techPageRepo.findByMethodAndNameAndRole(httpMethod.toUpperCase(), this.techPage.getName(), userRole);
         if (techpagePrivilege.isEmpty()) {
-            return "_public/home";
+            return "/_home/home";
         }
         System.out.println("# techPage:" + techPage);
         System.out.println("# techPageList2:" + techPageList2);
@@ -87,9 +87,9 @@ public class HomeController {
         model.addAttribute("host", Functions.getHostName());
         model.addAttribute("username",principal.getName());
         model.addAttribute("authorities",authorities);
-        model.addAttribute("details");
+        model.addAttribute("details",details);
         model.addAttribute("userRole",userRole);
 
-        return "_public/home";
+        return "_public/technicalinformation";
     }
 }

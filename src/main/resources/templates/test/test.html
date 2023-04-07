@@ -18,7 +18,7 @@
 
 
 <main id="main" class="article">
-    <header id="header" class="blue" onclick="window.location='/home'"><div > Test List </div> </header>
+    <header id="header" onclick="window.location='/home'" class="blue" ><div > Test List </div> </header>
     <article class="article">
 
 
@@ -32,6 +32,7 @@
         <input id="myInput" type="text" placeholder="Search.."><br><br>
         <p class="menu" style = "text-align:center"><a href="/arkani2/test/add">Add a new test</a></p>
 
+        test table:
         <table>
             <thead >
             <tr >
@@ -45,7 +46,7 @@
 
             </tr>
             </thead >
-            <tbody id="myTable_">
+            <tbody class="myTable">
             <tr th:each="test_ : ${test}">
 
 
@@ -74,7 +75,7 @@
 
 </div>
 
-<!--        automatyczne generowanie v1-->
+        automatyczne generowanie v1:
 
         <table>
             <thead>
@@ -91,14 +92,14 @@
         </table>
 
 
-        <!--        automatyczne generowanie v2-->
+                automatyczne generowanie z tabeli SQL v2:<br>
 
 
         <table>
             <thead>
             <tr><th class="menu" th:each="header: ${headers}"   th:text="${header}" /></tr>
             </thead>
-            <tbody><tr  th:each="row: ${rows}" id="myTable">
+            <tbody><tr  th:each="row: ${rows}" class="myTable">
 
 
 <!--              <td class="menu"><a th:href="@{/arkani2/test/edit/{id}(id=${r})}">Edit</a></td>-->
@@ -108,6 +109,60 @@
             </tr>
             </tbody>
         </table>
+<br>
+<br>
+
+
+      userDTOList:<br>
+
+
+        <table>
+            <thead>
+            <tr>
+
+                <th class="menu">Delete</th>
+                <th class="menu">Edit</th>
+
+                <th class="menu">id</th>
+                <th class="menu">username</th>
+                <th class="menu">password</th>
+                <th class="menu">password2</th>
+                <th class="menu">roles</th>
+                <th class="menu">Code</th>
+                <th class="menu">enabled</th>
+                <th class="menu">authority</th>
+                <th class="menu">role</th>
+                <th class="menu">email</th>
+                <th class="menu">purchases</th>
+
+
+
+            </tr>
+            </thead >
+            <tbody class="myTable">
+            <tr th:each="s : ${userDTOList}">
+
+                <td class="menu"><a th:href="@{/arkani2/userdto/delete/{id}(id=${s.id})}" onclick="return confirm(' you want to delete?');">Delete</a></td>
+                <td class="menu"><a th:href="@{/arkani2/userdto/edit/{id}(id=${s.id})}">Edit</a></td>
+
+
+                <td class="menu" th:text="${s.id}"></td>
+                <td class="menu" th:text="${s.username}"></td>
+                <td class="menu" th:text="${s.password}"></td>
+                <td class="menu" th:text="${s.password2}"></td>
+                <td class="menu" th:text="${s.roles}"></td>
+                <td class="menu" th:text="${s.Code}"></td>
+                <td class="menu" th:text="${s.enabled}"></td>
+                <td class="menu" th:text="${s.authority}"></td>
+                <td class="menu" th:text="${s.role}"></td>
+                <td class="menu" th:text="${s.email}"></td>
+                <td class="menu" th:text="${s.purchases}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+
+
 
 
     </article>
@@ -120,7 +175,7 @@
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
+    $(".myTable tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });

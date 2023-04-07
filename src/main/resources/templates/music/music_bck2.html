@@ -18,10 +18,10 @@
 
 
 <main id="main" class="article">
-<!--    <header id="header" class="blue"><div > Music List </div> </header>-->
+<!--    <header id="header" onclick="window.location='/home'" class="blue"><div > Music List </div> </header>-->
     <article class="article">
 
-        <div class="naglowek">
+        <div class="naglowek" onclick="window.location='/home'">
 
             <p style="text-align:center;font-size:15px;"  th:text="${#strings.toUpperCase(thisTechPage.name)}">    </p>
 

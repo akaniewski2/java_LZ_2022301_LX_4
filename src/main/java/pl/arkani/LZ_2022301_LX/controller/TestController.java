@@ -1,6 +1,7 @@
 package pl.arkani.LZ_2022301_LX.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -8,16 +9,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.arkani.LZ_2022301_LX.Examples.SqlRepo;
 import pl.arkani.LZ_2022301_LX.Examples.SqlRepoExec;
 import pl.arkani.LZ_2022301_LX.model.Test;
+import pl.arkani.LZ_2022301_LX.model.User;
+import pl.arkani.LZ_2022301_LX.model.UserDTO;
+import pl.arkani.LZ_2022301_LX.model.UserDTOMapper;
 import pl.arkani.LZ_2022301_LX.repo.TestRepo;
+import pl.arkani.LZ_2022301_LX.repo.UserRepo;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/arkani2/")
@@ -26,32 +32,29 @@ public class TestController {
 
     private TestRepo testRepo;
     private SqlRepoExec sqlRepoExec;
+
+    private UserRepo userRepo;
+    private UserDTOMapper userDTOMapper;
     @Autowired
-    public TestController(TestRepo testRepo, SqlRepoExec sqlRepoExec) {
+    public TestController(TestRepo testRepo, SqlRepoExec sqlRepoExec, UserRepo userRepo, UserDTOMapper userDTOMapper) {
         this.testRepo = testRepo;
         this.sqlRepoExec = sqlRepoExec;
+        this.userRepo = userRepo;
+        this.userDTOMapper = userDTOMapper;
     }
 
-    @GetMapping("test/add")
-    public String showSignUpForm(Test test) {
-        return "test/test-add";
-    }
-    
-    @PostMapping("test/add")
-    public String addTest(@Valid Test test, BindingResult result, Model model) {
-        if (result.hasErrors() || test.getName().isBlank() ) {
-            //system.out.println("1."+result.getAllErrors());
-            return "test/test-add"; // lokalizacja html
-        }
-        //system.out.println("2");
-        testRepo.save(test);
-        //system.out.println("3");
-        return "redirect:/arkani2/test"; //redirect przekierowuje na url
-    }
+
 
     // additional CRUD methods
     @GetMapping("test")
-    public String showTestList(Model model) {
+    public String showTestList(Model model, Principal principal) {
+
+        User user = userRepo.findByUsername(principal.getName()).orElseThrow(()->new UsernameNotFoundException("User not found in DB"));
+        List<UserDTO> userDTOList= userRepo.findAll().stream().map(u->userDTOMapper.apply(u)).collect(Collectors.toList());
+
+        System.out.println(userDTOList.stream().toList());
+        model.addAttribute("userDTOList", userDTOList);
+
 
         List<String> headers = Arrays.asList("ID", "Name", "Salary", "Status");
         List<Map<String, Object>> rows2 = new ArrayList<>();
@@ -100,6 +103,23 @@ public class TestController {
 
 
 
+    }
+
+    @GetMapping("test/add")
+    public String showSignUpForm(Test test) {
+        return "test/test-add";
+    }
+
+    @PostMapping("test/add")
+    public String addTest(@Valid Test test, BindingResult result, Model model) {
+        if (result.hasErrors() || test.getName().isBlank() ) {
+            //system.out.println("1."+result.getAllErrors());
+            return "test/test-add"; // lokalizacja html
+        }
+        //system.out.println("2");
+        testRepo.save(test);
+        //system.out.println("3");
+        return "redirect:/arkani2/test"; //redirect przekierowuje na url
     }
 
     @GetMapping("test/edit/{id}")

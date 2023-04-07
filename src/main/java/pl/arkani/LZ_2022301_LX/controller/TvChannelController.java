@@ -74,7 +74,7 @@ public class TvChannelController {
        // techPageList2.addAll(techPageList);
 
         Optional<TechPage> techpagePrivilege= techPageRepo.findByMethodAndNameAndRole("GET",this.techPage.getName(),userRole);
-        if (techpagePrivilege.isEmpty()) {return "/templates/_home";}
+        if (techpagePrivilege.isEmpty()) {return "/templates/_public";}
         System.out.println("# techPage:" + techPage);
         System.out.println("# techPageList2:" + techPageList2);
         techPageList.forEach(System.out::println);
