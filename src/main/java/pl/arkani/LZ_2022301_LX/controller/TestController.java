@@ -50,7 +50,8 @@ public class TestController {
     public String showTestList(Model model, Principal principal) {
 
         User user = userRepo.findByUsername(principal.getName()).orElseThrow(()->new UsernameNotFoundException("User not found in DB"));
-        List<UserDTO> userDTOList= userRepo.findAll().stream().map(u->userDTOMapper.apply(u)).collect(Collectors.toList());
+       // List<UserDTO> userDTOList= userRepo.findAll().stream().map(u->userDTOMapper.apply(u)).collect(Collectors.toList());
+        List<UserDTO> userDTOList= userRepo.findAll().stream().map(u->userDTOMapper.toDTO(u)).collect(Collectors.toList());
 
         System.out.println(userDTOList.stream().toList());
         model.addAttribute("userDTOList", userDTOList);

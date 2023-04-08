@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/w3s/")
+@RequestMapping(value = "/w3/")
 public class TeamController {
 
 
     @GetMapping("/team")
     public String getTeam () {
-        return "w3s/team/team";
+        return "w3/team/team";
     }
 }

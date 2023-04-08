@@ -85,13 +85,15 @@ public class UserService {
     public List<UserDTO> getAllUsersDTO() {
         return userRepo.findAll()
                 .stream()
-                .map(userDTOMapper)
+                //.map(userDTOMapper)
+                .map(x->userDTOMapper.toDTO(x))
                 .collect(Collectors.toList());
     }
 
    public UserDTO getUserDTO(long id) {
        return userRepo.findById(id)
-               .map(userDTOMapper)
+               //.map(userDTOMapper)
+               .map(x->userDTOMapper.toDTO(x))
                .orElseThrow(()-> new RuntimeException("user with id [%s] not found".formatted(id)));
    }
 
