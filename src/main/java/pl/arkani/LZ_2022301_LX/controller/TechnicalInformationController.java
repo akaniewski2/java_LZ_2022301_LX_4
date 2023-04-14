@@ -54,7 +54,7 @@ public class TechnicalInformationController {
         // #--- Privileges START ----------------------------------------------------------------------------------------------------------------
         String userRole = techPageService.checkPrivilage("get",this.techPage.getName(),model, principal,
                                                           techPageRepo, techPage, userRepo);
-        if (userRole == null) return "_public/home";
+        if (userRole == null) return "_public/error";
         // #--- Privileges END ------------------------------------------------------------------------------------------------------------------
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();

@@ -31,16 +31,19 @@ public class GoodsRating {
     long id;
 
 
-//    @NotNull
-//    @NotEmpty /*gt > 0*/
-//    @NotBlank /*trim gt >0*/
+    @NotNull
+    @NotEmpty /*gt > 0*/
+    @NotBlank /*trim gt >0 (not null and not an empty String)*/
     @Size(min=3)
     String item;
-
+    @NotNull
     @NotEmpty(message = "cannot be empty.")
     @Size(min = 5, max = 250)
     String mark;
-
+    @NotNull
+    @NotEmpty(message = "Country must not be empty") /*gt > 0*/
+    @NotBlank /*trim gt >0*/
+    @Size(min=3)
     String country;
 
     String shop;

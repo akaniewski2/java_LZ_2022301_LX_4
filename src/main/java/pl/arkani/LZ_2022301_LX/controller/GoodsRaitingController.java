@@ -58,9 +58,13 @@ public class GoodsRaitingController {
     @GetMapping("goodsratingitem")
     public String showGoodsRatingItem(@RequestParam/*("id")*/ long id, Model model) {
 
-        model.addAttribute("goodsRating", goodsRatingRepo.findById(id));
-        return "goodsrating/goodsrating";
+        try {
 
+            model.addAttribute("goodsRating", goodsRatingRepo.findById(id));
+            return "goodsrating/goodsrating";
+        } finally {
+            return "_public/error";
+        }
 
     }
 
@@ -87,23 +91,24 @@ public class GoodsRaitingController {
 
     @GetMapping("goodsrating/edit/{id}")
     public String updateGoodsRating(@PathVariable/*("id")*/ long id, Model model) {
+        model.addAttribute("goodsRating",new GoodsRating());
         GoodsRating goodsRating = goodsRatingRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid goodsRating Id:" + id));
 
-        model.addAttribute("goodsRating", goodsRating);
+      //  model.addAttribute("goodsRating", goodsRating);
         return "goodsrating/goodsrating-update";
     }
 
     @PostMapping("goodsrating/update/{id}")
-    public String updateGoodsRating(@PathVariable/*("id")*/ long id, @Valid  GoodsRating goodsRating,
+    public String updateGoodsRating(@PathVariable/*("id")*/ long id, @Valid @ModelAttribute("goodsRating") GoodsRating goodsRating,
                              BindingResult result, Model model) {
 
 
-        String err = goodsRatingValidationService.validateGoods(goodsRating);
-        if (!err.isEmpty()) {
-            ObjectError error = new ObjectError("globalError", err);
-            result.addError(error);
-        }
+    //    String err = goodsRatingValidationService.validateGoods(goodsRating);
+//        if (!err.isEmpty()) {
+//            ObjectError error = new ObjectError("globalError", err);
+//            result.addError(error);
+//        }
 
         if (result.hasErrors()||goodsRating.getItem().isEmpty()  ) {
         result.getAllErrors().forEach(e->System.out.println(e.getObjectName() +" "+ e.getDefaultMessage()) );

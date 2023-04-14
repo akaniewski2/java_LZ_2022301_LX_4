@@ -37,7 +37,7 @@
 
 
         <input id="myInput" type="text" placeholder="Search.."><br><br>
-        <p class="menu" style = "text-align:center"><a href="/arkani2/purchaseCategory/add">Add a new purchaseCategory</a></p>
+        <p class="menu" style = "text-align:center"><a href="/arkani2/purchasecategory/add">Add a new purchaseCategory</a></p>
 
         <table>
             <thead >
@@ -60,8 +60,8 @@
             <tr th:each="purchaseCategory_ : ${purchaseCategory}">
 
 
-                <td class="menu"><a th:href="@{/arkani2/purchaseCategory/delete/{id}(id=${purchaseCategory_.id})}" onclick="return confirm(' you want to delete?');">Delete</a></td>
-                <td class="menu"><a th:href="@{/arkani2/purchaseCategory/edit/{id}(id=${purchaseCategory_.id})}">Edit</a></td>
+                <td class="menu"><a th:href="@{/arkani2/purchasecategory/delete/{id}(id=${purchaseCategory_.id})}" onclick="return confirm(' you want to delete?');">Delete</a></td>
+                <td class="menu"><a th:href="@{/arkani2/purchasecategory/edit/{id}(id=${purchaseCategory_.id})}">Edit</a></td>
 
 
                 <td th:text="${purchaseCategory_.id}" class="menu"></td>

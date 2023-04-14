@@ -29,6 +29,8 @@
                     <tr><td> item: </td> <td><input style ="width:700px;" type="text"  th:field="*{item}" id="item"  ></td></tr>
                     <tr><td> mark: </td> <td><input style ="width:700px;" type="text"  th:field="*{mark}" id="mark"  ></td></tr>
                     <tr><td> country: </td> <td><input style ="width:700px;" type="text"  th:field="*{country}" id="country"  ></td></tr>
+                    <span th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></span>
+
                     <tr><td> shop: </td> <td><input style ="width:700px;" type="text"  th:field="*{shop}" id="shop"  ></td></tr>
                     <tr><td> rating: </td> <td><input style ="width:700px" type="text"  th:field="*{rating}" id="rating"  ></td></tr>
                     <tr><td> comment: </td> <td><input style ="width:700px" type="text"  th:field="*{comment}" id="comment"  ></td></tr>

@@ -1,0 +1,90 @@
+<!-- # VIEW FINISH -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>CulinaryRecipes</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
+
+</head>
+<body>
+
+
+<main id="main" class="article">
+    <header id="header" onclick="window.location='/home'" class="blue">
+        <div> CulinaryRecipes </div>
+<!--        <br>[<span th:text="${username}"/>] </div> -->
+    </header>
+    <article class="article">
+
+
+        <div th:switch="${culinaryRecipes}" >
+
+
+                <input id="myInput" type="text" placeholder="Search.."><br><br>
+                <p class="menu" style = "text-align:center"><a href="/arkani2/culinaryrecipes/add">Dodaj</a></p>
+
+                  <table>
+    <thead>
+    <tr>
+
+        <th class="menu">Delete</th>
+        <th class="menu">Edit</th>
+
+        <th class="menu">id</th>
+<th class="menu">name</th>
+<th class="menu">comment</th>
+<th class="menu">createdOn</th>
+<th class="menu">updatedOn</th>
+<th class="menu">culinaryIngredients</th>
+
+
+
+    </tr>
+    </thead >
+    <tbody id="myTable">
+    <tr th:each="s : ${culinaryRecipes}">
+
+        <td class="menu"><a th:href="@{/arkani2/culinaryrecipes/delete/{id}(id=${s.id})}" onclick="return confirm(' you want to delete?');">Delete</a></td>
+        <td class="menu"><a th:href="@{/arkani2/culinaryrecipes/edit/{id}(id=${s.id})}">Edit</a></td>
+
+
+        <td class="menu" th:text="${s.id}"></td>
+        <td class="menu" th:text="${s.name}"></td>
+        <td class="menu" th:text="${s.comment}"></td>
+        <td class="menu" th:text="${s.createdOn}"></td>
+        <td class="menu" th:text="${s.updatedOn}"></td>
+        <td class="menu" th:text="${s.culinaryIngredients}"></td>
+
+    </tr>
+    </tbody>
+</table>
+
+
+
+        </div>
+
+
+
+    </article>
+</main>
+
+<footer></footer>
+
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+</body>
+
+
+</html>

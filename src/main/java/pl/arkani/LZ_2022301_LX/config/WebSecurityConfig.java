@@ -139,6 +139,8 @@ public class WebSecurityConfig {
 
 
 
+            //    .requestMatchers(HttpMethod.GET  ,"/arkani2/goodsrating").hasAnyRole("ADMIN","USER")//test
+
                 .requestMatchers(HttpMethod.POST  ,"/arkani2/**").hasAnyRole("ADMIN","USER")
                 .requestMatchers(HttpMethod.PUT   ,"/arkani2/**").hasAnyRole("ADMIN","USER")
                 .requestMatchers(HttpMethod.PATCH ,"/arkani2/**").hasAnyRole("ADMIN","USER")

@@ -46,7 +46,7 @@ public class HomeController {
         this.tokenRepo = tokenRepo;
         this.techPageRepo = techPageRepo;
 
-        this.techPage = techPageRepo.findByName("home"); // get info from sql table about thie page
+        this.techPage = techPageRepo.findByName("home"); // get info from sql table about this page
         this.sqlRepoExec = sqlRepoExec;
         this.userDetailsService = userDetailsService;
     }

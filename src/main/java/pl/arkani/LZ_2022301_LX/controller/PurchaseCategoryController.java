@@ -33,60 +33,60 @@ public class PurchaseCategoryController {
     }
 
 
-    @GetMapping("purchaseCategory/add")
+    @GetMapping("purchasecategory/add")
     public String showSignUpForm(PurchaseCategory purchaseCategory,Principal principal) {
         //system.out.println("# principal.getName():"+principal.getName());
 
-        return "purchaseCategory/purchaseCategory-update";
+        return "purchasecategory/purchasecategory-update";
     }
 
-    @PostMapping("purchaseCategory/add")
+    @PostMapping("purchasecategory/add")
     public String addPurchaseCategory(@Valid PurchaseCategory purchaseCategory, BindingResult result, Model model,Principal principal) {
 
         //system.out.println("# principal.getName():"+principal.getName());
         if (result.hasErrors() || purchaseCategory.getName().isBlank() ) {
             //system.out.println("1");
-            return "purchaseCategory/purchaseCategory"; // lokalizacja html
+            return "purchasecategory/purchasecategory"; // lokalizacja html
         }
         //system.out.println("2");
 
         purchaseCategoryService.save(purchaseCategory,principal);
         //system.out.println("3");
-        return "redirect:/arkani2/purchaseCategory"; //redirect przekierowuje na url
+        return "redirect:/arkani2/purchasecategory"; //redirect przekierowuje na url
     }
 
     // additional CRUD methods
-    @GetMapping("purchaseCategory")
+    @GetMapping("purchasecategory")
     public String showPurchaseCategoryList(Model model,Principal principal) {
         model.addAttribute("purchaseCategory", purchaseCategoryRepo.findAll());
         model.addAttribute("username", principal.getName());
-        return "purchaseCategory/purchaseCategory";
+        return "purchasecategory/purchasecategory";
     }
 
-    @GetMapping("purchaseCategory/edit/{id}")
+    @GetMapping("purchasecategory/edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
         PurchaseCategory purchaseCategory = purchaseCategoryRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid purchaseCategory Id:" + id));
 
         model.addAttribute("purchaseCategory", purchaseCategory);
-        return "purchaseCategory/purchaseCategory-update";
+        return "purchasecategory/purchasecategory-update";
     }
 
-    @PostMapping("purchaseCategory/update/{id}")
+    @PostMapping("purchasecategory/update/{id}")
     public String updatePurchaseCategory(@PathVariable("id") long id, @Valid PurchaseCategory purchaseCategory,
                              BindingResult result, Model model,Principal principal) {
         if (result.hasErrors()) {
             purchaseCategory.setId(id);
-            return "purchaseCategory/purchaseCategory-update";
+            return "purchasecategory/purchasecategory-update";
         }
 
         //purchaseCategory.setModBy();
 
         purchaseCategoryService.update(purchaseCategory,principal);
-        return "redirect:/arkani2/purchaseCategory";
+        return "redirect:/arkani2/purchasecategory";
     }
 
-    @GetMapping("purchaseCategory/delete/{id}")
+    @GetMapping("purchasecategory/delete/{id}")
     public String deletePurchaseCategory(@PathVariable("id") long id, Model model,Principal principal) {
         PurchaseCategory purchaseCategory = purchaseCategoryRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid purchaseCategory Id:" + id));
@@ -94,6 +94,6 @@ public class PurchaseCategoryController {
 
         purchaseCategoryService.delete(purchaseCategory,principal);
 
-        return "redirect:/arkani2/purchaseCategory";
+        return "redirect:/arkani2/purchasecategory";
     }
 }

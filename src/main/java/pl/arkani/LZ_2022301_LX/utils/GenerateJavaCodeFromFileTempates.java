@@ -1,9 +1,7 @@
 package pl.arkani.LZ_2022301_LX.utils;
 
 
-import pl.arkani.LZ_2022301_LX.model.ImportantDates;
-import pl.arkani.LZ_2022301_LX.model.MusicTest;
-import pl.arkani.LZ_2022301_LX.model.UserDTO;
+import pl.arkani.LZ_2022301_LX.model.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,7 +45,7 @@ public class GenerateJavaCodeFromFileTempates {
         System.out.println("-------------------------------------------------------------------");
         System.out.println("-- # CLASS INFO");
 
-        UserDTO ft = new UserDTO();
+        CulinaryIngredients ft = new CulinaryIngredients();
 
         Class ftClass = ft.getClass();
         String ClassNm = ftClass.getSimpleName();

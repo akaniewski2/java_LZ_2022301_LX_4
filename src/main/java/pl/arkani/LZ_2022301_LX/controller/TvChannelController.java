@@ -3,12 +3,9 @@ package pl.arkani.LZ_2022301_LX.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestParam;
 import pl.arkani.LZ_2022301_LX.model.TechPage;
 import pl.arkani.LZ_2022301_LX.model.TechPageTmp;
 import pl.arkani.LZ_2022301_LX.model.User;
@@ -20,6 +17,7 @@ import java.security.Principal;
 import java.util.*;
 
 @Controller
+@CrossOrigin //https://spring.io/guides/gs/rest-service-cors/
 @RequestMapping(value = "/arkani2/")
 public class TvChannelController {
 
