@@ -17,6 +17,56 @@ import java.util.Properties;
 
 public class Functions {
 
+    public static String[] getHostAddresses2() {
+        Set<String> HostAddresses = new HashSet<>();
+        try {
+            for (NetworkInterface ni : Collections.list(NetworkInterface.getNetworkInterfaces())) {
+                if (!ni.isLoopback() && ni.isUp() && ni.getHardwareAddress() != null) {
+                    for (InterfaceAddress ia : ni.getInterfaceAddresses()) {
+                        if (ia.getBroadcast() != null) {  //If limited to IPV4
+                            HostAddresses.add(ia.getAddress().getHostAddress());
+                        }
+                    }
+                }
+            }
+        } catch (SocketException e) { }
+        return HostAddresses.toArray(new String[0]);
+    }
+
+//    public String getDeviceName() {
+//        String manufacturer = Build.MANUFACTURER;
+//        String model = Build.MODEL;
+//
+//        /*
+//        String ip="" ;
+//        try {
+//        ip= InetAddress.getLocalHost().getHostAddress().toString() ;
+//        } catch  (Exception e){
+//            e.printStackTrace();
+//            Log.d("# Err:",e.getMessage());
+//        }
+//*/
+//        if (model.toLowerCase().startsWith(manufacturer.toLowerCase())) {
+//            return capitalize(model);
+//        } else {
+//
+//            return capitalize(manufacturer) + " " + model ;
+//        }
+//    }
+
+
+    private String capitalize(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+        char first = s.charAt(0);
+        if (Character.isUpperCase(first)) {
+            return s;
+        } else {
+            return Character.toUpperCase(first) + s.substring(1);
+        }
+    }
+
 
     public static String RPad(String str, Integer length, char car) {
         return (str + String.format("%" + length + "s", "").replace(" ", String.valueOf(car))).substring(0, length);

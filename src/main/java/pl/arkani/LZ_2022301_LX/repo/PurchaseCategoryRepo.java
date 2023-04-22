@@ -15,4 +15,6 @@ public interface PurchaseCategoryRepo extends JpaRepository<PurchaseCategory, Lo
     @Query("update PurchaseCategory p set p.activeRec = 0 where p.id = ?1")
     void updateActiveById(long id);
 
+
+    PurchaseCategory findByName(String name);
 }

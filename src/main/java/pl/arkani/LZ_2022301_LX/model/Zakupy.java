@@ -5,9 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
-
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
 
 @Entity
 @Setter
@@ -15,16 +13,22 @@ import java.util.Date;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Test {
+public class Zakupy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
-    // @Column(name="`desc`")
-    @NotBlank(message = "name is mandatory")
-    private String name;
-
-    private Date date;
+    private long id;
+    private String towar;
+    private String kupione;
+    private long dt_dod;
+    private long dt_zm;
+    private String stan;
+    private String kategoria;
+    private int usun;
+    private String uwagi;
+    private String user_dod;
+    private String user_zm;
+    private long user_id;
 
 
 }

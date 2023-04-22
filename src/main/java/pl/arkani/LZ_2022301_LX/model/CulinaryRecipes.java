@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -21,7 +22,13 @@ public class CulinaryRecipes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
+//    public CulinaryRecipes(CulinaryIngredients culinaryIngredients) {
+//     this.culinaryIngredients.add(culinaryIngredients);
+//    }
+
     String name;
+
+    String description;
 
     String comment;
 

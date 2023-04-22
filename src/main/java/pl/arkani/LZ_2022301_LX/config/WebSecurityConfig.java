@@ -106,7 +106,7 @@ public class WebSecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/images/**", "/js/**", "/webjars/**","/css/**");
+        return (web) -> web.ignoring().requestMatchers("/images/**", "/js/**", "/webjars/**","/css/**","/api/**");
     }
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration  config) throws Exception {
@@ -124,13 +124,16 @@ public class WebSecurityConfig {
 //        https://www.baeldung.com/spring-channel-security-https
 
         // zmiana aby miec dostep do bazy h2
-        http.csrf().disable();
-        http.headers().disable();
+
+        http            .cors().disable().csrf().disable();
+        //http.headers()disable();
 
         http
 
                 .authorizeHttpRequests()
 
+                .requestMatchers("/test/**").permitAll()
+                .requestMatchers("/api/**").permitAll()
                 .requestMatchers("/user-admin/**").hasAnyRole("USER", "ADMIN")
                 //  .requestMatchers("/user-admin/**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
                 .requestMatchers("/guest/**").hasAnyRole("GUEST")

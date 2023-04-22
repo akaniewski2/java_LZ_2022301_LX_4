@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>purchase-update</title>
+
+    <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
+    <script type="text/javascript" th:src="@{/js/funkcje.js}"></script>
+</head>
+<body>
+
+
+<main id="main" class="article">
+    <header id="header" onclick="window.location='/home'" class="blue"><div > Zapisz </div> </header>
+    <article class="article">
+
+        <div class="rejestracja">
+    <!--/*@thymesVar id="culinaryRecipes" type="pl.arkani.LZ_2022301_LX.model.CulinaryRecipes"*/-->
+
+            <p th:if="${messageStr!=null}" th:text="${messageStr}"></p>
+            <p th:if="${message.msg!=null}" th:text="${message}"></p>
+
+
+
+
+            <form action="#" method="post" th:action="@{/arkani2/culinaryrecipes-update2}" th:object="${culinaryRecipes}">
+
+
+                <fieldset>
+                    <legend>Przepis</legend>
+
+
+                    <label>id:</label><input type="text" th:field="*{id}" readonly/>
+                    <label>name:</label><input type="text" th:field="*{name}"/>
+                    <label>description:</label><input type="text" th:field="*{description}"/>
+        <!--            <label><createdOn/label><input type="text" th:field="*{createdOn}"/>-->
+
+
+                    <fieldset  th:each="s,stepStat : *{culinaryIngredients}">
+                        <legend th:text="|Składnik ${stepStat.index+1}| "></legend>
+
+                        <table>
+                            <tbody id="myTable_">
+                                <tr>
+                                <td class="menu"><a th:href="@{/arkani2/culinaryrecipes-update2/delete/{id}(id=${s.id})}" onclick="return confirm(' you want to delete?');">Delete</a></td>
+                                <td class="menu"><a th:href="@{/arkani2/culinaryrecipes-update2/edit/{id}(id=${s.id})}">Edit</a></td>
+                                </tr>
+
+                                <tr><td>name:</td><td class="menu"><input  type="text" th:field="*{culinaryIngredients[__${stepStat.index}__].name}" /></td></tr>
+                                <tr><td>quantity:</td><<td class="menu"><input  type="text" th:field="*{culinaryIngredients[__${stepStat.index}__].quantity}"   /></td></tr>
+                                <tr><td>measure:</td><<td class="menu"><input  type="text" th:field="*{culinaryIngredients[__${stepStat.index}__].measure}" /></td></tr>
+                                <tr><td>description:</td><<td class="menu"><input  type="text" th:field="*{culinaryIngredients[__${stepStat.index}__].description}" /></td></tr>
+                                <tr><td>comment:</td><<td class="menu"><input  type="text" th:field="*{culinaryIngredients[__${stepStat.index}__].comment}" /></td></tr>
+                                <tr><td>shop:</td><<td class="menu"><input  type="text" th:field="*{culinaryIngredients[__${stepStat.index}__].shop}" /></td></tr>
+                                <tr><td>makrToAddToPurchaseList:</td><<td class="menu"><input  type="checkbox" th:field="*{culinaryIngredients[__${stepStat.index}__].addToPurchaseList}" /></td></tr>
+                                <tr> <input  type="hidden" th:field="*{culinaryIngredients[__${stepStat.index}__].id}" id="id"  readonly/></td></tr>
+                                <tr><input  type="hidden" th:field="*{culinaryIngredients[__${stepStat.index}__].createdOn}" /></tr>
+                            </tbody>
+                        </table>
+
+                    </fieldset>
+                    <p>
+                        <button type="submit" name="addStep">addNewIngredients</button>
+                    </p>
+        <!--            //https://www.wimdeblauwe.com/blog/2021/01/11/string-concatenation-with-thymeleaf/-->
+
+                </fieldset>
+
+                <p>
+                    <button type="submit">Save</button>
+                    <button type="reset">Clear</button>
+                </p>
+                <div>
+                    <button type="submit" name="addIngredientsToPurchase">addIngredientsToPurchase</button>
+                </div>
+            </form>
+
+        </div>
+</main>
+
+
+
+
+</body>
+</html>

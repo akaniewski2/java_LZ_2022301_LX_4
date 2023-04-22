@@ -20,6 +20,8 @@ import javax.validation.constraints.Null;
 //@Table(name="zakupy2")
 public class Purchase {
 
+
+
     public static class View {
         public interface Id{}
         public interface Basic extends Id{}
@@ -27,33 +29,38 @@ public class Purchase {
 
     }
 
-    public interface NewPurchaseValidation {}
-    @JsonView(View.Id.class)
+//    public interface NewPurchaseValidation {}
+//    @JsonView(View.Id.class)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
   //  @Column(name="towar")
-    @JsonView(View.Basic.class)
+//    @JsonView(View.Basic.class)
     @NotNull
     private String name;
+    private String subCategory;
 
-  //  @Column(name="kupione")
-  @JsonView(View.Basic.class)
+    //  @Column(name="kupione")
+//  @JsonView(View.Basic.class)
     private String purchased ;
 
+    String measure;
+
+    double quantity;
+
    // @Column(name="dt_dod")
-   @JsonView(View.Extended.class)
+//   @JsonView(View.Extended.class)
     private long addDt;
 
    // @Column(name="dt_zm")
-   @JsonView(View.Extended.class)
+//   @JsonView(View.Extended.class)
     private long modDt;
 
 
   //  @Column(name="stan")
   //@JsonView(View.Basic.class)
-  @JsonIgnore
+//  @JsonIgnore
     private String state ;
 
 
@@ -62,15 +69,15 @@ public class Purchase {
    // }
 
     //    @Column(name="kategoria")
-    @JsonView(View.Basic.class)
+//    @JsonView(View.Basic.class)
     private String category ;
 
 //    @Column(name="usun")
-@JsonView(View.Extended.class)
+//@JsonView(View.Extended.class)
     private int toDelete ;
 
   //  @Column(name="uwagi")
-  @JsonView(View.Basic.class)
+//  @JsonView(View.Basic.class)
     private String comment ;
 
 //    public String getTmp() {
@@ -81,21 +88,21 @@ public class Purchase {
 
 
   //  @Column(name="user_dod")
-  @JsonView(View.Extended.class)
+//  @JsonView(View.Extended.class)
     private String addBy ;
 
  //   @Column(name="user_zm")
- @JsonView(View.Extended.class)
+// @JsonView(View.Extended.class)
     private String modBy ;
 
   //  @Column(name="user_zm_ostatni")
-  @JsonView(View.Extended.class)
+//  @JsonView(View.Extended.class)
     private String lastModBy;
 
  //   @Column(name="tmp")
 
     @Nullable
-    @Null(groups = NewPurchaseValidation.class)
+//    @Null(groups = NewPurchaseValidation.class)
     private String tmp ;
 
 
@@ -147,16 +154,20 @@ public class Purchase {
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST,optional = false /*optional = false nie pozowli zapisac course bez teacher */)
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     @ToString.Exclude
+    @JsonIgnore
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,optional = false /*optional = false nie pozowli zapisac course bez teacher */)
     @JoinColumn(name = "PURCHASE_CATEGORY_ID", referencedColumnName = "ID")
     @ToString.Exclude
+    @JsonIgnore
     private PurchaseCategory purchaseCategory;
 
 
+
+
     //testowa metoda
-    @JsonView(View.Basic.class)
+//    @JsonView(View.Basic.class)
    public String upperName() {
        return this.name.toUpperCase();
 

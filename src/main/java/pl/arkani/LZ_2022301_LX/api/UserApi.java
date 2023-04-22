@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.arkani.LZ_2022301_LX.model.UserDTO;
 import pl.arkani.LZ_2022301_LX.repo.UserRepo;
 import pl.arkani.LZ_2022301_LX.service.UserService;
+import pl.arkani.LZ_2022301_LX.utils.Functions;
 
 import java.net.PortUnreachableException;
 import java.time.temporal.ChronoUnit;
@@ -19,6 +20,7 @@ public class UserApi {
     private UserService userService;
     private final UserRepo userRepo;
 
+
     public UserApi(UserService userService,
                    UserRepo userRepo) {
         this.userService = userService;
@@ -26,7 +28,14 @@ public class UserApi {
     }
 
     @GetMapping("/users")
-    public List<UserDTO> getUsers() {return userService.getAllUsersDTO();
+    public List<UserDTO> getUsers() {
+
+        System.out.println(Functions.getHostAddresses());
+        System.out.println(Functions.getHostAddresses2());
+
+        return userService.getAllUsersDTO();
+
+
     }
 
     @GetMapping ("/users/{userId}")

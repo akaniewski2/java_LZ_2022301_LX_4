@@ -23,11 +23,16 @@ public class CulinaryIngredients {
     long id;
 
     String name;
+    String measure;
 
+    double quantity;
+
+    String shop;
+    String description;
     String comment;
 
 
-   double quantity;
+    boolean addToPurchaseList;
 
     @CreationTimestamp
     private LocalDateTime createdOn;
@@ -36,7 +41,10 @@ public class CulinaryIngredients {
     private LocalDateTime updatedOn;
 
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,optional = false /*optional = false nie pozowli zapisac course bez teacher */)
+
+
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,optional = true /*optional = false nie pozowli zapisac sklądnikow bez przepisu */)
     @JoinColumn(name = "CULINARY_RECIPES_ID", referencedColumnName = "ID")
     @ToString.Exclude
     private CulinaryRecipes culinaryRecipes;

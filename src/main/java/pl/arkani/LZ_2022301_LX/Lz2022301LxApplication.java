@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import pl.arkani.LZ_2022301_LX.model.TvChannel;
 import pl.arkani.LZ_2022301_LX.repo.TvChannelRepo;
+import pl.arkani.LZ_2022301_LX.utils.Testowe.Testy;
+
 //@ComponentScan(basePackages = "pl.arkani.LZ_202301_LX")
 @SpringBootApplication
 public class Lz2022301LxApplication {

@@ -17,7 +17,7 @@ import java.security.Principal;
 import java.util.*;
 
 @Controller
-@CrossOrigin //https://spring.io/guides/gs/rest-service-cors/
+//@CrossOrigin //https://spring.io/guides/gs/rest-service-cors/ http://192.168.1.5
 @RequestMapping(value = "/arkani2/")
 public class TvChannelController {
 
@@ -52,7 +52,7 @@ public class TvChannelController {
         }
 
 
-
+   // @CrossOrigin(origins = "http://192.168.1.5/")
     @RequestMapping(path = "tv_channels",method = RequestMethod.GET)
     public String tv_channels(Model model, @RequestParam(required =false) String dt, Principal principal)  {
 

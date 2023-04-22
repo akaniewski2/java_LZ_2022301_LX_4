@@ -23,7 +23,7 @@
 
 
                 <input id="myInput" type="text" placeholder="Search.."><br><br>
-                <p class="menu" style = "text-align:center"><a href="/arkani2/culinaryrecipes/add">Dodaj</a></p>
+                <p class="menu" style = "text-align:center"><a href="/arkani2/culinaryrecipes-update2">Dodaj</a></p>
 
                   <table>
     <thead>
@@ -47,7 +47,7 @@
     <tr th:each="s : ${culinaryRecipes}">
 
         <td class="menu"><a th:href="@{/arkani2/culinaryrecipes/delete/{id}(id=${s.id})}" onclick="return confirm(' you want to delete?');">Delete</a></td>
-        <td class="menu"><a th:href="@{/arkani2/culinaryrecipes/edit/{id}(id=${s.id})}">Edit</a></td>
+        <td class="menu"><a th:href="@{/arkani2/culinaryrecipes-update2/edit/{id}(id=${s.id})}">Edit</a></td>
 
 
         <td class="menu" th:text="${s.id}"></td>
@@ -55,7 +55,17 @@
         <td class="menu" th:text="${s.comment}"></td>
         <td class="menu" th:text="${s.createdOn}"></td>
         <td class="menu" th:text="${s.updatedOn}"></td>
-        <td class="menu" th:text="${s.culinaryIngredients}"></td>
+
+
+<!--        <td class="menu" th:text="${s.culinaryIngredients}">-->
+            <td class="menu">
+                <ul>
+                    <li th:each="z : ${s.culinaryIngredients}">
+                        <span th:text="|${z.name} ${z.quantity} ${z.measure}  |"></span>
+                    </li>
+                </ul>
+
+        </td>
 
     </tr>
     </tbody>

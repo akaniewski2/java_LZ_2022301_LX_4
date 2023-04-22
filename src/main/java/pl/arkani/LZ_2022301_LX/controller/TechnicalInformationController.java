@@ -17,6 +17,7 @@ import pl.arkani.LZ_2022301_LX.service.UserService;
 import pl.arkani.LZ_2022301_LX.utils.Functions;
 
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.Collection;
 
 
@@ -50,6 +51,10 @@ public class TechnicalInformationController {
 
     @GetMapping("/technicalinformation")
     public String showHome(Model model, Principal principal) {
+
+        System.out.println("#getHostAddresses:"+Arrays.toString(Functions.getHostAddresses()));
+        System.out.println("#getHostAddresses2:"+Arrays.toString(Functions.getHostAddresses2()));
+
         model.addAttribute("users", userRepo.findAll());
         // #--- Privileges START ----------------------------------------------------------------------------------------------------------------
         String userRole = techPageService.checkPrivilage("get",this.techPage.getName(),model, principal,
@@ -60,6 +65,7 @@ public class TechnicalInformationController {
         Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
 
         model.addAttribute("host", Functions.getHostName());
+        model.addAttribute("host2", Arrays.toString(Functions.getHostAddresses()));
         model.addAttribute("username",principal.getName());
         model.addAttribute("authorities",authorities);
         model.addAttribute("details",details);

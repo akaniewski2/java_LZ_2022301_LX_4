@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- CSS for users with dark mode -->
+<!--    https://igoradamenko.github.io/awsm.css/download.html-->
+    <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/css/awsm.min.css" media="(prefers-color-scheme: dark)">
+<!--    <link rel="stylesheet" href="awsm_theme_big-stone.min.css" media="(prefers-color-scheme: dark)">-->
+    <title>Recipes</title>
+</head>
+<body>
+<main>
+    <!--/*@thymesVar id="culinaryRecipes" type="pl.arkani.LZ_2022301_LX.model.CulinaryRecipes"*/-->
+
+    <p th:if="${messageStr!=null}" th:text="${messageStr}"></p>
+    <p th:if="${message.msg!=null}" th:text="${message}"></p>
+
+
+
+
+    <form action="#" method="post" th:action="@{/arkani2/culinaryrecipes-update2}" th:object="${culinaryRecipes}">
+
+
+        <fieldset>
+            <legend>Nowy Przepis</legend>
+
+
+            <label>id:</label><input type="text" th:field="*{id}" readonly/>
+            <label>name:</label><input type="text" th:field="*{name}"/>
+            <label>description:</label><input type="text" th:field="*{description}"/>
+<!--            <label><createdOn/label><input type="text" th:field="*{createdOn}"/>-->
+
+
+            <fieldset  th:each="step,stepStat : *{culinaryIngredients}">
+                <legend th:text="|Składnik ${stepStat.index+1}| "></legend>
+
+
+
+
+
+
+                <label>id:          </label><input  type="text" th:field="*{culinaryIngredients[__${stepStat.index}__].id}" id="id" readonly/>
+                <label>name:        </label><input  type="text" th:field="*{culinaryIngredients[__${stepStat.index}__].name}" id="name"/>
+                <label>quantity:    </label><input  type="text" th:field="*{culinaryIngredients[__${stepStat.index}__].quantity}" id="quantity"/>
+                <label>measure:     </label><input  type="text" th:field="*{culinaryIngredients[__${stepStat.index}__].measure}" id="measure"/>
+                <label>description: </label><input  type="text" th:field="*{culinaryIngredients[__${stepStat.index}__].description}" id="description"/>
+                <label>comment:     </label><input  type="text" th:field="*{culinaryIngredients[__${stepStat.index}__].comment}" id="comment"/>
+                <label>shop:     </label><input  type="text" th:field="*{culinaryIngredients[__${stepStat.index}__].shop}" id="shop"/>
+                <label>addToPurchaseList:     </label><input  type="checkbox" th:field="*{culinaryIngredients[__${stepStat.index}__].addToPurchaseList}" id="addToPurchaseList"/>
+
+                <label>createdOn:     </label><input  type="text" th:field="${culinaryRecipes.createdOn}" id="createdOn"/>
+
+<!--                <label>createdOn:     </label><input type="text" th:field="*{culinaryIngredients[__${stepStat.index}__].createdOn}" id="createdOn"/>-->
+
+<!--                <label>name:        </label><input type="text" th:field="step.name}" id="name"/>-->
+<!--                <label>quantity:    </label><input type="text" th:field="step.quantity}" id="quantity"/>-->
+<!--                <label>measure:     </label><input type="text" th:field="step.measure}" id="measure"/>-->
+<!--                <label>description: </label><input type="text" th:field="step.description}" id="description"/>-->
+<!--                <label>comment:     </label><input type="text" th:field="step.comment}" id="comment"/>-->
+
+            </fieldset>
+            <div>
+                <button type="submit" name="addStep">+</button>
+            </div>
+            <div>
+                <button type="submit" name="addIngredientsToPurchase">+</button>
+            </div>
+<!--            //https://www.wimdeblauwe.com/blog/2021/01/11/string-concatenation-with-thymeleaf/-->
+
+        </fieldset>
+
+        <p>
+            <button type="submit">zapisz</button>
+            <button type="reset">wyczyść</button>
+        </p>
+    </form>
+
+    </article>
+</main>
+
+
+</body>
+</html>

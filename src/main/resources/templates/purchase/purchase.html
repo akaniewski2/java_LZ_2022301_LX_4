@@ -48,7 +48,11 @@
 
                 <th class="menu">id</th>
 
+                <th class="menu">subCategory</th>
                 <th class="menu">name</th>
+                <th class="menu">quantity</th>
+                <th class="menu">measure</th>
+
                 <th class="menu">purchased</th>
 
 
@@ -78,7 +82,10 @@
 
 
                 <td th:text="${purchase_.id}" class="menu"></td>
+                <td th:text="${purchase_.subCategory}" class="menu"></td>
                 <td th:text="${purchase_.name}" class="menu"></td>
+                <td th:text="${purchase_.quantity}" class="menu"></td>
+                <td th:text="${purchase_.measure}" class="menu"></td>
 
                 <td th:text="${purchase_.purchased}" class="menu"></td>
 
