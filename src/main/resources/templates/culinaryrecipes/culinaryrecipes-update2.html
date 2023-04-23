@@ -12,7 +12,7 @@
 
 <main id="main" class="article">
     <header id="header" onclick="window.location='/home'" class="blue"><div > Zapisz </div> </header>
-    <article class="article">
+    <article class="article" style="display: inline-block;">
 
         <div class="rejestracja">
     <!--/*@thymesVar id="culinaryRecipes" type="pl.arkani.LZ_2022301_LX.model.CulinaryRecipes"*/-->
@@ -28,19 +28,16 @@
 
                 <fieldset>
                     <legend>Przepis</legend>
-
-
-                    <label>id:</label><input type="text" th:field="*{id}" readonly/>
+                    <label>id:</label><input type="hidden" th:field="*{id}" readonly/>
                     <label>name:</label><input type="text" th:field="*{name}"/>
-                    <label>description:</label><input type="text" th:field="*{description}"/>
+                    <label>description:</label><textarea rows="4" cols="50"   th:field="*{description}"/>
         <!--            <label><createdOn/label><input type="text" th:field="*{createdOn}"/>-->
 
 
                     <fieldset  th:each="s,stepStat : *{culinaryIngredients}">
-                        <legend th:text="|Składnik ${stepStat.index+1}| "></legend>
-
+                        <legend th:text="|Składnik ${stepStat.index+1}|"></legend>
                         <table>
-                            <tbody id="myTable_">
+                            <tbody id="myTable">
                                 <tr>
                                 <td class="menu"><a th:href="@{/arkani2/culinaryrecipes-update2/delete/{id}(id=${s.id})}" onclick="return confirm(' you want to delete?');">Delete</a></td>
                                 <td class="menu"><a th:href="@{/arkani2/culinaryrecipes-update2/edit/{id}(id=${s.id})}">Edit</a></td>
@@ -76,6 +73,12 @@
             </form>
 
         </div>
+    </article>
+    <div style="display: inline-block;">
+        <img th:src="@{/images/w3/mountains.jpg}" alt="Mountains" width="500" height="333" >
+    </div>
+    <!--    <img src="pic_trulli.jpg" alt="Trulli" width="500" height="333">-->
+    <!--    <img th:src="@{/images/w3/mountains.jpg}" alt="Mountains" style="width:100%">-->
 </main>
 
 

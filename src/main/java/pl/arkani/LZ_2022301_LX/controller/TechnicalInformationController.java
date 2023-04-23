@@ -64,12 +64,15 @@ public class TechnicalInformationController {
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
 
+        String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
+
         model.addAttribute("host", Functions.getHostName());
         model.addAttribute("host2", Arrays.toString(Functions.getHostAddresses()));
         model.addAttribute("username",principal.getName());
         model.addAttribute("authorities",authorities);
         model.addAttribute("details",details);
         model.addAttribute("userRole",userRole);
+        model.addAttribute("UPLOAD_DIRECTORY",UPLOAD_DIRECTORY);
 
         return "_public/technicalinformation";
     }
