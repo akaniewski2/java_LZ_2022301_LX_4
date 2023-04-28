@@ -25,6 +25,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+//todo:multiload https://www.baeldung.com/spring-file-upload
+//todo:multiload2 https://spring.io/guides/gs/uploading-files/
 @Controller
 public class UserController {
 
@@ -183,6 +185,10 @@ public class UserController {
 
     @GetMapping("/hello")
     public String hello(Principal principal, Model model) {
+
+        User user = userRepo.findByUsername(principal.getName()).orElseThrow(()->new UsernameNotFoundException("User not found in DB"));
+        String userRole =  user.getRole();
+        List<TechPage> techPageList = techPageRepo.findByMethodAndRole("GET", userRole);
        // //system.out.println(Arrays.toString(Functions.getHostAddresses()));
         model.addAttribute("host",Functions.getHostName());
         model.addAttribute("username",principal.getName());
@@ -190,6 +196,7 @@ public class UserController {
         Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
         model.addAttribute("authorities",authorities);
         model.addAttribute("details",details);
+        model.addAttribute("techPageList",techPageList);
 
         return "hello";
     }
@@ -234,11 +241,12 @@ public class UserController {
         // #--- Pobranie auto-table START ------------------------------------------------------------------------------------------------------------------
 
         List<String> headers =new ArrayList<>();
-        headers.add("Edit");
-        headers.add("Delete");
-        headers = sqlRepoExec.getTableHeaders("user_v"); // Arrays.asList("id", "username", "role");
+//        headers.add("Edit");
+//        headers.add("Delete");
+        headers = sqlRepoExec.getTableHeaders("user_v"); //"user_v" Arrays.asList("id", "username", "role");
 
-        List<List<String>> rows= sqlRepoExec.getTableData("select concat('/user/edit/',s.id) edit,  '_' de ,s.* from arkani_1.user_v s order by id");
+       // List<List<String>> rows= sqlRepoExec.getTableData("select concat('/user/edit/',s.id) edit,  '_' de ,s.* from arkani_1.user_v s order by id");
+        List<List<String>> rows= sqlRepoExec.getTableData("select s.* from arkani_1.user_v s order by id"); //"user_v"
 
 
 

@@ -1,19 +1,16 @@
 package pl.arkani.LZ_2022301_LX.utils;
 
 
+import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 import java.io.IOException;
-
-import java.util.Properties;
 
 public class Functions {
 
@@ -33,6 +30,17 @@ public class Functions {
         return HostAddresses.toArray(new String[0]);
     }
 
+
+
+
+    private static List<String> getFieldNamesForClass(Class<?> clazz) throws Exception {
+        List<String> fieldNames = new ArrayList<String>();
+        Field[] fields = clazz.getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            fieldNames.add(fields[i].getName());
+        }
+        return fieldNames;
+    }
 //    public String getDeviceName() {
 //        String manufacturer = Build.MANUFACTURER;
 //        String model = Build.MODEL;

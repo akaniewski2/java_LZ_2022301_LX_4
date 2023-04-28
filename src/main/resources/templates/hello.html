@@ -1,24 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style0.css}"  />
     <title>Title</title>
 </head>
 <body>
-Hello: <span th:text="${username}"/><br>
-Details: <span th:text="${details}"/><br>
-host: <span th:text="${host}"/><br>
+<!--Hello: <span th:text="${username}"/><br>-->
+<!--Details: <span th:text="${details}"/><br>-->
+<!--host: <span th:text="${host}"/><br>-->
 
 
 
+<!--<div th:replace="_fragments.html :: my_fragment('test',${host})"></div>-->
+<!--<div th:replace="~{_fragments.html :: my_fragment('test',${host})}"></div>-->
 
+<!--<div style="width:30%">-->
+<!--    <div  th:replace="~{_fragments.html :: menu(${techPageList})}" ></div>-->
+<!--</div>-->
 
+<!--<div style="width:30%">-->
+<!--    <div  th:replace="~{_fragments.html :: tableView(${headers},${rows},'menu')}" ></div>-->
+<!--</div>-->
 
-<table>
-<tr th:each="auth: ${authorities}">
-    <td th:text="${auth}" />
-</tr>
-<table>
+<!--<table>-->
+<!--<tr th:each="auth: ${authorities}">-->
+<!--    <td th:text="${auth}" />-->
+<!--</tr>-->
+<!--<table>-->
 
 </body>
 </html>

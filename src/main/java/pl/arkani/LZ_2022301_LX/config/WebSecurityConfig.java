@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import pl.arkani.LZ_2022301_LX.controller.UploadImageController;
 import pl.arkani.LZ_2022301_LX.repo.UserRepo;
 ////todo: https://www.javainterviewpoint.com/spring-security-jdbcuserdetailsmanager-example/
 // jakies wyrazenia regularne w sciezkach
@@ -104,10 +105,7 @@ public class WebSecurityConfig {
 //        web.ignoring().requestMatchers("/css/**", "/js/**");
 //    }
 
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/images/**", "/js/**", "/webjars/**","/css/**","/api/**");
-    }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration  config) throws Exception {
         return config.getAuthenticationManager();
@@ -132,8 +130,10 @@ public class WebSecurityConfig {
 
                 .authorizeHttpRequests()
 
-                .requestMatchers("/test/**").permitAll()
-                .requestMatchers("/api/**").permitAll()
+             //   .requestMatchers("//home/komp/PROGRAMOWANIE/JAVA/java_LZ_2022301_LX_4/uploads/**").permitAll()
+              //  .requestMatchers("/test/**").permitAll()
+                .requestMatchers("/hello/**").permitAll()
+              //  .requestMatchers("/api/**").permitAll()
                 .requestMatchers("/user-admin/**").hasAnyRole("USER", "ADMIN")
                 //  .requestMatchers("/user-admin/**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
                 .requestMatchers("/guest/**").hasAnyRole("GUEST")

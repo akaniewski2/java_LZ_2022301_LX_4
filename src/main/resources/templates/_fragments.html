@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<!--<div th:fragment="my_fragment(content,param2)" th:with="param2=${param2} ?: 'default value'">-->
+<div th:fragment="my_fragment(content,param2)" >
+<!--<div th:fragment="my_fragment(content,param2)" >-->
+<!--<div th:fragment="my_fragment(content)">-->
+    <p th:text="${content}"></p>
+    <p th:text="${param2}"></p>
+</div>
+
+
+<!-- # MENU -->
+<div th:fragment="menu(techPageList)">
+<div  th:each="page: ${techPageList}">
+    <!--        działa ,ale nie łapie całego przycisku tylko napis-->
+    <!--            <a th:href="@{{url}(url=${page.url})}"  th:text="${page.button}"> </a>-->
+    <div  class="menu" th:onclick="'window.location.href = \'' + @{{id}(id=${page.url})} + '\''"  th:text="${page.button}">  </div>
+</div>
+</div>
+
+
+<!--# TABLE-->
+<div th:fragment="tableView(headers,rows,style)">
+
+
+
+    <table>
+        <thead>
+        <tr>
+<!--            <th class="menu">Delete</th>-->
+<!--            <th class="menu">Edit</th>-->
+            <th class="menu" th:each="header: ${headers}"   th:text="${header}" />
+        </tr>
+        </thead>
+        <tbody><tr  th:each="row: ${rows}" class="myTable">
+           <!--              <td class="menu"><a th:href="@{/arkani2/test/edit/{id}(id=${r})}">Edit</a></td>-->
+            <td class="menu" th:each="r: ${row}" th:text="${r}" />
+            <!--                <td><a th:href="${'/arkani2/test/edit/'+row.id}">Edit2</a></td>-->
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+
+<div th:fragment="tableView2(headers,rows,style)">
+
+
+
+    <table>
+        <thead>
+        <tr>
+            <th class="menu">Delete</th>
+            <th class="menu">Edit</th>
+            <th class="menu" th:each="header: ${headers}"   th:text="${header}" />
+        </tr>
+        </thead>
+        <tbody>
+        <tr  th:each="row: ${rows}" class="myTable">
+
+            <td class="menu"><a th:href="@{/arkani2/test/edit/{id}(id=${row[0]})}">Delete</a></td>
+            <td class="menu"><a th:href="@{/arkani2/test/delete/{id}(id=${row[0]})}">Edit</a></td>
+            <td class="menu" th:each="data: ${row}" th:text="${data}" />
+            <!--                <td><a th:href="${'/arkani2/test/edit/'+row.id}">Edit2</a></td>-->
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+
+
+<!--<div  >-->
+<!--    <table>-->
+<!--        <thead th:each="s: ${headers}">-->
+<!--        <tr>-->
+
+<!--            <th class="menu">Delete</th>-->
+<!--            <th class="menu">Edit</th>-->
+<!--            <th class="menu" th;text="{s.name}">id</th>-->
+
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody id="myTable">-->
+<!--        <tr th:each="s : ${movies}">-->
+
+<!--            <td class="menu"><a th:href="@{/arkani2/movie/delete/{id}(id=${s.id})}" onclick="return confirm(' you want to delete?');">Delete</a></td>-->
+<!--            <td class="menu"><a th:href="@{/arkani2/movie/edit/{id}(id=${s.id})}">Edit</a></td>-->
+
+
+<!--            <td class="menu" th:text="${s.id}"></td>-->
+
+
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</div>-->
+
+
+</body>
+</html>
+
+
+<!--
+if content is given from model:
+
+<div th:replace="fragments :: my_fragment(${content})></div>
+
+else:
+
+<div th:replace="fragments :: my_fragment('content')></div>
+-->

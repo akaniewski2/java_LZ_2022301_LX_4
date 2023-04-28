@@ -45,7 +45,9 @@ public class GenerateJavaCodeFromFileTempates {
         System.out.println("-------------------------------------------------------------------");
         System.out.println("-- # CLASS INFO");
 
-        CulinaryIngredients ft = new CulinaryIngredients();
+        //####################################### info: change class #######################################
+        Movie ft = new Movie();
+        //####################################### info: change class #######################################
 
         Class ftClass = ft.getClass();
         String ClassNm = ftClass.getSimpleName();

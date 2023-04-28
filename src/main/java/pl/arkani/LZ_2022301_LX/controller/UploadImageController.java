@@ -12,13 +12,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+///todo:https://www.baeldung.com/spring-file-upload -  w trakcie ale cos nie dziala
+///todo:https://spring.io/guides/gs/uploading-files/ -  w trakcie ale cos nie dziala
+///todo:https://www.bezkoder.com/spring-boot-image-upload-thymeleaf/  - wykorzystanie fragmentów w thymeleaf
 @Controller
-public class UploadController {
+public class UploadImageController {
 
     public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
 
-    @GetMapping("/uploadimage") public String displayUploadForm() {
-        return "imageupload/imageupload";
+    @GetMapping("/imageupload") public String displayUploadForm() {
+        return "upload/imageupload/imageupload";
     }
 
     @PostMapping("/upload") public String uploadImage(Model model, @RequestParam("image") MultipartFile file) throws IOException {
@@ -27,6 +30,6 @@ public class UploadController {
         fileNames.append(file.getOriginalFilename());
         Files.write(fileNameAndPath, file.getBytes());
         model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
-        return "imageupload/imageupload";
+        return "upload/imageupload/imageupload";
     }
 }

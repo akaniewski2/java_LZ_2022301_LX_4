@@ -1,32 +1,64 @@
+<!-- # HTML -->
+<!-- # UPDATE FINISH -->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>movie-update</title>
+    <title>Movie - update</title>
+
+
+    <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
 </head>
 <body>
 
 
-<form action="#"
-      th:action="@{/arkani2/movie/update/{id}(id=${movie.id})}"
-      th:object="${movie}"
-      method="post">
-
-    <div class="rejestracja">
-
-        <input style ="width:700px" type="text" th:field="*{name}" id="name" placeholder="name">
-        <input style ="width:700px" type="text"  th:field="*{originalName}" id="originalName" placeholder="originalName">
-        <input style ="width:700px" type="text"  th:field="*{country}" id="country" placeholder="country">
-        <input style ="width:700px" type="text"  th:field="*{description}" id="description" placeholder="description">
+<main id="main" class="article">
+    <header id="header" onclick="window.location='/home'" class="blue">
+        <div> Movie - update </div></header>
+    <article class="article">
 
 
+        <form action="#"
+              th:action="@{/arkani2/movie/update/{id}(id=${movie.id})}"
+              th:object="${movie}"
+              method="post">
 
-    </div>
 
-    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-    <input type="submit" value="Update Movie" style ="width:800px">
-</form>
+            <div class="rejestracja">
+                <!--                visibility: hidden;-->
+                <table>
 
+                    <tr style="<styleTr>"><td> id:</td> <td><input style ="width:700px;<styleTd>" type="text"  th:field="*{id}" id="id"  ></td></tr>
+                    <tr style="<styleTr>"><td> name:</td> <td><input style ="width:700px;<styleTd>" type="text"  th:field="*{name}" id="name"  ></td></tr>
+                    <tr style="<styleTr>"><td> originalName:</td> <td><input style ="width:700px;<styleTd>" type="text"  th:field="*{originalName}" id="originalName"  ></td></tr>
+                    <tr style="<styleTr>"><td> Country:</td> <td><input style ="width:700px;<styleTd>" type="text"  th:field="*{Country}" id="Country"  ></td></tr>
+                    <tr style="<styleTr>"><td> description:</td> <td><input style ="width:700px;<styleTd>" type="text"  th:field="*{description}" id="description"  ></td></tr>
+
+
+                    <!--                    <p th:if="${#fields.hasErrors('item')}">Invalid item</p>-->
+
+                </table>
+
+                <div th:if="${#fields.hasErrors('global')}">
+                    <h3>Global errors:</h3>
+                    <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+                </div>
+
+
+                <!--                <input style ="width:700px;visibility: hidden;" type="text" th:field="*{id}" id="id" placeholder="id">-->
+
+
+
+
+            </div>
+
+
+            <input type="submit" value="Zapisz" style ="width:800px">
+        </form>
+
+
+    </article>
+</main>
 
 
 </body>

@@ -92,7 +92,9 @@
         </table>
 
 
-                automatyczne generowanie z tabeli SQL v2:<br>
+<hr>
+# automatyczne generowanie z tabeli SQL v2:
+        <br>
 
 
         <table>
@@ -112,8 +114,23 @@
 <br>
 <br>
 
+<hr>
+# objects from fragments:
+<br>
 
-      userDTOList:<br>
+<!--        <div th:replace="~{_fragments.html :: my_fragment('test',${host})}"></div>-->
+
+<!--        <div style="width:30%">-->
+<!--            <div  th:replace="~{_fragments.html :: menu(${techPageList})}" ></div>-->
+<!--        </div>-->
+
+        <div style="width:30%">
+            <div  th:replace="~{_fragments.html :: tableView2(${headers},${rows},'menu')}" ></div>
+        </div>
+
+
+<hr>
+# userDTOList:<br>
 
 
         <table>

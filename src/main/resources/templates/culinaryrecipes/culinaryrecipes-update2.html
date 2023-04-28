@@ -5,7 +5,7 @@
     <title>purchase-update</title>
 
     <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
-    <script type="text/javascript" th:src="@{/js/funkcje.js}"></script>
+<!--    <script type="text/javascript" th:src="@{/js/funkcje.js}"></script>-->
 </head>
 <body>
 
@@ -19,6 +19,8 @@
 
             <p th:if="${messageStr!=null}" th:text="${messageStr}"></p>
             <p th:if="${message.msg!=null}" th:text="${message}"></p>
+            <p th:if="${UPLOAD_DIRECTORY!=null}" th:text="${UPLOAD_DIRECTORY}"></p>
+            <p th:if="${UPLOAD_DIRECTORY!=null}" th:text="@{{path}/{itemId}.jpg(path=${UPLOAD_DIRECTORY},itemId = ${culinaryRecipes.id})}"></p>
 
 
 
@@ -75,7 +77,26 @@
         </div>
     </article>
     <div style="display: inline-block;">
-        <img th:src="@{/images/w3/mountains.jpg}" alt="Mountains" width="500" height="333" >
+<!--        <img th:src="@{/images/w3/mountains.jpg}" alt="Mountains" width="500" height="333" >-->
+<!--        <img th:src="|@{/${UPLOAD_DIRECTORY}/mountains.jpg}|" alt="Mountains" width="500" height="333" >-->
+<!--        <a th:href="@{/uploads/space{itemId}/detail/{dtlId}(itemId = ${item.id}, dtlId = ${dtl.id})}">-->
+<!--        <a th:href="@{/uploads/space{itemId}.jpg (itemId = ${item.id}, dtlId = ${dtl.id})}">-->
+<!--        <img th:src="@{/home/komp/PROGRAMOWANIE/JAVA/java_LZ_2022301_LX_4/uploads/snow.jpg}" alt="snow" width="500" height="333" >-->
+<!--        <img th:src="@{///home/komp/PROGRAMOWANIE/JAVA/java_LZ_2022301_LX_4/uploads/snow.jpg}" alt="snow" width="500" height="333" >-->
+<!--        <img th:src="@{.uploads/snow.jpg}" alt="snow" width="500" height="333" >-->
+        <img src="/images/space.jpg" alt="Image 2" width="500px ">
+        <img src="/uploads/snow.jpg" alt="Image 2" width="500px ">
+        <img th:src="@{/uploads/snow.jpg}" alt="snow" width="500" height="333" >
+<!--        <img th:src="@{./uploads/snow.jpg}" alt="snow" width="500" height="333" >-->
+<!--        <img th:src="@{/uploads/snow.jpg}" alt="snow" width="500" height="333" >-->
+<!--        <img th:src="@{**/uploads/snow.jpg}" alt="snow" width="500" height="333" >-->
+<!--&lt;!&ndash;        <img th:src="@{./uploads/snow.jpg}" alt="snow" width="500" height="333" >&ndash;&gt;-->
+
+<!--        <img th:src="@{file:///home/komp/PROGRAMOWANIE/JAVA/java_LZ_2022301_LX_4/uploads/snow.jpg}" alt="snow" width="500" height="333" >-->
+<!--        <img th:src="@{~/PROGRAMOWANIE/JAVA/java_LZ_2022301_LX_4/uploads/snow.jpg}" alt="snow" width="500" height="333" >-->
+<!--&lt;!&ndash;        <img th:src="@{~/uploads/snow.jpg}" alt="Mountains" width="500" height="333" >&ndash;&gt;-->
+        <img th:src="@{/uploads/avatar{itemId}.jpg(itemId = ${culinaryRecipes.id})}" th:alt="@{/uploads/avatar{itemId}.jpg(itemId = ${culinaryRecipes.id})}"
+             width="500" height="333" >
     </div>
     <!--    <img src="pic_trulli.jpg" alt="Trulli" width="500" height="333">-->
     <!--    <img th:src="@{/images/w3/mountains.jpg}" alt="Mountains" style="width:100%">-->

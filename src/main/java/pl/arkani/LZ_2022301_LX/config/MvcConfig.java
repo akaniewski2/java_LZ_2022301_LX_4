@@ -1,5 +1,6 @@
 //package pl.arkani.LZ_2022301_LX.config;
 //
+//import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 //import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -9,6 +10,11 @@
 //@Configuration
 //@EnableWebMvc
 //public class MvcConfig implements WebMvcConfigurer {
+//
+//
+//
+//
+//
 //
 //	public void addViewControllers(ViewControllerRegistry registry) {
 ////		registry.addViewController("/home").setViewName("home");
@@ -23,6 +29,6 @@
 //        registry
 //                .addResourceHandler("/resources/**")
 //                .addResourceLocations("/resources/");
-//    }
+//
 //
 //}

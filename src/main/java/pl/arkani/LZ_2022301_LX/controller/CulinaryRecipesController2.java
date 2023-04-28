@@ -11,6 +11,7 @@ import pl.arkani.LZ_2022301_LX.repo.*;
 import pl.arkani.LZ_2022301_LX.service.CulinaryRecipesService;
 import pl.arkani.LZ_2022301_LX.service.PurchaseService;
 
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +71,8 @@ public class CulinaryRecipesController2 {
         culinaryRecipesToEdit.setCulinaryIngredients(culinaryIngredientsList);
         System.out.println("#culinaryRecipesToEdit.getCulinaryIngredients():"+ culinaryRecipesToEdit.getCulinaryIngredients());
         model.addAttribute("culinaryRecipes",culinaryRecipesToEdit);
+
+        model.addAttribute("UPLOAD_DIRECTORY",   UploadImageController.UPLOAD_DIRECTORY);
        // model.addAttribute("culinaryRecipesList", culinaryRecipesRepo.findAll());
         return "culinaryrecipes/culinaryrecipes-update2";
 
@@ -156,6 +159,7 @@ public class CulinaryRecipesController2 {
         CulinaryRecipes culinaryRecipes = culinaryRecipesRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid goodsRating Id:" + id));
         CulinaryIngredients culinaryIngredients= culinaryIngredientsRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid goodsRating Id:" + id));
 
+          model.addAttribute("UPLOAD_DIRECTORY", UploadImageController.UPLOAD_DIRECTORY);
           model.addAttribute("culinaryRecipes", culinaryRecipes);
           model.addAttribute("culinaryIngredients", culinaryIngredients);
         return "culinaryrecipes/culinaryrecipes-update2";

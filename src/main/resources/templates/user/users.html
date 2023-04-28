@@ -29,20 +29,27 @@
                 <h2>Users</h2>
 
 
-                <table>
-                    <thead>
-                    <tr><th class="menu" th:each="header: ${headers}"   th:text="${header}" /></tr>
-                    </thead>
-                    <tbody><tr  th:each="row: ${rows}" id="myTable">
-                        <td class="menu" th:each="r: ${row}" th:text="${r}" />
-                    </tr>
 
-                    <tr th:each="user : ${users}">
-                        <td><a th:href="@{/user/edit/{id}(id=${user.id})}">Edit</a></td>
-                        <td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div style="width:30%">
+                    <div  th:replace="~{_fragments.html :: tableView2(${headers},${rows},'menu')}" ></div>
+                </div>
+
+
+<!--                <table>-->
+<!--                    <thead>-->
+<!--                    <tr><th class="menu" th:each="header: ${headers}"   th:text="${header}" /></tr>-->
+<!--                    </thead>-->
+<!--                    <tbody><tr  th:each="row: ${rows}" id="myTable">-->
+<!--                        <td class="menu" th:each="r: ${row}" th:text="${r}" />-->
+<!--                    </tr>-->
+
+<!--                    <tr th:each="user : ${users}">-->
+<!--                        <td><a th:href="@{/user/edit/{id}(id=${user.id})}">Edit</a></td>-->
+<!--                        <td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>-->
+<!--                    </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+
             </div>
             <p><a href="/signup">Add a new user</a></p>
         </div>

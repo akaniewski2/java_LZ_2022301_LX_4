@@ -16,6 +16,8 @@ import pl.arkani.LZ_2022301_LX.service.UserDetailsServiceImpl;
 import pl.arkani.LZ_2022301_LX.service.UserService;
 import pl.arkani.LZ_2022301_LX.utils.Functions;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.Collection;
@@ -65,6 +67,8 @@ public class TechnicalInformationController {
         Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
 
         String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
+        final Path root = Paths.get("./uploads");
+        final Path root2 = Paths.get(UPLOAD_DIRECTORY);
 
         model.addAttribute("host", Functions.getHostName());
         model.addAttribute("host2", Arrays.toString(Functions.getHostAddresses()));
@@ -73,6 +77,8 @@ public class TechnicalInformationController {
         model.addAttribute("details",details);
         model.addAttribute("userRole",userRole);
         model.addAttribute("UPLOAD_DIRECTORY",UPLOAD_DIRECTORY);
+        model.addAttribute("UPLOAD_DIRECTORY2",root);
+        model.addAttribute("UPLOAD_DIRECTORY3",root2);
 
         return "_public/technicalinformation";
     }
