@@ -27,20 +27,20 @@ public class UserApi {
         this.userRepo = userRepo;
     }
 
-    @GetMapping("/users")
-    public List<UserDTO> getUsers() {
-
-        System.out.println(Functions.getHostAddresses());
-        System.out.println(Functions.getHostAddresses2());
-
-        return userService.getAllUsersDTO();
-
-
-    }
-
-    @GetMapping ("/users/{userId}")
-    public UserDTO getUser(@PathVariable("userId") long userId) {
-        return userService.getUserDTO(userId);
-    }
+//    @GetMapping("/users")
+//    public List<UserDTO> getUsers() {
+//
+//        System.out.println(Functions.getHostAddresses());
+//        System.out.println(Functions.getHostAddresses2());
+//
+//        return userService.getAllUsersDTO();
+//
+//
+//    }
+//
+//    @GetMapping ("/users/{userId}")
+//    public UserDTO getUser(@PathVariable("userId") long userId) {
+//        return userService.getUserDTO(userId);
+//    }
 }
 

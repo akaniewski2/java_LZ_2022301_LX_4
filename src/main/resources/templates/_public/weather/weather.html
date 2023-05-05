@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
+
+</head>
+<body>
+
+
+<main id="main" class="article">
+    <header id="header" onclick="window.location='/home'" class="blue">
+        <div> Weather </div>
+        <!--        <br>[<span th:text="${username}"/>] </div> -->
+    </header>
+    <article class="article">
+
+
+        <div th:switch="${weather}" >
+
+
+            <input id="myInput" type="text" placeholder="Search.."><br><br>
+<!--            <p class="menu" style = "text-align:center"><a href="/arkani2/weather/add">Dodaj</a></p>-->
+
+
+
+            <form action="#" method="post" th:action="@{/pub/weather}" th:object="${weather}">
+
+                <table>
+
+                    <tr><td>latitude:</td><td><input type="text" th:field="*{latitude}" /></td></tr>
+                    <tr><td>longitude:</td><td><input type="text" th:field="*{longitude}"/></td></tr>
+                    <tr><td>lang:</td><td><input type="text"  th:field="*{lang}" th:value="${weather.getLang()}"/></td></tr>
+
+                </table>
+
+            <p>
+                <button type="submit" name="addCoordinates">addCoordinates</button>
+            </p>
+
+            </form>
+            <br>
+            <table>
+                <thead>
+                <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+
+                </tr>
+                </thead >
+                <tbody id="myTable">
+                <div th:each="s : ${weather}">
+
+
+                    <tr> <td class="menu">nearestCity</td><td class="menu" th:text="${s.nearestCity}"></td></tr>
+                    <tr><td class="menu">latitude</td> <td class="menu" th:text="${s.latitude}"></td></tr>
+                    <!--                    <td> <input type="number" th:field="*{lat}"> </td>-->
+                    <tr><td class="menu">longitude</td> <td class="menu" th:text="${s.longitude}"></td></tr>
+                    <!--                   <td> <input type="number" th:field="*{lon}"> </td>-->
+                    <tr><td class="menu">temperature</td> <td class="menu" th:text="${s.temperature}"></td></tr>
+                    <tr><td class="menu">feelsLike</td> <td class="menu" th:text="${s.feelsLike}"></td></tr>
+                    <tr><td class="menu">temperatureMin</td><td class="menu" th:text="${s.temperatureMin}"></td></tr>
+                    <tr><td class="menu">temperatureMax</td> <td class="menu" th:text="${s.temperatureMax}"></td></tr>
+                    <tr> <td class="menu">pressure</td><td class="menu" th:text="${s.pressure}"></td></tr>
+                    <tr><td class="menu">humidity</td><td class="menu" th:text="${s.humidity}"></td></tr>
+                    <tr> <td class="menu">windSpeed</td><td class="menu" th:text="${s.windSpeed}"></td></tr>
+                    <tr> <td class="menu">main</td><td class="menu" th:text="${s.main}"></td></tr>
+                    <tr> <td class="menu">description</td><td class="menu" th:text="${s.description}"></td></tr>
+                    <tr> <td class="menu">country</td><td class="menu" th:text="${s.country}"></td></tr>
+                    <tr> <td class="menu">date</td><td class="menu" th:text="${s.getFormattedDt}"></td></tr>
+
+
+                </div>
+                </tbody>
+            </table>
+
+
+
+        </div>
+
+
+
+    </article>
+</main>
+
+<footer></footer>
+
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+</body>
+
+
+</html>

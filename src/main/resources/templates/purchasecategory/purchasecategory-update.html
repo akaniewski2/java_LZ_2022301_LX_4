@@ -1,8 +1,11 @@
+<!-- # HTML -->
+<!-- # UPDATE FINISH -->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>purchaseCategory-update</title>
+    <title>PurchaseCategory - update</title>
+
 
     <link rel="stylesheet" th:href="@{/css/style2a.css}"  />
 </head>
@@ -10,32 +13,49 @@
 
 
 <main id="main" class="article">
-    <header id="header" onclick="window.location='/home'" class="blue"><div > Save PurchaseCategory </div> </header>
+    <header id="header" onclick="window.location='/home'" class="blue">
+        <div> PurchaseCategory - update </div></header>
     <article class="article">
 
-
-<form action="#"
-      th:action="@{/arkani2/purchasecategory/update/{id}(id=${purchaseCategory.id})}"
-      th:object="${purchaseCategory}"
-      method="post">
-
-
-    <div class="rejestracja">
-
-        <input style ="width:700px" type="text" th:field="*{id}" id="id" placeholder="id">
-        <input style ="width:700px" type="text"  th:field="*{name}" id="name" placeholder="name">
-        <input style ="width:700px" type="text"  th:field="*{orderr}" id="orderr" placeholder="orderr">
-        <input style ="width:700px" type="text"  th:field="*{activeRec}" id="activeRec" placeholder="activeRec">
+        <!--              th:action="@{/arkani2/purchasecategory/update/{id}(id=${purchaseCategory.id})}"-->
+        <form action="#"
+              th:action="@{/arkani2/purchasecategory/update/0}"
+              th:object="${purchaseCategory}"
+              method="post">
 
 
+            <div class="rejestracja">
+                <!--                visibility: hidden;-->
+                <table>
+
+                    <tr style="<styleTr>"><td> id:</td> <td><input style ="width:700px;<styleTd>" type="text"  th:field="*{id}" id="id"  ></td></tr>
+                    <tr style="<styleTr>"><td> name:</td> <td><input style ="width:700px;<styleTd>" type="text"  th:field="*{name}" id="name"  ></td></tr>
+                    <tr style="<styleTr>"><td> purchases:</td> <td><input style ="width:700px;<styleTd>" type="text"  th:field="*{purchases}" id="purchases"  ></td></tr>
+                    <tr style="<styleTr>"><td> orderr:</td> <td><input style ="width:700px;<styleTd>" type="text"  th:field="*{orderr}" id="orderr"  ></td></tr>
+                    <tr style="<styleTr>"><td> activeRec:</td> <td><input style ="width:700px;<styleTd>" type="text"  th:field="*{activeRec}" id="activeRec"  ></td></tr>
 
 
-    </div>
+                    <!--                    <p th:if="${#fields.hasErrors('item')}">Invalid item</p>-->
+
+                </table>
+
+                <div th:if="${#fields.hasErrors('global')}">
+                    <h3>Global errors:</h3>
+                    <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+                </div>
 
 
-    <span  th:if="${#fields.hasErrors('name')}"  th:errors="*{purchaseCategory}"></span><br>
-    <input type="submit" value="Save" style ="width:800px">
-</form>
+                <!--                <input style ="width:700px;visibility: hidden;" type="text" th:field="*{id}" id="id" placeholder="id">-->
+
+
+
+
+            </div>
+
+
+            <input type="submit" value="Zapisz" style ="width:800px">
+        </form>
+
 
     </article>
 </main>

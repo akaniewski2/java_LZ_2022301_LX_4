@@ -71,10 +71,11 @@ public class PurchaseCategoryController {
         model.addAttribute("purchaseCategory", purchaseCategory);
         return "purchasecategory/purchasecategory-update";
     }
-
+   // purchasecategory/update
     @PostMapping("purchasecategory/update/{id}")
     public String updatePurchaseCategory(@PathVariable("id") long id, @Valid PurchaseCategory purchaseCategory,
                              BindingResult result, Model model,Principal principal) {
+        model.addAttribute("username", principal.getName());
         if (result.hasErrors()) {
             purchaseCategory.setId(id);
             return "purchasecategory/purchasecategory-update";

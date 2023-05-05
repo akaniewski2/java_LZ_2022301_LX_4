@@ -8,18 +8,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.arkani.LZ_2022301_LX.mapper.Mapper;
 import pl.arkani.LZ_2022301_LX.model.Purchase;
 
-import pl.arkani.LZ_2022301_LX.model.User;
+import pl.arkani.LZ_2022301_LX.model.Zakupy;
 import pl.arkani.LZ_2022301_LX.repo.PurchaseCategoryRepo;
 import pl.arkani.LZ_2022301_LX.repo.PurchaseRepo;
 import pl.arkani.LZ_2022301_LX.repo.UserRepo;
+import pl.arkani.LZ_2022301_LX.repo.ZakupyRepo;
 import pl.arkani.LZ_2022301_LX.service.PurchaseCategoryService;
 import pl.arkani.LZ_2022301_LX.service.PurchaseService;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/arkani2/")
@@ -34,15 +35,19 @@ public class PurchaseController {
     private PurchaseCategoryService purchaseCategoryService;
     private PurchaseCategoryRepo purchaseCategoryRepo;
     private final UserRepo userRepo;
+    private ZakupyRepo zakupyRepo;
+    private Mapper mapper ;
 
     @Autowired
     public PurchaseController(PurchaseRepo purchaseRepo, PurchaseService purchaseService, PurchaseCategoryService purchaseCategoryService, PurchaseCategoryRepo purchaseCategoryRepo,
-                              UserRepo userRepo) {
+                              UserRepo userRepo, ZakupyRepo zakupyRepo) {
         this.purchaseRepo = purchaseRepo;
         this.purchaseService = purchaseService;
         this.purchaseCategoryService = purchaseCategoryService;
         this.purchaseCategoryRepo = purchaseCategoryRepo;
         this.userRepo = userRepo;
+        this.zakupyRepo = zakupyRepo;
+        this.mapper = new Mapper(this.purchaseCategoryRepo);
     }
 
 
@@ -66,6 +71,12 @@ public class PurchaseController {
         //system.out.println("2");
 
         purchaseService.save(purchase,principal);
+
+
+        //List<Zakupy> zakupyList = purchaseList.stream().map(x -> mapper.PurchaseToZakupy(x)).collect(Collectors.toList());
+        Zakupy zakupy = mapper.PurchaseToZakupy(purchase);
+        zakupyRepo.save(zakupy);
+
         //system.out.println("3");
         return "redirect:/arkani2/purchase"; //redirect przekierowuje na url
     }
@@ -108,6 +119,8 @@ public class PurchaseController {
         //purchase.setModBy();
 
         purchaseService.update(purchase,principal);
+        Zakupy zakupy = mapper.PurchaseToZakupy(purchase);
+        zakupyRepo.save(zakupy);
         return "redirect:/arkani2/purchase";
     }
 

@@ -46,7 +46,7 @@ public class GenerateJavaCodeFromFileTempates {
         System.out.println("-- # CLASS INFO");
 
         //####################################### info: change class #######################################
-        Movie ft = new Movie();
+        WeatherFinalClass01 ft = new WeatherFinalClass01();
         //####################################### info: change class #######################################
 
         Class ftClass = ft.getClass();
