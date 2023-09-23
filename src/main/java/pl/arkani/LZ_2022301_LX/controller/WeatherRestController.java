@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import pl.arkani.LZ_2022301_LX.model.WeatherFinalClass01;
+import pl.arkani.LZ_2022301_LX.model.gelocationJsonObjects.Location;
 import pl.arkani.LZ_2022301_LX.service.WeatherService;
 
 import java.util.List;
@@ -32,6 +33,7 @@ YT: https://www.youtube.com/watch?v=DPFYyjyeuVA&t=643s
 public class WeatherRestController {
 
     private final WeatherService weatherService;
+
 
     @GetMapping("/json")
     public WeatherFinalClass01 getWeatherJson() {
@@ -65,6 +67,23 @@ public class WeatherRestController {
         return   resultObjects;
     }
 
+//
+//    @GetMapping("/json/locations")
+//    public List<Object>  getCityCoordinates() {
+//        RestTemplate restTemplate = new RestTemplate();
+//        ResponseEntity<List<Object>> response = restTemplate.exchange(
+//                url,
+//                HttpMethod.GET,
+//                null,
+//                new ParameterizedTypeReference<List<Object>>() {
+//                });
+//        List<Object> resultObjects = response.getBody();
+//        System.out.println("#objects:" + resultObjects);
+//        return   resultObjects;
+//
+//        List<Location> cityCoordinates = weatherService.getLocationFromCityName("Bydgoszcz", 1);
+//        return cityCoordinates;
+//    }
 
 
 }

@@ -107,7 +107,7 @@ public class CulinaryRecipesController2 {
     }
 
     //!!! dynamic method by bind by name param in html  !!!
-    @PostMapping(params="addStep") //w html params to znacznik "name"
+    @PostMapping(params="addStep") //w html params to znacznik "name":  <button type="submit" name="addStep">addNewIngredients</button>
     String addCulinaryRecipesStep(@ModelAttribute("culinaryRecipes") CulinaryRecipes culinaryRecipes)  {
         culinaryRecipes.getCulinaryIngredients().add(new CulinaryIngredients());
         System.out.println("#culinaryRecipes:"+culinaryRecipes);

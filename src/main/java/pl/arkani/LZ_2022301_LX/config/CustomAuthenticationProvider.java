@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 @Component
-public class CustomAuthenticationProvider implements AuthenticationProvider {
+public class
+CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication)

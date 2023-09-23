@@ -133,6 +133,7 @@ public class WebSecurityConfig {
              //   .requestMatchers("//home/komp/PROGRAMOWANIE/JAVA/java_LZ_2022301_LX_4/uploads/**").permitAll()
               //  .requestMatchers("/test/**").permitAll()
                 .requestMatchers("/hello/**").permitAll()
+              //  .requestMatchers("/chat.html").permitAll()
                 .requestMatchers("/test/**").permitAll()
                 .requestMatchers("/pub/**").permitAll()
                 .requestMatchers("/api/**").permitAll()
@@ -141,6 +142,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/guest/**").hasAnyRole("GUEST")
                 .requestMatchers("/admin/**").hasAnyRole("ADMIN")
                 .requestMatchers("/user/**").hasAnyRole("USER")
+                .requestMatchers("/chat.html").hasAnyRole("ADMIN","USER")
 
 
 

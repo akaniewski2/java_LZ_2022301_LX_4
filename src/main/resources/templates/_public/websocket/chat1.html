@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+
+
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        #chat-window {
+            width: 300px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #chat-messages {
+            height: 200px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        #user-input {
+            width: 100%;
+            padding: 5px;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+
+        #send-button {
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #send-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div id="chat-window">
+    <h2>Zabawny Chat XD</h2>
+    <div id="chat-messages">
+        <p><strong>ChatGPT:</strong> Cześć! Jestem Twój cyfrowy przyjaciel. 😄</p>
+    </div>
+    <input type="text" id="user-input" placeholder="Napisz wiadomość...">
+    <button id="send-button">Wyślij</button>
+</div>
+
+<script>
+        const chatMessages = document.getElementById("chat-messages");
+        const userInput = document.getElementById("user-input");
+        const sendButton = document.getElementById("send-button");
+
+        sendButton.addEventListener("click", () => {
+            const userMessage = userInput.value;
+            if (userMessage) {
+                chatMessages.innerHTML += `<p><strong>Użytkownik:</strong> ${userMessage}</p>`;
+                userInput.value = "";
+                scrollToBottom();
+            }
+        });
+
+        function scrollToBottom() {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    </script>
+
+asdasdsadad
+<script type = "text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script type = "text/javascript" src="  https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+</body>
+</html>

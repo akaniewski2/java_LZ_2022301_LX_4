@@ -16,6 +16,7 @@ import pl.arkani.LZ_2022301_LX.model.UserDTO;
 import pl.arkani.LZ_2022301_LX.model.UserDTOMapper;
 import pl.arkani.LZ_2022301_LX.repo.TestRepo;
 import pl.arkani.LZ_2022301_LX.repo.UserRepo;
+import pl.arkani.LZ_2022301_LX.service.MailService;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -35,12 +36,14 @@ public class TestController {
 
     private UserRepo userRepo;
     private UserDTOMapper userDTOMapper;
+    private MailService mailService;
     @Autowired
-    public TestController(TestRepo testRepo, SqlRepoExec sqlRepoExec, UserRepo userRepo, UserDTOMapper userDTOMapper) {
+    public TestController(TestRepo testRepo, SqlRepoExec sqlRepoExec, UserRepo userRepo, UserDTOMapper userDTOMapper, MailService mailService) {
         this.testRepo = testRepo;
         this.sqlRepoExec = sqlRepoExec;
         this.userRepo = userRepo;
         this.userDTOMapper = userDTOMapper;
+        this.mailService = mailService;
     }
 
 
@@ -48,6 +51,15 @@ public class TestController {
     // additional CRUD methods
     @GetMapping("test")
     public String showTestList(Model model, Principal principal) {
+
+                try {
+            mailService.sendMail("arek.kaniewski@gmail.com",
+                    "arkani1@wp.pl",
+                    "Potwierdź rejestracje","body text",false);
+
+        } catch (jakarta.mail.MessagingException e) {
+            throw new RuntimeException(e);
+        }
 
         User user = userRepo.findByUsername(principal.getName()).orElseThrow(()->new UsernameNotFoundException("User not found in DB"));
        // List<UserDTO> userDTOList= userRepo.findAll().stream().map(u->userDTOMapper.apply(u)).collect(Collectors.toList());

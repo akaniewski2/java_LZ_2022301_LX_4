@@ -1,6 +1,7 @@
 package pl.arkani.LZ_2022301_LX.model;
 
 import lombok.*;
+import pl.arkani.LZ_2022301_LX.utils.Functions;
 
 @Getter
 @Setter
@@ -31,14 +32,27 @@ public class WeatherFinalClass01 {
     private String country;
     private String lang = country;
 
+    private long sunrise;
+    private long sunset;
     private long dt;
 
     public String getFormattedDt () {
-        String formattedDt = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date (this.dt*1000));
+        String formattedDt = Functions.formatEpochToString(this.dt,"yyyy-MM-dd HH:mm:ss");
+        //Epoch in seconds, remove '*1000' for milliseconds.
+        return formattedDt;
+    }
+    public String getFormattedSunriseDt () {
+        String formattedDt = Functions.formatEpochToString(this.sunrise,"yyyy-MM-dd HH:mm:ss");
         //Epoch in seconds, remove '*1000' for milliseconds.
         return formattedDt;
     }
 
+
+    public String getFormattedSunsetDt () {
+        String formattedDt = Functions.formatEpochToString(this.sunset,"yyyy-MM-dd HH:mm:ss");
+        //Epoch in seconds, remove '*1000' for milliseconds.
+        return formattedDt;
+    }
 
 
 }

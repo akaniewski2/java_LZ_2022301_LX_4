@@ -1,0 +1,89 @@
+#mapid {
+
+ height:400px ;
+ width:400px}
+.number-icon{
+    background-image: url("../images/marker-icon2.png") transparent ;
+    mix-blend-mode: multiply;
+    text-align:center;
+    color:white;
+}
+
+.my-icon {
+color:blue;
+font-weight: bold;
+font-size: 15px;
+background-color:rgba(255,255,255,0.5) !important;
+width:auto !important;
+height:auto !important;
+padding:3px !important;
+border-radius: 7px;
+}
+
+.my-icon2 {
+color:red;
+font-weight: bold;
+
+ border-radius: 25px;
+  background: white;
+  padding: 2px;
+  width: 20px;
+  height: 3px;
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+    margin-bottom:50px !important;
+    /*
+        width:auto !important;
+        height:auto !important;
+         padding:1px;
+         */
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+     /*float: left;*/
+     display: inline-block;
+
+    margin-right: 8px;
+    padding:1px;
+    opacity: 0.7;
+
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+ .info2 {
+     margin-top:10px;
+     padding: 6px 8px;
+     font: 14px/16px Arial, Helvetica, sans-serif;
+     background: white;
+     background: rgba(255,255,255,0.8);
+     box-shadow: 0 0 15px rgba(0,0,0,0.2);
+     border-radius: 5px;
+ }
+
+
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+.info2 h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+.a {
+
+ text-align:right;
+}

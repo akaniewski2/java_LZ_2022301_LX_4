@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--https://leafletjs.com/examples/choropleth/ -->
+<!--marker color: https://tombatossals.github.io/angular-leaflet-directive/examples/0503-markers-icons-example.html -->
+<!--https://gis.stackexchange.com/questions/330713/zoom-marker-text-when-zooming-map -->
+
+<!--https://www.openstreetmap.org/#map=6/52.018/19.137-->
+<!--https://leafletjs.com/-->
+
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>WeatherMap</title>
+<!--    <link rel="stylesheet" media="screen" th:href="@{/css/stylemap_.css}"/>-->
+<!--    <link rel="stylesheet" media="screen" th:href="@{/css/leaflet190.css}"  crossorigin=""/>-->
+
+
+<!--    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"-->
+<!--              integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="-->
+<!--              crossorigin=""/>-->
+<!--    &lt;!&ndash; Make sure you put this AFTER Leaflet's CSS &ndash;&gt;-->
+<!--    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"-->
+<!--                integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="-->
+<!--                crossorigin=""></script>-->
+
+<!--    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+          crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+            crossorigin=""></script>
+    <script type="text/javascript" th:src="@{/js/weathermap.js}"></script>
+
+    <style>
+    #mapid {
+    height:400px;
+    width:400px}
+    </style>
+
+
+
+</head>
+<body>
+<div id="mapid"></div>
+<!--<script src="../js/js.js"></script>-->
+<!--var points = [[${points}]];-->
+<!--console.log(points);-->
+<!--main();-->
+
+
+<!--var startLat=54.545;-->
+<!--var startLon=18.545;-->
+<!--var map = L.map('mapid').setView([startLat, startLon],13);-->
+
+<!--<script th:inline="javascript">-->
+<!--var map = L.map('mapid').setView([51.05,-0.09],13);-->
+<!--L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {-->
+<!--maxZoom: 19,-->
+<!--attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'-->
+<!--}).addTo(map);-->
+
+<!--L.marker([51.05,-0.09]).addTo(map)-->
+<!--.bindPopup('v.text')-->
+<!--.openPopup();-->
+<!--</script>-->
+
+<script th:inline="javascript">
+
+var points = [[${points}]];
+console.log(points);
+main();
+
+
+
+</script>
+
+
+
+</body>
+
+
+</html>
+
+
+

@@ -1,4 +1,4 @@
-package pl.arkani.LZ_2022301_LX.dto;
+package pl.arkani.LZ_2022301_LX.model.OpenWeatherJsonDto;
 
 import lombok.Getter;
 

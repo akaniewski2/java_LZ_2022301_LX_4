@@ -74,7 +74,9 @@ public class UserService {
 
         String url ="http://localhost:8080/token?value="+tokenValue;
         try {
-            mailService.sendMail(user.getEmail(),"Potwierdź rejestracje",url,false);
+            mailService.sendMail(user.getEmail(),
+                    "",
+                    "Potwierdź rejestracje",url,false);
         } catch (jakarta.mail.MessagingException e) {
             throw new RuntimeException(e);
         }

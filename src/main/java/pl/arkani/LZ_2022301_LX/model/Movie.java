@@ -22,6 +22,8 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     long id;
+
+    private String category;
     // @Column(name="`desc`")
     @NotBlank(message = "Name is mandatory")
     private String name;

@@ -1,10 +1,18 @@
 package pl.arkani.LZ_2022301_LX.model.WeatherJsonObjectFor4Days;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-public class WeatherInfo2 {
+import java.util.List;
+@Getter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class WeatherItem2 {
     private long dt;
-    private MainInfo2 main;
+    private Main2 main;
     private List<Weather2> weather;
     private Clouds2 clouds;
     private Wind2 wind;

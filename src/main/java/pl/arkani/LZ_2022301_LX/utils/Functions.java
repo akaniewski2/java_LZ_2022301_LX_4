@@ -41,6 +41,11 @@ public class Functions {
         }
         return fieldNames;
     }
+
+    public static String formatEpochToString(long dt, String dateFormat) {
+        String formattedDt = new java.text.SimpleDateFormat(dateFormat).format(new Date (dt*1000));
+        return formattedDt;
+    }
 //    public String getDeviceName() {
 //        String manufacturer = Build.MANUFACTURER;
 //        String model = Build.MODEL;

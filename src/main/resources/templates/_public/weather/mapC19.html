@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--https://leafletjs.com/examples/choropleth/ -->
+<!--marker color: https://tombatossals.github.io/angular-leaflet-directive/examples/0503-markers-icons-example.html -->
+<!--https://gis.stackexchange.com/questions/330713/zoom-marker-text-when-zooming-map -->
+
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>Mapa Koronawirus</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+              integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+              crossorigin=""/>
+        <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+                integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+                crossorigin=""></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/map.js}"></script>
+
+    <link rel="stylesheet" media="screen" th:href="@{/css/style.css}"/>
+
+</head>
+<body>
+
+<div id="mapid"></div>
+<!--<script src="../js/js.js"></script>-->
+<script th:inline="javascript">
+
+var x="[[${x}]]";
+var y="[[${y}]]";
+
+console.log("html:START");
+
+<!--//lista z javy mapowana na lite javascript-->
+var data0 =[[${point0List}]];
+
+var confirmed=data0[0].confirmed;
+var dt_danych = data0[0].dtDanych2;
+
+console.log("html:data0[0].dtDanych2:"+data0[0].dtDanych2 + "/" +dt_danych );
+console.log("html:data0[0].confirmed:"+data0[0].confirmed + "/" +confirmed );
+
+var data =[[${pointList}]];
+var dt_danych = data[0].dtDanych2;
+console.log("html:data[0].dtDanych2:"+data[0].dtDanych2 + "/" +dt_danych );
+
+
+
+
+
+<!--.last_Update;-->
+<!--.dt_danych2-->
+//console.log(dt_danych);
+//console.log(data);
+
+main();
+
+</script>
+
+
+
+</body>
+</html>
+
+
+

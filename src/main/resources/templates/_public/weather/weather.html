@@ -9,7 +9,7 @@
 </head>
 <body>
 
-
+<!--//https://www.kurshtml.edu.pl/generatory/form.html-->
 <main id="main" class="article">
     <header id="header" onclick="window.location='/home'" class="blue">
         <div> Weather </div>
@@ -25,11 +25,35 @@
 <!--            <p class="menu" style = "text-align:center"><a href="/arkani2/weather/add">Dodaj</a></p>-->
 
 
+<!--            <p>-->
+<!--                <input type="button" value="Click Me!" onclick="submitForms()" />-->
+<!--            </p>-->
 
-            <form action="#" method="post" th:action="@{/pub/weather}" th:object="${weather}">
+<!--            <form action="#" method="post" th:action="@{/pub/weather/city}" th:object="${city}" id="city" name="city" >-->
+
+<!--                <table>-->
+<!--&lt;!&ndash;                    <tr><td>latitude:</td><td><input type="text" th:field="*{latitude}" /></td></tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <tr><td>longitude:</td><td><input type="text" th:field="*{longitude}"/></td></tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <tr><td>city:</td><td><input type="text"  th:field="*{city}" th:value="${weather.getLang()}"/></td></tr>&ndash;&gt;-->
+<!--                    <tr><td>city:</td><td><input type="text"  th:field="*{name}" id="name" name="name" /></td></tr>-->
+
+<!--                </table>-->
+
+<!--                <p>-->
+<!--                    <button type="submit" name="addCity" id="addCity">city</button>-->
+
+<!--                </p>-->
+
+<!--            </form>-->
+
+
+            <form action="#" method="post" th:action="@{/pub/weather}" th:object="${weather}" id="form1" >
 
                 <table>
-
+                    <div  th:object="${city}">
+                    <tr><td>city:</td><td><input type="text"  th:field="*{name}" id="name" name="name" /></td></tr>
+                    <tr><td>city:</td><td><input type="number"  th:field="*{nr}" id="nr" name="nr"  /></td></tr>
+                    </div>
                     <tr><td>latitude:</td><td><input type="text" th:field="*{latitude}" /></td></tr>
                     <tr><td>longitude:</td><td><input type="text" th:field="*{longitude}"/></td></tr>
                     <tr><td>lang:</td><td><input type="text"  th:field="*{lang}" th:value="${weather.getLang()}"/></td></tr>
@@ -37,20 +61,20 @@
                 </table>
 
             <p>
-                <button type="submit" name="addCoordinates">addCoordinates</button>
+                <button type="submit" name="addCoordinates" id="addCoordinates">addCoordinates</button>
             </p>
 
             </form>
+
             <br>
             <table>
                 <thead>
                 <tr>
                 <th>Parameter</th>
                 <th>Value</th>
-
                 </tr>
-                </thead >
-                <tbody id="myTable">
+                </thead>
+                <tbody class="myTable">
                 <div th:each="s : ${weather}">
 
 
@@ -70,9 +94,69 @@
                     <tr> <td class="menu">description</td><td class="menu" th:text="${s.description}"></td></tr>
                     <tr> <td class="menu">country</td><td class="menu" th:text="${s.country}"></td></tr>
                     <tr> <td class="menu">date</td><td class="menu" th:text="${s.getFormattedDt}"></td></tr>
+                    <tr> <td class="menu">sunrise</td><td class="menu" th:text="${s.getFormattedSunriseDt}"></td></tr>
+                    <tr> <td class="menu">sunset</td><td class="menu" th:text="${s.getFormattedSunsetDt}"></td></tr>
 
 
                 </div>
+                </tbody>
+            </table>
+<br><hr><br>
+            <table>
+                <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                </tr>
+                <body>
+                <div th:each="s : ${locations}">
+                <tr><td class="menu">name</td><td class="menu"th:text="${s.name}" ></td></tr>
+                <tr><td class="menu">lat</td><td class="menu"th:text="${s.lat}" ></td></tr>
+                <tr><td class="menu">lot</td><td class="menu"th:text="${s.lon}" ></td></tr>
+                <tr><td class="menu">country</td><td class="menu"th:text="${s.country}" ></td></tr>
+                </div>
+                </body>
+
+                </thead>
+
+            </table>
+
+<br><hr><br>
+            <br>
+            <table>
+                <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                </tr>
+                </thead>
+                <tbody class="myTable">
+<!--                <div th:each="weatherForecast: ${weatherForecastList}">-->
+
+<!--                    <div th:each="s: ${weatherForecast}">-->
+
+                    <div th:each="s: ${weatherForecastList}">
+                    <tr> <td class="menu">nearestCity</td><td class="menu" th:text="${s.nearestCity}"></td></tr>
+                    <tr><td class="menu">latitude</td> <td class="menu" th:text="${s.latitude}"></td></tr>
+                    <!--                    <td> <input type="number" th:field="*{lat}"> </td>-->
+                    <tr><td class="menu">longitude</td> <td class="menu" th:text="${s.longitude}"></td></tr>
+                    <!--                   <td> <input type="number" th:field="*{lon}"> </td>-->
+                    <tr><td class="menu">temperature</td> <td class="menu" th:text="${s.temperature}"></td></tr>
+                    <tr><td class="menu">feelsLike</td> <td class="menu" th:text="${s.feelsLike}"></td></tr>
+                    <tr><td class="menu">temperatureMin</td><td class="menu" th:text="${s.temperatureMin}"></td></tr>
+                    <tr><td class="menu">temperatureMax</td> <td class="menu" th:text="${s.temperatureMax}"></td></tr>
+                    <tr> <td class="menu">pressure</td><td class="menu" th:text="${s.pressure}"></td></tr>
+                    <tr><td class="menu">humidity</td><td class="menu" th:text="${s.humidity}"></td></tr>
+                    <tr> <td class="menu">windSpeed</td><td class="menu" th:text="${s.windSpeed}"></td></tr>
+                    <tr> <td class="menu">main</td><td class="menu" th:text="${s.main}"></td></tr>
+                    <tr> <td class="menu">description</td><td class="menu" th:text="${s.description}"></td></tr>
+                    <tr> <td class="menu">country</td><td class="menu" th:text="${s.country}"></td></tr>
+                    <tr> <td class="menu">date</td><td class="menu" th:text="${s.getFormattedDt}"></td></tr>
+                    <tr> <td class="menu">sunrise</td><td class="menu" th:text="${s.getFormattedSunriseDt}"></td></tr>
+                    <tr> <td class="menu">sunset</td><td class="menu" th:text="${s.getFormattedSunsetDt}"></td></tr>
+
+                    </div>
+<!--                </div>-->
                 </tbody>
             </table>
 
@@ -90,13 +174,23 @@
 
 <script>
 $(document).ready(function(){
-  $("#myInput").on("keyup", function() {
+  $(".myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $("#myTable tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
 });
+</script>
+<script>
+
+    submitForms = function(){
+<!--    document.getElementById("form1").method = "post";-->
+    document.getElementById("addCoordinates").click();
+<!--    document.getElementById("form1").method = "post";-->
+    document.getElementById("addCity").click();
+}
+
 </script>
 
 </body>
