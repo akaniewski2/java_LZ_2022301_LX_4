@@ -20,6 +20,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class PurchaseCategoryApi {
 
+
     @Autowired
     private PurchaseCategoryRepo purchaseCategoryRepo;
 
