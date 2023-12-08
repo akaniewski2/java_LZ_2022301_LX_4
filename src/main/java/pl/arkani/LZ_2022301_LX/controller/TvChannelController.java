@@ -18,6 +18,7 @@ import java.util.*;
 
 @Controller
 //@CrossOrigin //https://spring.io/guides/gs/rest-service-cors/ http://192.168.1.5
+
 @RequestMapping(value = "/arkani2/")
 public class TvChannelController {
 

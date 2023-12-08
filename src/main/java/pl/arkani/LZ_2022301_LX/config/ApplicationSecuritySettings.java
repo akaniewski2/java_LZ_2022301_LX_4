@@ -12,8 +12,8 @@ public class ApplicationSecuritySettings {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
-        .requestMatchers("/**"); // # !!!! bez logowania , without login ,wylaczenie logoeania do aplikacji
-        //.requestMatchers("/images/**", "/js/**", "/webjars/**","/css/**","/api/**", "/uploads/**","chat.html");
+       // .requestMatchers("/**"); // # !!!! bez logowania , without login ,wylaczenie logoeania do aplikacji
+        .requestMatchers("/images/**", "/js/**", "/webjars/**","/css/**","/api/**", "/uploads/**","chat.html");
     }
 }
 

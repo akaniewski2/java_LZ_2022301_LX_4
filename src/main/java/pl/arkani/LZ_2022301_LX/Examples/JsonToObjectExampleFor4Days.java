@@ -1,4 +1,4 @@
-package pl.arkani.LZ_2022301_LX.webclient.weather;
+package pl.arkani.LZ_2022301_LX.Examples;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import pl.arkani.LZ_2022301_LX.model.WeatherJsonObjectFor4Days.WeatherData2;

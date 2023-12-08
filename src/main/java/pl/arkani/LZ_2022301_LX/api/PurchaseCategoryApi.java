@@ -16,14 +16,14 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/getcategories")
+@RequestMapping("/api/purchase/getcategories")
 @AllArgsConstructor
 public class PurchaseCategoryApi {
 
 
     @Autowired
     private PurchaseCategoryRepo purchaseCategoryRepo;
-
+/*win*/
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Object>> getAllCategories() {
         List<PurchaseCategory> categories = purchaseCategoryRepo.findAll();
@@ -40,6 +40,7 @@ public class PurchaseCategoryApi {
             categoryMap.put("kolejnosc", category.getOrderr());
             categoryList.add(categoryMap);
         }
+        // dodaje tablice o nazwie kategorie
 
         response.put("kategorie", categoryList);
 

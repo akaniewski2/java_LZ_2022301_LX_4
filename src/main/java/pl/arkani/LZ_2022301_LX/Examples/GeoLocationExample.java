@@ -1,4 +1,4 @@
-package pl.arkani.LZ_2022301_LX.webclient.weather;
+package pl.arkani.LZ_2022301_LX.Examples;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import pl.arkani.LZ_2022301_LX.model.gelocationJsonObjects.Location;
 import pl.arkani.LZ_2022301_LX.model.gelocationJsonObjects.LocationList;
+import pl.arkani.LZ_2022301_LX.webclient.weather.Converters;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
